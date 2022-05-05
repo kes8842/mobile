@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, FlatList, Picker, ScrollView, TouchableHighlight, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const styleSheet = (windowHeight, windowWidth) => {
     const wp = windowWidth / 360
