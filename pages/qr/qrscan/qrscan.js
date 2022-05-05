@@ -42,7 +42,7 @@ Qrscan.defaultProps = {
 
 }
 
-export default  Qrscan
+export default Qrscan
 
 const styles = StyleSheet.create({
   "qrscan": {
