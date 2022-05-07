@@ -19,7 +19,7 @@ const App = () => {
 
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName='Qrscan'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen
           name="Home"
           component={Signup}
@@ -31,7 +31,7 @@ const App = () => {
           component={Qrscan}
         />
         <Stack.Screen
-          name="qrCode"
+          name="QrCode"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={Qrcode}
         />

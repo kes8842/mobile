@@ -1,49 +1,87 @@
 import React, { Component } from 'react';
 import { Dimensions } from 'react-native';
-import { StyleSheet, Text, View, TextInput, ScrollView, } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AsyncStorage from '@react-native-community/async-storage';
+import { useEffect, useState, useMemo } from 'react/cjs/react.development';
 
-export default class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+const Signup = (props) => {
 
-    };
+  const [id, setId] = useState('')
+  const [hpNo, setHpNo] = useState('')
+  const [show, setShow] = useState(false)
+
+  useEffect(() => {
+    try {
+      const getLocalData = async () => {
+        const locaId = await AsyncStorage.getItem('id')
+        const hpNo = await AsyncStorage.getItem('hpNo')
+
+        if (locaId && hpNo) {
+          props.navigation.reset({ routes: [{ name: 'QrCode' }] })
+        } else {
+          setShow(true)
+        }
+        return
+      }
+      getLocalData()
+    } catch (error) {
+      console.log(error)
+      setShow(true)
+    }
+  }, [])
+
+  const doLogin = async () => {
+    console.log('login do')
+    
+    if (!id || !hpNo) {
+      return
+    }
+
+    await AsyncStorage.setItem('id', id)
+    await AsyncStorage.setItem('hpNo', hpNo)
+    props.navigation.reset({ routes: [{ name: 'QrCode' }] })
   }
 
-  render() {
-    const { windowWidth, windowHeight } = this.props
-    const styles = styless(windowWidth, windowHeight)
-    console.log(windowHeight)
-    console.log(windowWidth)
+  const { windowWidth, windowHeight } = props
+  const styles = useMemo(() => styless(windowWidth, windowHeight), [windowHeight, windowWidth])
 
-    return (
-      <ScrollView style={styles.signup}
-        contentContainerStyle={{ flex: 1 }}>
-        <View data-layer="ea17b79f-8e6b-4885-a32e-548925801faa" style={styles.signup_x98}>
-          <View data-layer="905c4bd5-2a73-44ef-a82b-0a99dd7807b7" style={styles.signup_x98_x12}></View>
-          <Text data-layer="72a38335-da9c-42f7-bb97-b91e906fe19a" style={styles.signup_x98_x04e5fcf6}>로그인</Text>
-        </View>
+  return (
+    <KeyboardAwareScrollView style={styles.signup}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={{ height: windowHeight }}
+      enableOnAndroid={true}
+      scrollEnabled={true}
+      extraScrollHeight={100}
+      scrollToOverflowEnabled={true}
+      enableAutomaticScroll={true}
+      keyboardShouldPersistTaps='always'
+    >
+      {show ? (<View><View data-layer="ea17b79f-8e6b-4885-a32e-548925801faa" style={styles.signup_x98}>
+        <View data-layer="905c4bd5-2a73-44ef-a82b-0a99dd7807b7" style={styles.signup_x98_x12}></View>
+        <Text data-layer="72a38335-da9c-42f7-bb97-b91e906fe19a" style={styles.signup_x98_x04e5fcf6}>로그인</Text>
+      </View>
         <View data-layer="87f18346-a379-44bd-b978-98ba7372e6e1" style={styles.signup_x3}>
           <Text data-layer="9c696a7b-5e45-4af3-92e2-8e55edfe1a69" style={styles.signup_x3_xeff37fe1}>성명</Text>
-          <TextInput style={styles.phone_insert_xccd6c701} placeholder={"성명을 입력해주세요"} />
+          <TextInput style={styles.phone_insert_xccd6c701} placeholder={"성명을 입력해주세요"} onChange={(e) => setId(e.nativeEvent.text)} />
         </View>
         <View data-layer="eb158b20-d986-442e-b483-1f4a56372bf8" style={styles.phone_insert}>
-          <Text data-layer="c0d5f013-2fa9-4232-afc9-e22f4701eb7e" style={styles.phone_insert_x}>핸드폰 번호</Text>
-          <TextInput style={styles.phone_insert_xccd6c701} placeholder={"번호를 입력해주세요"} />
+          <Text data-layer="c0d5f013-2fa9-4232-afc9-e22f4701eb7e" style={styles.phone_insert_x} >핸드폰 번호</Text>
+          <TextInput style={styles.phone_insert_xccd6c701} placeholder={"번호를 입력해주세요"} onChange={(e) => setHpNo(e.nativeEvent.text)} keyboardType="number-pad" maxLength={10}
+            returnKeyType="done" />
         </View>
         <View data-layer="a51f1c56-d1f7-4e89-be36-a3a0e7303358" style={styles.signup_iconClose}>
           <ReactImage data-layer="54e44012-5432-4f60-9943-ca3f2f328f01" source={require('./assets/x4781838cancelclosedeleteexitlogouticon.png')} style={styles.signup_iconClose_x4781838cancelclosedeleteexitlogouticon} />
         </View>
-        <View data-layer="821bb467-e6a5-48f8-b7a6-602983356629" style={styles.signup_x150}>
+        <TouchableOpacity data-layer="821bb467-e6a5-48f8-b7a6-602983356629" style={styles.signup_x150} onPress={() => doLogin()}>
           <View data-layer="7e9004e4-b07e-4d65-87e0-9a56101a0d47" style={styles.signup_x150_x1}></View>
           <View data-layer="278979ee-089f-4c0e-8e0c-32141bf16483" style={styles.signup_x150_x96}>
             <Text data-layer="96664cfd-7dea-4b39-84dc-c7c953850546" style={styles.signup_x150_x96_xae48a666}>로그인</Text>
           </View>
-        </View>
-      </ScrollView>
-    );
-  }
+        </TouchableOpacity ></View>) : <></>}
+    </KeyboardAwareScrollView >
+  );
 }
 
 Signup.propTypes = {
@@ -54,6 +92,7 @@ Signup.defaultProps = {
   windowWidth: Dimensions.get('window').width,
   windowHeight: Dimensions.get('window').height
 }
+
 
 const styless = (windowWidth, windowHeight) => StyleSheet.create({
   "signup": {
@@ -88,7 +127,8 @@ const styless = (windowWidth, windowHeight) => StyleSheet.create({
     "width": 101 * (windowWidth / 360),
     "height": 43 * (windowHeight / 640),
     "left": 33 * (windowWidth / 360),
-    "top": 99 * (windowHeight / 640)
+    "top": 99 * (windowHeight / 640),
+    "flex": 1
   },
   "signup_x98_x12": {
     "opacity": 1,
@@ -116,7 +156,7 @@ const styless = (windowWidth, windowHeight) => StyleSheet.create({
     "position": "absolute",
     "backgroundColor": "rgba(255, 255, 255, 0)",
     "color": "rgba(29, 29, 29, 1)",
-    "fontSize": 36 * (windowHeight / 640),
+    "fontSize": 35 * (windowWidth / 360),
     "fontWeight": "700",
     "fontStyle": "normal",
     "fontFamily": "Apple SD Gothic Neo",
@@ -157,7 +197,7 @@ const styless = (windowWidth, windowHeight) => StyleSheet.create({
     "position": "absolute",
     "backgroundColor": "rgba(255, 255, 255, 0)",
     "color": "rgba(29, 29, 29, 1)",
-    "fontSize": 20 * (windowHeight / 640),
+    "fontSize": 20 * (windowWidth / 360),
     "fontWeight": "700",
     "fontStyle": "normal",
     "fontFamily": "Apple SD Gothic Neo",
@@ -370,7 +410,7 @@ const styless = (windowWidth, windowHeight) => StyleSheet.create({
     "position": "absolute",
     "backgroundColor": "rgba(255, 255, 255, 0)",
     "color": "rgba(255, 255, 255, 1)",
-    "fontSize": 41 * (windowHeight / 640),
+    "fontSize": 41 * (windowWidth / 360),
     "fontWeight": "700",
     "fontStyle": "normal",
     "fontFamily": "Apple SD Gothic Neo",
@@ -389,3 +429,5 @@ const styless = (windowWidth, windowHeight) => StyleSheet.create({
     "top": 0
   }
 });
+
+export default Signup

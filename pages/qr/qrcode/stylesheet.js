@@ -43,7 +43,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "position": "absolute",
             "backgroundColor": "rgba(255, 255, 255, 0)",
             "color": "rgba(255, 255, 255, 1)",
-            "fontSize": 22 * hp,
+            "fontSize": 20 * hp,
             "fontWeight": "700",
             "fontStyle": "normal",
             "fontFamily": "Apple SD Gothic Neo",
@@ -55,11 +55,11 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 230 * wp,
+            "width": 300 * wp,
             "height": 27 * hp,
-            "left": 0,
             "top": 0,
-            'textAlign': "center"
+            'textAlign': "center",
+            alignSelf: 'center'
         },
         "qr_answer": {
             "opacity": 0.5,
@@ -1051,7 +1051,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 58.63 * wp,
+            "width": 60.63 * wp,
             "height": 58.63 * hp,
             "left": -1 * wp,
             "top": 115.37 * hp
@@ -1074,10 +1074,11 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 62 * wp,
+            "width": 90 * wp,
             "height": 29 * hp,
-            "left": 149 * wp,
-            "top": 381.73 * hp
+            // "left": 149 * wp,
+            "top": 381.73 * hp,
+            alignSelf: 'center'
         },
         "qrcode_x": {
             "opacity": 1,
@@ -1099,7 +1100,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingLeft": 0,
             "width": 132 * wp,
             "height": 19 * hp,
-            "left": 114 * wp,
+            // "left": 114 * wp,
+            alignSelf: 'center',
             "top": 421.34 * hp
         },
         "qrcode_x1": {
