@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styleSheet = (windowHeight, windowWidth) => {
-    const wp = windowWidth / 360
+    const wp = windowWidth / 360 
     const hp = windowHeight / 640
 
     return StyleSheet.create({
@@ -17,8 +17,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 360,
-            "height": 640,
+            "width": windowWidth,
+            "height": windowHeight,
             "left": 0,
             "top": 0
         },
@@ -34,8 +34,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 249.07,
-            "height": 333.12,
+            "width": 249.07 * wp,
+            "height": 333.12 * hp,
             "left": 55,
             "top": 127.88
         },

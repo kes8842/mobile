@@ -7,26 +7,31 @@ import { Dimensions } from 'react-native';
 import { useEffect, useMemo, useState } from 'react/cjs/react.development';
 import { styleSheet } from './stylesheet';
 import QRcode from 'react-native-qrcode-svg'
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const QrCode = (props) => {
-  const [name, setName] = useState('')
-  const [hpNo, setHpNo] = useState('')
+  const [memberName, setMemberName] = useState('')
+  const [memberId, setMemberId] = useState('')
+  const [mobileId, setMobileId] = useState('')
   const { windowHeight, windowWidth } = props
   const styles = useMemo(() => styleSheet(windowHeight, windowWidth), [windowHeight, windowWidth])
 
   useEffect(() => {
     const getData = async () => {
-      const localName = await AsyncStorage.getItem('id')
-      const localHpNo = await AsyncStorage.getItem('hpNo')
+
+      const localName = await AsyncStorage.getItem('memberName')
+      const localMemberId = await AsyncStorage.getItem('memberId')
+      const localMobileId = await AsyncStorage.getItem('mobileId')
+
       if (localName) {
-        setName(localName)
-        setHpNo(localHpNo)
+        setMemberName(localName)
+        setMemberId(localMemberId)
+        setMobileId(localMobileId)
       }
     }
 
     getData()
-  })
+  }, [])
 
   const logOut = async () => {
     await AsyncStorage.setItem('id', '')
@@ -59,7 +64,8 @@ const QrCode = (props) => {
         <View data-layer="df94f18d-8bfe-4282-bee9-aec3b6d33f61" style={styles.qrcode_x109_x107}>
           <View data-layer="a488d622-4eb0-4ec6-b41e-5320a8522df7" style={styles.qrcode_x109_x107_x104}>
             <View style={styles.qrcode_x109_x107_x104_rwyyrzli98hnwpoQrCodeTransparentPng}>
-              <QRcode size={150 * windowWidth / 360} value={[{ name: name }, { hpNo: hpNo }]} />
+              <QRcode size={140 * windowWidth / 360} value={JSON.stringify({ mobileId: mobileId, memberId: memberId, })} />
+              {/* <QRcode size={140 * windowWidth / 360} value={[{ memberName: memberName }, { hpNo: hpNo }, { mobileId: mobileId }]} /> */}
             </View>
           </View>
           <View data-layer="26ffd333-e583-4974-a91a-ffbc3d27b71a" style={styles.qrcode_x109_x107_x105}>
@@ -74,14 +80,14 @@ const QrCode = (props) => {
           </View>
         </View>
       </View>
-      <Text data-layer="3ca3bf9e-9457-4d07-bac9-54b5ad67fb9c" style={styles.qrcode_x8c7d203a}>{name}</Text>
+      <Text data-layer="3ca3bf9e-9457-4d07-bac9-54b5ad67fb9c" style={styles.qrcode_x8c7d203a}>{memberName}</Text>
       <Text data-layer="1f6a51e3-8b9d-4ebc-9db3-0c427022ef30" style={styles.qrcode_x}>엘리트그룹 소속 팀장</Text>
       {/* <ReactImage data-layer="e57ea44f-c86a-418e-8cb1-5d6a691fe0e8" source={require('./assets/x1.png')} style={styles.qrcode_x1} /> */}
       <TouchableOpacity data-layer="4b9630fe-a827-4064-a395-931ac2075662" style={styles.qrcode_x154} onPress={() => logOut()}>
         <ReactImage data-layer="7a226e96-6daa-46e7-a7ce-56ef6c541e02" source={require('./assets/x48.png')} style={styles.qrcode_x154_x48} />
         <Text data-layer="211359f3-8d11-4267-9658-b9bbf8608635" style={styles.qrcode_x154_xf6337869}>로그아웃</Text>
       </TouchableOpacity>
-      <TouchableOpacity data-layer="57a7d739-aec4-4895-b0b8-bdf7b7fc9671" style={styles.qrcode_x151 } onPress={() => props.navigation.navigate('Qrscan')}>
+      <TouchableOpacity data-layer="57a7d739-aec4-4895-b0b8-bdf7b7fc9671" style={styles.qrcode_x151} onPress={() => props.navigation.navigate('Qrscan')}>
         <Text data-layer="a4f81d26-a9ef-4b21-95a0-2ae23068742f" style={styles.qrcode_x151_scan}>SCAN</Text>
         <ReactImage data-layer="f0a78d32-3850-4b97-8c00-50c767bb3dea" source={require('./assets/x49.png')} style={styles.qrcode_x151_x49} />
       </TouchableOpacity>
