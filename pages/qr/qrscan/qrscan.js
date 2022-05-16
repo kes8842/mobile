@@ -7,6 +7,7 @@ import { RNCamera } from 'react-native-camera';
 import { Dimensions } from 'react-native';
 import { useRef, useState, useMemo } from 'react/cjs/react.development';
 import { styleSheet } from './stylesheet';
+import client from '../../../api/client';
 
 const Qrscan = () => {
   const camera = useRef(null)
@@ -15,20 +16,23 @@ const Qrscan = () => {
   const CAM_VIEW_WIDTH = Dimensions.get('screen').width;
   const styles = useMemo(() => styleSheet(CAM_VIEW_HEIGHT, CAM_VIEW_WIDTH), [CAM_VIEW_HEIGHT, CAM_VIEW_WIDTH])
 
-  const onBarCodeRead = (e) => {
+  const onBarCodeRead = async (e) => {
     if (controlCamera) {
       return
     }
     camera.current.pausePreview()
     setControlCamera(true)
 
-    console.log(JSON.stringify(e.data))
     const qrData = JSON.parse(e.data)
-    
+    console.log(JSON.stringify(qrData, null, 4))
+
+    const response = await client.post('rest/v1/s0221a0020/qr-scan', { ...qrData, "orgId": "39", "eventId": "4" })
+    console.log(JSON.stringify(response, null, 4))
+
     setTimeout(() => {
       setControlCamera(false)
       camera.current.resumePreview()
-    }, 1000)
+    }, 1500)
 
   }
 

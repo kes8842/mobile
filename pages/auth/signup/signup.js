@@ -45,18 +45,20 @@ const Signup = (props) => {
     }
 
     try {
-      const result = await client.get(`/rest/v1/s0221a0030/sign-up?member-name=${paramName}&hp-no=${paramHpNo}`)
+      const result = await client.get(`/rest/v1/s0221a0030/sign-up?memberName=${paramName}&hpNo=${paramHpNo}`).catch((error) => {
+        console.log('error!!')
+        console.log(JSON.stringify(error.response, null, 4))
+      })
 
       console.log(JSON.stringify(result, null, 4))
 
-      if (result.status === 200) {
+      if (result?.status === 200) {
 
         const { data } = result
         const loginData = data?.data
         if (!loginData) {
           return
         }
-        console.log(loginData)
 
         const { orgId, memberTp, orgEventName, mobileId, memberId, memberName, hpNo } = loginData
 
@@ -68,10 +70,12 @@ const Signup = (props) => {
         await AsyncStorage.setItem('memberTp', memberTp || '')
         await AsyncStorage.setItem('orgId', JSON.stringify(orgId) || '')
 
+      } else {
+        return
       }
     } catch (error) {
       console.log('error')
-      console.log(error)
+      console.error(error)
       return
     }
     await props.navigation.reset({ routes: [{ name: 'QrCode' }] })

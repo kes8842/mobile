@@ -45,15 +45,15 @@ const QrCode = (props) => {
         <Text data-layer="146d49f7-7ad6-4a00-baae-526c23a4698f" style={styles.qr_header}>QR코드를 스캔 시켜주세요</Text>
         <Text data-layer="e58061e9-34f0-48ea-bdaf-f10996cfa593" style={styles.qr_answer}>QR코드를 영역 안에 위치시키세요</Text>
       </View>
-      <View data-layer="d8209c16-8106-4902-b922-fd35abb68437" style={styles.qrcode_x41}></View>
+      <View data-layer="d8209c16-8106-4902-b922-fd35abb68437" style={styles.qrcode_x41}/>
       <View data-layer="e2ec3d4a-6cad-49b2-9a7a-61a164289cff" style={styles.qrcode_x56}>
-        <Text data-layer="444cbccf-edaa-47eb-91e9-8628d9e4d209" style={styles.qrcode_x56_x180a11c0}>비용등록</Text>
+        <Text data-layer="444cbccf-edaa-47eb-91e9-8628d9e4d209" style={styles.cost_text}>비용등록</Text>
         <View data-layer="76c66651-ea97-4eac-a065-e987d5f69f43" style={styles.qrcode_x56_iconHand}>
           <ReactImage data-layer="32c163e3-c209-4947-8382-a79ee6164b69" source={require('./assets/hand.png')} style={styles.qrcode_x56_iconHand_hand} />
         </View>
       </View>
       <View data-layer="7f789017-fa74-4a8a-a8e2-be928987507b" style={styles.qrcode_x55}>
-        <Text data-layer="a57721ba-2cf2-4c28-99ec-86cdbb31382f" style={styles.qrcode_x55_xafc4ab4c}>결제하기</Text>
+        <Text data-layer="a57721ba-2cf2-4c28-99ec-86cdbb31382f" style={styles.pay_text}>결제하기</Text>
         <View data-layer="121b8c35-f149-433a-ad40-dd8cdd8136bf" style={styles.qrcode_x55_iconDocuments}>
           <ReactImage data-layer="50c178e5-f387-43bb-8abe-0cbbecffadc0" source={require('./assets/documents.png')} style={styles.qrcode_x55_iconDocuments_documents} />
         </View>
@@ -85,7 +85,7 @@ const QrCode = (props) => {
       {/* <ReactImage data-layer="e57ea44f-c86a-418e-8cb1-5d6a691fe0e8" source={require('./assets/x1.png')} style={styles.qrcode_x1} /> */}
       <TouchableOpacity data-layer="4b9630fe-a827-4064-a395-931ac2075662" style={styles.qrcode_x154} onPress={() => logOut()}>
         <ReactImage data-layer="7a226e96-6daa-46e7-a7ce-56ef6c541e02" source={require('./assets/x48.png')} style={styles.qrcode_x154_x48} />
-        <Text data-layer="211359f3-8d11-4267-9658-b9bbf8608635" style={styles.qrcode_x154_xf6337869}>로그아웃</Text>
+        <Text data-layer="211359f3-8d11-4267-9658-b9bbf8608635" style={styles.log_out}>로그아웃</Text>
       </TouchableOpacity>
       <TouchableOpacity data-layer="57a7d739-aec4-4895-b0b8-bdf7b7fc9671" style={styles.qrcode_x151} onPress={() => props.navigation.navigate('Qrscan')}>
         <Text data-layer="a4f81d26-a9ef-4b21-95a0-2ae23068742f" style={styles.qrcode_x151_scan}>SCAN</Text>

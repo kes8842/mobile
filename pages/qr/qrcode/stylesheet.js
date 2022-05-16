@@ -79,10 +79,12 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 186 * wp,
+            "width": 200 * wp,
             "height": 17 * hp,
-            "left": 19 * wp,
-            "top": 31 * hp
+            // "left": 19 * wp,
+            "top": 31 * hp,
+            'textAlign': "center",
+            'alignSelf': 'center'
         },
         "qrcode_x41": {
             "opacity": 1,
@@ -122,7 +124,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "left": 71.05 * wp,
             "top": 545 * hp
         },
-        "qrcode_x56_x180a11c0": {
+        "cost_text": {
             "opacity": 1,
             "position": "absolute",
             "backgroundColor": "rgba(255, 255, 255, 0)",
@@ -140,10 +142,13 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 48 * wp,
+            "width": 60 * wp,
             "height": 17 * hp,
-            "left": 0,
-            "top": 50 * hp
+            // "left": 0,
+            "top": 50 * hp,
+            'alignSelf': 'center',
+            'textAlign': 'center',
+            // 'justifyContent': 'center'
         },
         "qrcode_x56_iconHand": {
             "opacity": 1,
@@ -195,12 +200,12 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "left": 240.95 * wp,
             "top": 545 * hp
         },
-        "qrcode_x55_xafc4ab4c": {
+        "pay_text": {
             "opacity": 1,
             "position": "absolute",
             "backgroundColor": "rgba(255, 255, 255, 0)",
             "color": "rgba(29, 29, 29, 1)",
-            "fontSize": 14 * hp,
+            "fontSize": 14 * wp,
             "fontWeight": "700",
             "fontStyle": "normal",
             "fontFamily": "Apple SD Gothic Neo",
@@ -213,7 +218,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 48 * wp,
+            "width": 50 * wp,
             "height": 17 * hp,
             "left": 0,
             "top": 50 * hp
@@ -1078,7 +1083,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "height": 29 * hp,
             // "left": 149 * wp,
             "top": 381.73 * hp,
-            alignSelf: 'center'
+            'alignSelf': 'center'
         },
         "qrcode_x": {
             "opacity": 1,
@@ -1101,7 +1106,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "width": 132 * wp,
             "height": 19 * hp,
             // "left": 114 * wp,
-            alignSelf: 'center',
+            'alignSelf': 'center',
             "top": 421.34 * hp
         },
         "qrcode_x1": {
@@ -1195,16 +1200,19 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "borderBottomRightRadius": 0,
             "width": 30.12 * wp,
             "height": 29.88 * hp,
-            "left": 2.5 * wp,
-            "top": -0.5 * hp,
-            "resizeMode": 'contain'
+            // "left": 2.5 * wp,
+            // "top": -0.5 * hp,
+            "resizeMode": 'contain',
+            'alignContent': 'center',
+            'justifyContent': 'center',
+            'alignSelf': 'center',
         },
-        "qrcode_x154_xf6337869": {
+        "log_out": {
             "opacity": 1,
             "position": "absolute",
             "backgroundColor": "rgba(255, 255, 255, 0)",
             "color": "rgba(255, 255, 255, 1)",
-            "fontSize": 10 * hp,
+            "fontSize": 10 * wp,
             "fontWeight": "700",
             "fontStyle": "normal",
             "fontFamily": "Apple SD Gothic Neo",
@@ -1217,10 +1225,14 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 34 * wp,
+            "width": 36 * wp,
             "height": 12 * hp,
             "left": 0,
-            "top": 36.34 * hp
+            "top": 36.34 * hp,
+            'alignContent': 'center',
+            'justifyContent': 'center',
+            'alignSelf': 'center',
+            'textAlign': 'center'
         },
         "qrcode_x151": {
             "opacity": 1,
