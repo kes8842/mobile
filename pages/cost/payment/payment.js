@@ -8,7 +8,7 @@ const Payment = () => {
   const styles = styleSheet()
   return (
 
-    <View style={styles.wrap} >
+    <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
           <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
@@ -19,7 +19,7 @@ const Payment = () => {
         <View style={styles.form}>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>제목</Text>
-            <TextInput style={styles.input}/>
+            <TextInput style={styles.input} />
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
