@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, FlatList, Picker, ScrollView, TouchableOpacity } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import Svg, { Defs, Pattern } from 'react-native-svg';
 import { Path as SvgPath } from 'react-native-svg';
 import { Dimensions } from 'react-native';
-import { useEffect, useMemo, useState } from 'react/cjs/react.development';
 import { styleSheet } from './stylesheet';
 import QRcode from 'react-native-qrcode-svg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -45,7 +44,7 @@ const QrCode = (props) => {
         <Text data-layer="146d49f7-7ad6-4a00-baae-526c23a4698f" style={styles.qr_header}>QR코드를 스캔 시켜주세요</Text>
         <Text data-layer="e58061e9-34f0-48ea-bdaf-f10996cfa593" style={styles.qr_answer}>QR코드를 영역 안에 위치시키세요</Text>
       </View>
-      <View data-layer="d8209c16-8106-4902-b922-fd35abb68437" style={styles.qrcode_x41}/>
+      <View data-layer="d8209c16-8106-4902-b922-fd35abb68437" style={styles.qrcode_x41} />
       <View data-layer="e2ec3d4a-6cad-49b2-9a7a-61a164289cff" style={styles.qrcode_x56}>
         <Text data-layer="444cbccf-edaa-47eb-91e9-8628d9e4d209" style={styles.cost_text}>비용등록</Text>
         <View data-layer="76c66651-ea97-4eac-a065-e987d5f69f43" style={styles.qrcode_x56_iconHand}>

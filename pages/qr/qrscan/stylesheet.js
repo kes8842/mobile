@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const styleSheet = (windowHeight, windowWidth) => {
-    const wp = windowWidth / 360 
-    const hp = windowHeight / 640
+    console.log(windowHeight, windowWidth)
+    const wp = windowWidth > 540 ? 1.5 : windowWidth / 360
+    const hp = windowHeight > 960 ? 1.5 : windowHeight / 640
 
     return StyleSheet.create({
         "qrscan": {
@@ -36,8 +37,10 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingLeft": 0,
             "width": 249.07 * wp,
             "height": 333.12 * hp,
-            "left": 55,
-            "top": 127.88
+            // "left": 55,
+            "top": 127.88 * hp,
+            'textAlign': "center",
+            "alignSelf": 'center'
         },
         "qrscan_x145_x8": {
             "opacity": 1,
@@ -50,10 +53,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "borderTopRightRadius": 46,
             "borderBottomLeftRadius": 46,
             "borderBottomRightRadius": 46,
-            "width": 249.07,
-            "height": 245,
-            "left": 0,
-            "top": 0
+            "width": 249.07 * wp,
+            "height": 245 * wp,
+            "alignSelf": 'center'
         },
         "qrscan_x145_x144": {
             "opacity": 1,
@@ -67,10 +69,10 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 240,
-            "height": 51.31,
-            "left": 4.53,
-            "top": 281.8
+            "width": 240 * wp,
+            "height": 51.31 * hp,
+            "left": 4.53 * wp,
+            "top": 281.8 * hp
         },
         "qrscan_x145_x144_x146": {
             "opacity": 1,
@@ -84,10 +86,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 240,
-            "height": 51.31,
-            "left": 0,
-            "top": 0
+            "width": 240 * wp,
+            "height": 51.31 * hp,
         },
         "qrscan_x145_x144_x146_qr0d071759": {
             "opacity": 1,
@@ -107,7 +107,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 240,
+            "width": 240 * wp,
             "height": 28,
             "left": 0,
             "top": 0
@@ -130,7 +130,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 186,
+            "width": 186 * wp,
             "height": 17,
             "left": 27,
             "top": 34.31
@@ -199,7 +199,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "width": 27,
             "height": 27,
             "left": 19,
-            "top": 37
+            "top": 37,
+            'textAlign': "center",
+            "alignSelf": 'center'
         },
         "qrscan_iconCloseWhite_x4781838cancelclosedeleteexitlogouticon": {
             "opacity": 1,

@@ -142,12 +142,10 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 60 * wp,
-            "height": 17 * hp,
-            // "left": 0,
+            "width": 55 * wp,
+            "height": 19 * hp,
             "top": 50 * hp,
             'alignSelf': 'center',
-            'textAlign': 'center',
             // 'justifyContent': 'center'
         },
         "qrcode_x56_iconHand": {
@@ -218,10 +216,12 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 50 * wp,
-            "height": 17 * hp,
-            "left": 0,
-            "top": 50 * hp
+            "width": 55 * wp,
+            "height": 19 * hp,
+            "top": 50 * hp,
+            'alignSelf': 'center',
+            // 'textAlign': 'center',
+            // 'justifyContent': 'center'
         },
         "qrcode_x55_iconDocuments": {
             "opacity": 1,
@@ -1182,10 +1182,11 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 34.12,
+            "width": 34.12 * wp,
             "height": 48.34 * hp,
-            "left": 15,
-            "top": 19.66 * hp
+            "left": 15 * wp,
+            "top": 19.66 * hp,
+            "textAlign": "center"
         },
         "qrcode_x154_x48": {
             "opacity": 1,
@@ -1225,13 +1226,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 36 * wp,
-            "height": 12 * hp,
-            "left": 0,
+            "width": 38 * wp,
+            "height": 14 * hp,
             "top": 36.34 * hp,
-            'alignContent': 'center',
-            'justifyContent': 'center',
-            'alignSelf': 'center',
             'textAlign': 'center'
         },
         "qrcode_x151": {
@@ -1249,7 +1246,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "width": 33.44 * wp,
             "height": 49.63 * hp,
             "left": 311.28 * wp,
-            "top": 18.37 * hp
+            "top": 18.37 * hp,
+            "alignItems": 'center'
         },
         "qrcode_x151_scan": {
             "opacity": 1,
@@ -1269,10 +1267,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "paddingRight": 0,
             "paddingBottom": 0,
             "paddingLeft": 0,
-            "width": 25 * wp,
+            "width": 26 * wp,
             "height": 12 * hp,
-            "left": 4.72 * wp,
-            "bottom": 0
+            "bottom": 0,
         },
         "qrcode_x151_x49": {
             "opacity": 1,

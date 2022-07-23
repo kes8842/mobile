@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState, useMemo } from 'react';
 import { Dimensions } from 'react-native';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useEffect, useState, useMemo } from 'react/cjs/react.development';
+// import { useEffect, useState, useMemo } from 'react/cjs/react.development';
 import client from '../../../api/client';
 
 const Signup = (props) => {
