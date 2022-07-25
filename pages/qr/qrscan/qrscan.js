@@ -70,9 +70,13 @@ const Qrscan = (props) => {
         </View> */}
         <TouchableOpacity data-layer="4d320cd8-f321-4fd5-b48d-c8cb8144f2d7" style={styles.qrscan_iconCloseWhite} onPress={() => {
           props.navigation.goBack()
-
         }}>
           <ReactImage data-layer="186382d1-190f-4dad-a70f-b9339a603d11" source={require('./assets/x4781838cancelclosedeleteexitlogouticon.png')} style={styles.qrscan_iconCloseWhite_x4781838cancelclosedeleteexitlogouticon} />
+        </TouchableOpacity>
+        <TouchableOpacity data-layer="4d320cd8-f321-4fd5-b48d-c8cb8144f2d7" style={styles.temp} onPress={() => {
+          props.navigation.navigate('EventList')
+        }}>
+          <Text>임시</Text>
         </TouchableOpacity>
       </View>
     </RNCamera >

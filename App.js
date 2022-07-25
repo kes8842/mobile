@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName='Payment'>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen
           name="Home"
           component={Signup}

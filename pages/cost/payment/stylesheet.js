@@ -5,36 +5,43 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
   const wp = windowWidth / 360
   const hp = windowHeight / 640
   return StyleSheet.create({
+
     "wrap": {
       "width": windowWidth,
       "height": windowHeight,
     },
     "inner": {
       "position": "relative",
-      "width": windowWidth * 0.85,
+      // "width": windowWidth * 0.85,
+      "width": "85%",
       "height": windowHeight,
-      "margin": 0,
-      "marginLeft": 'auto'
+      "marginLeft": 'auto',
+      "marginRight": 'auto'
     },
+
     "backBtn": {
       "overflow": "hidden",
       "position": "absolute",
       "width": 30,
       "height": 30,
-      "top": 37,
+      "top": 25,
     },
+
     "backBtnIcon": {
-      "width": 30,
+      "width": "100%",
+      "height": "100%"
     },
+
     "titleWrap": {
       "opacity": 1,
       "position": "absolute",
-      "overflow": "hidden",
+      // "overflow": "hidden",
       "width": 172,
       "height": 40,
-      "top": 96
+      "top": 80
     },
-    "hightlight": {
+
+    "highlight": {
       "width": 113,
       "height": 19,
       "backgroundColor": "rgba(252, 242, 0, 0.9599999785423279)",
@@ -44,7 +51,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     },
     "title": {
       "width": 172,
-      "color": (29, 29, 29, 1),
+      "color": "#1d1d1d",
       "position": "absolute",
       "top": 0,
       "left": 0,
@@ -53,22 +60,27 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "fontSize": 33,
     },
     "form": {
-      "width": windowWidth * 0.75,
+      // "width": windowWidth * 0.75,
+      "width": "100%",
       "position": "absolute",
-      "top": 170
+      "top": 130
     },
     "inputWrap": {
-      "display": "flex",
-      "justifyContent": "space-between",
+
+      "flexDirection": "row",
+      "justifyContent": 'space-between',
       "alignItems": "baseline",
-      // "marginBottom": windowWidth * 0.7,
+      "marginBottom": "5%",
       "position": "relative",
+
     },
+
     "label": {
       "fontFamily": "Apple SD Gothic Neo",
+      "color": "#1d1d1d",
       "fontWeight": '700',
-      "fontSize": 18,
-      "lineHeight": 21,
+      "fontSize": 18
+
     },
     "searchBtn": {
       "width": 22,
@@ -76,15 +88,37 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "marginTop": -5,
       "position": "absolute",
       "right": 0,
+      "top": 10,
+      zIndex: 1
     },
     "searchIcon": {
-      "width": 22,
+      "width": "100%",
+      "height": "100%",
     },
+
     "input": {
-      "width": windowWidth * 0.85 * 0.8,
-      // "border": "none",
+      // "width": windowWidth * 0.85 * 0.8,
+      "width": "70%",
+      "height": 35,
+      "overflow": "hidden",
       "borderBottomWidth": 3,
       "borderBottomColor": "#707070",
+      "fontSize": 20,
+      "paddingTop": 0,
+      "paddingBottom": 0,
+      "position": "relative"
+    },
+
+    "won": {
+      "position": "absolute",
+      "right": 0,
+      "top": 10,
+      "fontSize": 14,
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontWeight": "700",
+      "color": "#1d1d1d"
+
+
     },
     "addBtn": {
       "position": "absolute",
@@ -93,47 +127,53 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "height": 22,
       "backgroundColor": "#00878d",
       "borderRadius": 50,
-      "marginTop": -5
+      "marginTop": 5
     },
     "addIcon": {
-      "width": 22 * 0.8,
-      "height": 22 * 0.8,
-      "margin": 0,
-      "marginLeft": 'auto',
-      "position": "absolute",
-      "left": 0,
-      "right": 0,
-      "top": 1.5,
+      "width": "60%",
+      "height": "60%",
+      "marginRight": "auto",
+      "marginLeft": "auto",
+      "marginTop": "auto",
+      "marginBottom": "auto"
+
+
+    },
+    "textfieldWrap": {
+
+      "marginTop": "5%"
+
     },
     "textfield": {
-      "width": windowWidth * 0.75,
-      "height": windowHeight * 0.5,
+      // "width": windowWidth * 0.75,
+      "height": windowHeight * 0.12,
       "borderRadius": 20,
       "borderWidth": 3,
       "borderColor": "#707070",
       "marginTop": 10,
-      // "resize": "none",
       "fontFamily": "Apple SD Gothic Neo",
-      "fontSize": 14
+      "fontSize": 14,
+      "textAlignVertical": "top"
     },
 
     "selectBox": {
-      // "width": 70 %,
-      // "border": "none",
-      // "borderBottomWidth": 3,
-      // "borderBottomColor": "#707070",
+      "width": "70%",
+      "border": "none",
+      "borderBottomWidth": 3,
+      "borderBottomColor": "#707070",
 
     },
 
     "btnWrap": {
-      "width": windowWidth * 0.85,
+      "width": "100%",
+      // "width": windowWidth * 0.85,
       "position": "absolute",
       "left": 0,
       "right": 0,
-      "bottom": 30,
+      "bottom": 40,
       "margin": 0,
       "marginLeft": 'auto',
-      "display": "flex",
+      "flexDirection": "row",
       "justifyContent": "space-between",
       "alignItems": "center",
     },
@@ -156,7 +196,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "height": 50,
       "backgroundColor": "rgba(226, 56, 56, 1)",
       "borderRadius": 50,
-      "color": (255, 255, 255, 1),
+      "color": "white",
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '500',
       "fontSize": 21,

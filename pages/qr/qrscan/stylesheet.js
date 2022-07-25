@@ -203,6 +203,25 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'textAlign': "center",
             "alignSelf": 'center'
         },
+        "temp": {
+            "opacity": 1,
+            "position": "absolute",
+            "backgroundColor": "transparent",
+            "marginTop": 0,
+            "marginRight": 0,
+            "marginBottom": 0,
+            "marginLeft": 0,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "width": 27,
+            "height": 27,
+            "right": 19,
+            "top": 37,
+            'textAlign': "center",
+            "alignSelf": 'center'
+        },
         "qrscan_iconCloseWhite_x4781838cancelclosedeleteexitlogouticon": {
             "opacity": 1,
             "position": "absolute",
