@@ -45,7 +45,7 @@ const QrCode = (props) => {
         <Text data-layer="e58061e9-34f0-48ea-bdaf-f10996cfa593" style={styles.qr_answer}>QR코드를 영역 안에 위치시키세요</Text>
       </View>
       <View data-layer="d8209c16-8106-4902-b922-fd35abb68437" style={styles.qrcode_x41} />
-      <TouchableOpacity data-layer="e2ec3d4a-6cad-49b2-9a7a-61a164289cff" style={styles.qrcode_x56} onPress={() => props.navigation.navigate('Payment')}>
+      <TouchableOpacity data-layer="e2ec3d4a-6cad-49b2-9a7a-61a164289cff" style={styles.qrcode_x56} onPress={() => props.navigation.navigate('PayList')}>
         <Text data-layer="444cbccf-edaa-47eb-91e9-8628d9e4d209" style={styles.cost_text} >비용등록</Text>
         <View data-layer="76c66651-ea97-4eac-a065-e987d5f69f43" style={styles.qrcode_x56_iconHand}>
           <ReactImage data-layer="32c163e3-c209-4947-8382-a79ee6164b69" source={require('./assets/hand.png')} style={styles.qrcode_x56_iconHand_hand} />

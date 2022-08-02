@@ -14,6 +14,7 @@ import Qrscan from './pages/qr/qrscan/qrscan';
 import Qrcode from './pages/qr/qrcode/qrcode';
 import EventList from './pages/event/list/list';
 import Payment from './pages/cost/payment/payment';
+import PayList from './pages/cost/payList/PayList';
 import { View } from 'react-native'
 const Stack = createStackNavigator();
 
@@ -42,10 +43,15 @@ const App = () => {
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={EventList}
         />
-           <Stack.Screen
+        <Stack.Screen
           name="Payment"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={Payment}
+        />
+        <Stack.Screen
+          name="PayList"
+          options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
+          component={PayList}
         />
       </Stack.Navigator>
     </NavigationContainer>

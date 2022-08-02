@@ -5,8 +5,9 @@ import { Image as ReactImage } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import client from '../../../api/client';
 
-const Payment = () => {
+const Payment = (props) => {
 
   const styles = styleSheet()
 
@@ -17,6 +18,16 @@ const Payment = () => {
     viewModal: false,
     confirmVal: '',
     confirmDate: new Date()
+  })
+  const [inputData, setInputData] = useState({
+    "eventId": 6,
+    "eventUserId": 68,
+    "useAmount": 0,
+    "useComment": "",
+    "useProStatus": "C",
+    "useReceiptId": "",
+    "useSubject": "",
+    "usedDate": ""
   })
 
   useEffect(() => {
@@ -42,14 +53,30 @@ const Payment = () => {
     const month = val.getMonth() + 1
     const date = val.getDate()
     setDateState({ ...dateState, confirmDate: val, confirmVal: `${year}-${month}-${date}`, viewModal: false })
+    setInputData({ ...inputData, usedDate: `${year}-${month}-${date}` })
+  }
 
+  const regist = async () => {
+    const body = { ...inputData, usedDate: `2022-06-06` }
+    const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).then((e) => {
+      console.log(e)
+      return e
+    }).catch((e) => {
+      console.log('error')
+      console.log(JSON.stringify(e, null, 4))
+    })
+    console.log(JSON.stringify(response, null, 4))
   }
 
   return (
     <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
-          <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          <TouchableOpacity onPress={() => {
+            props.navigation.goBack()
+          }} >
+            <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          </TouchableOpacity>
         </View>
         <View style={styles.titleWrap}>
           <View style={styles.highlight}></View><Text style={styles.title}>비용작성</Text>
@@ -57,7 +84,7 @@ const Payment = () => {
         <View style={styles.form}>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>제목</Text>
-            <TextInput style={styles.input} />
+            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} />
           </View>
           {/* <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
@@ -70,11 +97,11 @@ const Payment = () => {
                 <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
               </TouchableOpacity>
             </View>
-            <TextInput style={styles.input} editable={false}>{dateState.confirmVal}</TextInput>
+            <TextInput style={styles.input} editable={false} value={dateState.confirmVal}></TextInput>
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>사용금액</Text>
-            <TextInput style={styles.input}></TextInput>
+            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useAmount: e.nativeEvent.text })}></TextInput>
             <Text style={styles.won}>원</Text>
           </View>
           <View style={styles.inputWrap}>
@@ -89,11 +116,14 @@ const Payment = () => {
             <TextInput
               style={styles.textfield}
               multiline={true}
+              onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
             />
           </View>
         </View>
         <View style={styles.btnWrap}>
-          <Text style={styles.requestBtn}>등록</Text>
+          <TouchableOpacity onPress={regist}>
+            <Text style={styles.requestBtn}>등록</Text>
+          </TouchableOpacity>
           <Text style={styles.delBtn}>삭제</Text>
         </View>
       </View>
