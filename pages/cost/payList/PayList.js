@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useMemo, useState } from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, ScrollView, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import { styleSheet } from './stylesheet';
 import client from '../../../api/client';
@@ -11,21 +11,24 @@ const PayList = (props) => {
   const [listData, setListData] = useState([])
 
   useEffect(() => {
-    const callList = async () => {
-      const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=68&fromDate=2022-01-01&toDate=2022-12-31`)
-        .catch((e) => console.log(JSON.stringify(e, null, 4)))
-      console.log(JSON.stringify(response?.data, null, 4))
-      setListData(response?.data?.data || [])
-    }
     callList()
   }, [])
 
-  const listItem = (item) => {
+  const callList = async () => {
+    console.log('calllist done')
+    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=68&fromDate=2022-01-01&toDate=2022-12-31`)
+      .catch((e) => console.log(JSON.stringify(e, null, 4)))
+    // console.log(JSON.stringify(response?.data, null, 4))
+    setListData(response?.data?.data || [])
+  }
+
+  const listItem = (item, index) => {
     try {
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
+      // return (<Text style={{ height: 150 }}>teset</Text>)
       return (
-        <View style={styles.cell} key={item?.useReceiptId}>
+        <View style={styles.cell} key={index}>
           <View style={styles.cellInner}>
             <Text style={styles.cellTitle}>{cutTitle}</Text>
             <Text style={styles.cellDate}>
@@ -39,13 +42,13 @@ const PayList = (props) => {
       console.log(error)
       return <View></View>
     }
-
   }
 
   return (
-    <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
+    <View style={styles.wrap}>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
+
           <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
         </View>
         <View style={styles.titleWrap}>
@@ -59,9 +62,15 @@ const PayList = (props) => {
                 <option>구분</option>
               </SelectBox> */}
           <View style={styles.searchBtn}>
-            <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
+            <TouchableOpacity onPress={() => {
+              callList()
+            }}>
+              <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
+            </TouchableOpacity>
+
           </View>
         </View>
+
         <View style={styles.layer2}>
           <View style={styles.searchDate}>
             <TextInput style={styles.inputDate}
@@ -76,12 +85,17 @@ const PayList = (props) => {
           </View>
         </View>
         <View style={styles.cellWrap}>
-          {listData.map((t) => listItem(t))}
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
+
+            {listData.map((t, i) => listItem(t, i))}
+          </ScrollView>
+
         </View>
+
       </View>
       <View style={styles.regBtn}>
         <TouchableOpacity onPress={() => {
-          props.navigation.navigate('Payment')
+          props.navigation.navigate('Payment', { refresh: callList })
         }}>
           <Text style={styles.regBtnText}>등록</Text>
         </TouchableOpacity>

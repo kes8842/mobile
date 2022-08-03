@@ -31,6 +31,7 @@ const Payment = (props) => {
   })
 
   useEffect(() => {
+    console.log(props.route.params.refresh)
     const getData = async () => {
       const localName = await AsyncStorage.getItem('memberName')
       const localMemberId = await AsyncStorage.getItem('memberId')
@@ -66,15 +67,26 @@ const Payment = (props) => {
       console.log(JSON.stringify(e, null, 4))
     })
     console.log(JSON.stringify(response, null, 4))
+
+    if (response.status === 200) {
+      goback()
+    }
+  }
+
+  const goback = async () => {
+    try {
+      props.route.params.refresh()
+    } catch (error) {
+      console.log(error)
+    }
+    props.navigation.goBack()
   }
 
   return (
     <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
-          <TouchableOpacity onPress={() => {
-            props.navigation.goBack()
-          }} >
+          <TouchableOpacity onPress={goback} >
             <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
           </TouchableOpacity>
         </View>

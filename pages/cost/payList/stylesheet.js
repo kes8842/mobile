@@ -199,6 +199,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "width": "100%",
       "position": "absolute",
       "top": 260,
+      "height": "55%"
     },
 
     "cell": {
@@ -209,7 +210,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "borderColor": "#00878d",
       "borderRadius": 10,
       "marginBottom": 10
-
     },
 
     "cellInner": {
@@ -217,7 +217,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "marginLeft": "auto",
       "marginRight": "auto",
       "position": "relative",
-
     },
 
     "cellTitle": {
