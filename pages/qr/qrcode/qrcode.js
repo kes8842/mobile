@@ -21,7 +21,6 @@ const QrCode = (props) => {
       const localName = await AsyncStorage.getItem('memberName')
       const localMemberId = await AsyncStorage.getItem('memberId')
       const localMobileId = await AsyncStorage.getItem('mobileId')
-
       if (localName) {
         setMemberName(localName)
         setMemberId(localMemberId)

@@ -4,6 +4,7 @@ import { Image as ReactImage } from 'react-native';
 import { styleSheet } from './stylesheet';
 import client from '../../../api/client';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const PaymentList = (props) => {
 
@@ -15,28 +16,32 @@ const PaymentList = (props) => {
   }, [])
 
   const callList = async () => {
-    console.log('calllist done')
-    const response = await client.get(`rest/v1//rest/v1/s0221a0090/cost-req-list?mobileMemberId=68&fromDate=2022-01-01&toDate=2022-12-31`)
+    const memberId = await AsyncStorage.getItem('memberId')
+    const response = await client.get(`rest/v1/s0221a0090/cost-req-list?mobileMemberId=${memberId}&fromDate=2022-01-01&toDate=2022-12-31`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
-    // console.log(JSON.stringify(response?.data, null, 4))
     setListData(response?.data?.data || [])
   }
 
   const listItem = (item, index) => {
     try {
+      // console.log(item)
+      const eventUseId = item?.eventUseId
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
-      // return (<Text style={{ height: 150 }}>teset</Text>)
       return (
-        <View style={styles.cell} key={index}>
-          <View style={styles.cellInner}>
-            <Text style={styles.cellTitle}>{cutTitle}</Text>
-            <Text style={styles.cellDate}>
-              <Text style={styles.name}>{item?.memberName}</Text> {item?.useDate}
-            </Text>
-            <Text style={styles.cellAmount}>{item?.useAmount && `${item?.useAmount} 원`}</Text>
+        <TouchableOpacity key={index} onPress={() => {
+          props.navigation.navigate('Payment', { eventUseId: eventUseId })
+        }}>
+          <View style={styles.cell} >
+            <View style={styles.cellInner}>
+              <Text style={styles.cellTitle}>{cutTitle}</Text>
+              <Text style={styles.cellDate}>
+                <Text style={styles.name}>{item?.memberName}</Text> {item?.useDate}
+              </Text>
+              <Text style={styles.cellAmount}>{item?.useAmount && `${item?.useAmount} 원`}</Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       )
     } catch (error) {
       console.log(error)

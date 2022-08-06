@@ -55,12 +55,12 @@ const App = () => {
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={CostList}
         />
-           <Stack.Screen
+        <Stack.Screen
           name="Payment"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={Payment}
         />
-           <Stack.Screen
+        <Stack.Screen
           name="PaymentList"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={PaymentList}

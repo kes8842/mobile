@@ -7,31 +7,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CostList = (props) => {
-  const [memberName, setMemberName] = useState('')
-  const [memberId, setMemberId] = useState('')
-  const [mobileId, setMobileId] = useState('')
   const [listData, setListData] = useState([])
   const styles = styleSheet()
 
   useEffect(() => {
     callList()
-    getData()
   }, [])
 
-  const getData = async () => {
-
-    const localName = await AsyncStorage.getItem('memberName')
-    const localMemberId = await AsyncStorage.getItem('memberId')
-    const localMobileId = await AsyncStorage.getItem('mobileId')
-
-    if (localName) {
-      setMemberName(localName)
-      setMemberId(localMemberId)
-      setMobileId(localMobileId)
-    }
-  }
-
   const callList = async () => {
+    const memberId = await AsyncStorage.getItem('memberId')
     const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=2022-01-01&toDate=2022-12-31`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
     console.log(JSON.stringify(response?.data, null, 4))
@@ -44,15 +28,17 @@ const CostList = (props) => {
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
       // return (<Text style={{ height: 150 }}>teset</Text>)
       return (
-        <View style={styles.cell} key={index}>
-          <View style={styles.cellInner}>
-            <Text style={styles.cellTitle}>{cutTitle}</Text>
-            <Text style={styles.cellDate}>
-              <Text style={styles.name}>{item?.memberName}</Text> {item?.useDate}
-            </Text>
-            <Text style={styles.cellAmount}>{item?.useAmount && `${item?.useAmount} 원`}</Text>
+        <TouchableOpacity key={index}>
+          <View style={styles.cell} >
+            <View style={styles.cellInner}>
+              <Text style={styles.cellTitle}>{cutTitle}</Text>
+              <Text style={styles.cellDate}>
+                <Text style={styles.name}>{item?.memberName}</Text> {item?.useDate}
+              </Text>
+              <Text style={styles.cellAmount}>{item?.useAmount && `${item?.useAmount} 원`}</Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       )
     } catch (error) {
       console.log(error)
@@ -102,12 +88,9 @@ const CostList = (props) => {
         </View>
         <View style={styles.cellWrap}>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-
             {listData.map((t, i) => listItem(t, i))}
           </ScrollView>
-
         </View>
-
       </View>
       <View style={styles.regBtn}>
         <TouchableOpacity onPress={() => {
