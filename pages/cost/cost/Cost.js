@@ -7,7 +7,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import client from '../../../api/client';
 
-const Payment = (props) => {
+const Cost = (props) => {
 
   const styles = styleSheet()
 
@@ -21,7 +21,6 @@ const Payment = (props) => {
   })
   const [inputData, setInputData] = useState({
     "eventId": 6,
-    "eventUserId": 68,
     "useAmount": 0,
     "useComment": "",
     "useProStatus": "C",
@@ -32,18 +31,19 @@ const Payment = (props) => {
 
   useEffect(() => {
     console.log(props.route.params.refresh)
-    const getData = async () => {
-      const localName = await AsyncStorage.getItem('memberName')
-      const localMemberId = await AsyncStorage.getItem('memberId')
-      const localMobileId = await AsyncStorage.getItem('mobileId')
-      if (localName) {
-        setMemberName(localName)
-        setMemberId(localMemberId)
-        setMobileId(localMobileId)
-      }
-    }
     getData()
   }, [])
+
+  const getData = async () => {
+    const localName = await AsyncStorage.getItem('memberName')
+    const localMemberId = await AsyncStorage.getItem('memberId')
+    const localMobileId = await AsyncStorage.getItem('mobileId')
+    if (localName) {
+      setMemberName(localName)
+      setMemberId(localMemberId)
+      setMobileId(localMobileId)
+    }
+  }
 
   const openDateModal = () => {
     setDateState({ ...dateState, viewModal: true })
@@ -58,7 +58,7 @@ const Payment = (props) => {
   }
 
   const regist = async () => {
-    const body = { ...inputData, usedDate: `2022-06-06` }
+    const body = { ...inputData, usedDate: `2022-06-06`, "eventUserId": memberId, }
     const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).then((e) => {
       console.log(e)
       return e
@@ -152,4 +152,4 @@ const Payment = (props) => {
   )
 }
 
-export default Payment
+export default Cost

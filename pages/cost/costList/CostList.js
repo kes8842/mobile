@@ -4,21 +4,37 @@ import { Image as ReactImage } from 'react-native';
 import { styleSheet } from './stylesheet';
 import client from '../../../api/client';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const PayList = (props) => {
-
-  const styles = styleSheet()
+const CostList = (props) => {
+  const [memberName, setMemberName] = useState('')
+  const [memberId, setMemberId] = useState('')
+  const [mobileId, setMobileId] = useState('')
   const [listData, setListData] = useState([])
+  const styles = styleSheet()
 
   useEffect(() => {
     callList()
+    getData()
   }, [])
 
+  const getData = async () => {
+
+    const localName = await AsyncStorage.getItem('memberName')
+    const localMemberId = await AsyncStorage.getItem('memberId')
+    const localMobileId = await AsyncStorage.getItem('mobileId')
+
+    if (localName) {
+      setMemberName(localName)
+      setMemberId(localMemberId)
+      setMobileId(localMobileId)
+    }
+  }
+
   const callList = async () => {
-    console.log('calllist done')
-    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=68&fromDate=2022-01-01&toDate=2022-12-31`)
+    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=2022-01-01&toDate=2022-12-31`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
-    // console.log(JSON.stringify(response?.data, null, 4))
+    console.log(JSON.stringify(response?.data, null, 4))
     setListData(response?.data?.data || [])
   }
 
@@ -95,7 +111,7 @@ const PayList = (props) => {
       </View>
       <View style={styles.regBtn}>
         <TouchableOpacity onPress={() => {
-          props.navigation.navigate('Payment', { refresh: callList })
+          props.navigation.navigate('Cost', { refresh: callList })
         }}>
           <Text style={styles.regBtnText}>등록</Text>
         </TouchableOpacity>
@@ -104,4 +120,4 @@ const PayList = (props) => {
   )
 }
 
-export default PayList
+export default CostList

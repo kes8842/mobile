@@ -13,8 +13,10 @@ import Signup from './pages/auth/signup/signup';
 import Qrscan from './pages/qr/qrscan/qrscan';
 import Qrcode from './pages/qr/qrcode/qrcode';
 import EventList from './pages/event/list/list';
-import Payment from './pages/cost/payment/payment';
-import PayList from './pages/cost/payList/PayList';
+import Cost from './pages/cost/cost/Cost';
+import CostList from './pages/cost/costList/CostList';
+import Payment from './pages/payment/payment/Payment';
+import PaymentList from './pages/payment/paymentLlst/PaymentList';
 import { View } from 'react-native'
 const Stack = createStackNavigator();
 
@@ -44,14 +46,24 @@ const App = () => {
           component={EventList}
         />
         <Stack.Screen
+          name="Cost"
+          options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
+          component={Cost}
+        />
+        <Stack.Screen
+          name="CostList"
+          options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
+          component={CostList}
+        />
+           <Stack.Screen
           name="Payment"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={Payment}
         />
-        <Stack.Screen
-          name="PayList"
+           <Stack.Screen
+          name="PaymentList"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
-          component={PayList}
+          component={PaymentList}
         />
       </Stack.Navigator>
     </NavigationContainer>
