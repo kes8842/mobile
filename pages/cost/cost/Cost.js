@@ -1,4 +1,4 @@
-import { SelectBox, Text, View, TextInput, FlatList, Picker, ScrollView, Styled, Image } from 'react-native';
+import { SelectBox, Text, View, TextInput, FlatList, ScrollView, Styled, Image } from 'react-native';
 import { styleSheet } from './stylesheet';
 import React, { Component, useRef, useState, useMemo, useEffect } from 'react';
 import { Image as ReactImage } from 'react-native';
@@ -6,14 +6,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import client from '../../../api/client';
+import { Picker } from '@react-native-picker/picker';
 
 const Cost = (props) => {
 
   const styles = styleSheet()
-
-  const [memberName, setMemberName] = useState('')
   const [memberId, setMemberId] = useState('')
-  const [mobileId, setMobileId] = useState('')
   const [dateState, setDateState] = useState({
     viewModal: false,
     confirmVal: '',
@@ -30,7 +28,6 @@ const Cost = (props) => {
   })
 
   useEffect(() => {
-    console.log(props.route.params.refresh)
     getData()
   }, [])
 
@@ -39,9 +36,9 @@ const Cost = (props) => {
     const localMemberId = await AsyncStorage.getItem('memberId')
     const localMobileId = await AsyncStorage.getItem('mobileId')
     if (localName) {
-      setMemberName(localName)
+      // setMemberName(localName)
       setMemberId(localMemberId)
-      setMobileId(localMobileId)
+      // setMobileId(localMobileId)
     }
   }
 
@@ -98,10 +95,13 @@ const Cost = (props) => {
             <Text style={styles.label}>제목</Text>
             <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} />
           </View>
-          {/* <View style={styles.inputWrap}>
+          <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
-            <SelectBox style={styles.selectBox}></SelectBox>
-          </View> */}
+            <Picker style={styles.selectBox}>
+              <Picker.Item label="test1" value="1" />
+              <Picker.Item label="test2" value="2" />
+            </Picker>
+          </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label} >사용일자</Text>
             <View style={styles.searchBtn} >

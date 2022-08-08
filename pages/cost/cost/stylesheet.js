@@ -66,13 +66,11 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "top": 130
     },
     "inputWrap": {
-
       "flexDirection": "row",
       "justifyContent": 'space-between',
       "alignItems": "baseline",
       "marginBottom": "5%",
       "position": "relative",
-
     },
 
     "label": {
@@ -80,7 +78,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "color": "#1d1d1d",
       "fontWeight": '700',
       "fontSize": 18
-
     },
     "searchBtn": {
       "width": 22,
@@ -158,10 +155,9 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
     "selectBox": {
       "width": "70%",
-      "border": "none",
-      "borderBottomWidth": 3,
-      "borderBottomColor": "#707070",
-
+      // "border": "none",
+      // "borderBottomWidth": 3,
+      // "borderBottomColor": "#707070",
     },
 
     "btnWrap": {

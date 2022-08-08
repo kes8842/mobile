@@ -21,9 +21,10 @@ const Payment = (props) => {
       console.log(e)
     })
     if (response.status === 200) {
-      console.log(JSON.stringify(response.data?.data[0], null, 4))
+      console.log('?')
+      console.log(JSON.stringify(response, null, 4))
       const memberName = await AsyncStorage.getItem('memberName')
-      setDetailData({ ...response.data?.data[0], memberName: memberName })
+      setDetailData({ ...response.data?.data?.header || {}, memberName: memberName })
     }
   }
 
@@ -88,7 +89,7 @@ const Payment = (props) => {
 
           <View style={styles.contentsTextarea}>
             <Text style={styles.label}>결제의견</Text>
-            <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payCommnet: e.nativeEvent.text })} />
+            <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payComment: e.nativeEvent.text })} />
           </View>
         </View>
       </View>
@@ -101,7 +102,7 @@ const Payment = (props) => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
           <Text style={styles.canBtn}>취소</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
       </View>
     </View>
   )
