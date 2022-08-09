@@ -40,7 +40,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "width": "100%",
       "height": 70,
       "position": "absolute",
-      "top": 85,
+      "top": 75,
       "overflow": "hidden",
       "borderBottomWidth": 3,
       "borderBottomColor": "#bcbcbc",
@@ -83,7 +83,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
     "contentsWrap": {
       'width': '100%',
       'position': 'absolute',
-      'top': 180,
+      'top': 155,
     },
 
     "contents": {
@@ -91,15 +91,25 @@ export const styleSheet = (windowHeight, windowWidth) => {
       'flexDirection': 'row',
       'justifyContent': 'space-between',
       'alignItems': 'center',
-      'marginBottom': '5%'
+      'marginBottom': '4%'
     },
 
     'label': {
-      'fontFamily': 'Apple SD Gothic Neo',
+      'font-family': 'Apple SD Gothic Neo',
       'color': '#707070',
-      'fontWeight': '200',
+      'font-weight': '200',
       'fontSize': 14
     },
+
+    'sepLine': {
+
+      'width': '100%',
+      'height': 3,
+      'backgroundColor': '#bcbcbc',
+      'marginBottom': 10,
+
+    },
+
 
     'btnWrap': {
 
@@ -116,34 +126,25 @@ export const styleSheet = (windowHeight, windowWidth) => {
       ' alignItems': 'center',
     },
 
-    'textarea': {
-      'width': '100%',
-      'height': 50,
-      'borderRadius': 10,
-      'borderWidth': 2,
-      'borderColor': '#707070',
-      'marginTop': 10,
-      'fontFamily': 'Apple SD Gothic Neo',
-      'fontSize': 14,
-      'marginBottom': 10
-    },
+
 
     'opinion': {
-      'height': 70,
+      'height': 40,
       'width': '100%',
       'borderRadius': 10,
       'borderWidth': 2,
       'borderColor': '#707070',
       'marginTop': 10,
       'fontFamily': 'Apple SD Gothic Neo',
-      'fontSize': 14,
-      'marginBottom': 10
+      'fontSize': 12,
+      'marginBottom': 10,
+      'textAlignVertical': 'top'
     },
 
 
     'confBtn': {
       'width': 95,
-      'height': 40,
+      'height': 45,
       'borderRadius': 50,
       'backgroundColor': '#00878d',
       'color': 'white',

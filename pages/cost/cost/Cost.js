@@ -11,7 +11,9 @@ import { Picker } from '@react-native-picker/picker';
 const Cost = (props) => {
 
   const styles = styleSheet()
+  const [memberName, setMemberName] = useState('')
   const [memberId, setMemberId] = useState('')
+  const [mobileId, setMobileId] = useState('')
   const [dateState, setDateState] = useState({
     viewModal: false,
     confirmVal: '',
@@ -36,9 +38,9 @@ const Cost = (props) => {
     const localMemberId = await AsyncStorage.getItem('memberId')
     const localMobileId = await AsyncStorage.getItem('mobileId')
     if (localName) {
-      // setMemberName(localName)
+      setMemberName(localName)
       setMemberId(localMemberId)
-      // setMobileId(localMobileId)
+      setMobileId(localMobileId)
     }
   }
 
@@ -56,10 +58,8 @@ const Cost = (props) => {
 
   const regist = async () => {
     const body = { ...inputData, usedDate: `2022-06-06`, "eventUserId": memberId, }
-    const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).then((e) => {
-      console.log(e)
-      return e
-    }).catch((e) => {
+    console.log(JSON.stringify(body, null, 4))
+    const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).catch((e) => {
       console.log('error')
       console.log(JSON.stringify(e, null, 4))
     })
