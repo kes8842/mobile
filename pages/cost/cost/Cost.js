@@ -7,6 +7,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import client from '../../../api/client';
 import { Picker } from '@react-native-picker/picker';
+import TempoModal from '../../share/modal/modal';
 
 const Cost = (props) => {
 
@@ -80,6 +81,7 @@ const Cost = (props) => {
   }
 
   return (
+
     <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
@@ -97,10 +99,12 @@ const Cost = (props) => {
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
-            <Picker style={styles.selectBox}>
-              <Picker.Item label="test1" value="1" />
-              <Picker.Item label="test2" value="2" />
-            </Picker>
+            <View style={styles.searchBtn} >
+              <TouchableOpacity onPressIn={() => openDateModal()} >
+                <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
+              </TouchableOpacity>
+            </View>
+            <TextInput style={styles.input} editable={false} value={""}></TextInput>
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label} >사용일자</Text>
@@ -148,6 +152,7 @@ const Cost = (props) => {
         }
         date={dateState.confirmDate}
       />
+      <TempoModal />
     </View>
   )
 }
