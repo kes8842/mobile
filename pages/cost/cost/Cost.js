@@ -8,6 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import client from '../../../api/client';
 import { Picker } from '@react-native-picker/picker';
 import TempoModal from '../../share/modal/modal';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const Cost = (props) => {
 
@@ -20,6 +21,7 @@ const Cost = (props) => {
     confirmVal: '',
     confirmDate: new Date()
   })
+  const [eventOption, setEventOption] = useState([])
   const [inputData, setInputData] = useState({
     "eventId": 6,
     "useAmount": 0,
@@ -29,9 +31,11 @@ const Cost = (props) => {
     "useSubject": "",
     "usedDate": ""
   })
+  const [openModal, setOpenmodal] = useState(false)
 
   useEffect(() => {
     getData()
+    callModalData()
   }, [])
 
   const getData = async () => {
@@ -80,6 +84,38 @@ const Cost = (props) => {
     props.navigation.goBack()
   }
 
+  const callModalData = async () => {
+    const res = await client.get(`/rest/v1/s0221a2000/event-list?&orgId=39`).catch(e => {
+      console.log(JSON.stringify(e, null, 4))
+    })
+    console.log(JSON.stringify(res, null, 4))
+    if (res.status === 200) {
+      const option = res.data?.data?.map(i => {
+        return {
+          text: i.eventNm, value: i.eventId
+        }
+      })
+      console.log(option)
+      setEventOption(option)
+    }
+  }
+
+  const ShowPicker = () => {
+    //launchImageLibrary : 사용자 앨범 접근
+    console.log('res');
+
+    launchImageLibrary({}, (res) => {
+      alert(res.assets[0].uri)
+      const formdata = new FormData()
+      formdata.append('file', res.assets[0].uri);
+      console.log(res);
+    })
+  }
+
+  const onClick = (e) => {
+    console.log(e)
+  }
+
   return (
 
     <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
@@ -100,7 +136,7 @@ const Cost = (props) => {
           <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
             <View style={styles.searchBtn} >
-              <TouchableOpacity onPressIn={() => openDateModal()} >
+              <TouchableOpacity onPressIn={() => setOpenmodal(true)} >
                 <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
               </TouchableOpacity>
             </View>
@@ -123,7 +159,9 @@ const Cost = (props) => {
           <View style={styles.inputWrap}>
             <Text style={styles.label}>첨부파일</Text>
             <View style={styles.addBtn}>
-              <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+              <TouchableOpacity onPressIn={() => ShowPicker()} >
+                <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+              </TouchableOpacity>
             </View>
             <TextInput style={styles.input}></TextInput>
           </View>
@@ -152,7 +190,12 @@ const Cost = (props) => {
         }
         date={dateState.confirmDate}
       />
-      <TempoModal />
+      <TempoModal
+        openModal={openModal}
+        onClick={onClick}
+        onClose={() => setOpenmodal(false)}
+        option={eventOption}
+      />
     </View>
   )
 }

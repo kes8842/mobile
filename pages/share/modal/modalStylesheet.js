@@ -8,12 +8,13 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
 
     "modalBox": {
       "width": '100%',
-      "height": '100%',
+      "height": '98%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'backgroundColor': 'white',
       "position": 'absolute',
-      // display: 'none'
+      // 'display': 'none',
+      'zIndex' : 9,
     },
 
     'modalInner': {
@@ -87,10 +88,5 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'fontFamily': "Apple SD Gothic Neo",
       'color': '#00878D',
     },
-
-
-
-
-
   })
 }

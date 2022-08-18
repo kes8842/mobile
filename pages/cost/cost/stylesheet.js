@@ -124,23 +124,21 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "height": 22,
       "backgroundColor": "#00878d",
       "borderRadius": 50,
-      "marginTop": 5
+      "marginTop": 5,
+      zIndex: 1
     },
+
     "addIcon": {
-      "width": "60%",
-      "height": "60%",
-      "marginRight": "auto",
-      "marginLeft": "auto",
-      "marginTop": "auto",
-      "marginBottom": "auto"
-
-
+      "width": 18,
+      "height": 18,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'marginTop': 1.5,
     },
     "textfieldWrap": {
-
       "marginTop": "5%"
-
     },
+
     "textfield": {
       // "width": windowWidth * 0.75,
       "height": windowHeight * 0.12,

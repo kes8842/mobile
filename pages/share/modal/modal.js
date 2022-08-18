@@ -1,57 +1,59 @@
 import React from "react";
-import { Text, View, styles, TouchableOpacity } from 'react-native';
+import { Text, View, styles } from 'react-native';
 import Modal from 'react-native-simple-modal';
 import { modalStyleSheet } from './modalStylesheet';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useState, useEffect } from "react";
 
-const TempoModal = () => {
+const TempoModal = (props) => {
+    const { onClick, onClose, option } = props
+    const [display, setDisplay] = useState(false)
     const styles = modalStyleSheet()
+
+    useEffect(() => {
+        setDisplay(props.openModal)
+    }, [props])
+
+    const closeModal = () => {
+        if (typeof (onClose) === 'function') {
+            if (onClose) {
+                onClose()
+            }
+        }
+        setDisplay(false)
+    }
+
+    const renderList = (item, i) => {
+ 
+        const { text, value } = item
+
+        return (
+            <View style={styles.contentsWrap} key={i}>
+                <TouchableOpacity onPress={() => onClick(value)}>
+                    <View style={styles.cell}>
+                        <Text style={styles.cellNum}>{i + 1}</Text>
+                        <Text style={styles.cellName}>{text}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     return (
-        <View style={styles.modalBox}>
+        <View style={{ ...styles.modalBox, display: display ? 'flex' : 'none' }}>
             <View style={styles.titleSection}>
                 <Text style={styles.modalTitle}>구분</Text>
             </View>
 
             <View style={styles.modalInner}>
-
-                <View style={styles.contentsWrap}>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>1</Text>
-                        <Text style={styles.cellName}>행사명 A</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>2</Text>
-                        <Text style={styles.cellName}>긴 행사명 B</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>3</Text>
-                        <Text style={styles.cellName}>매우 긴 행사명 C</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>4</Text>
-                        <Text style={styles.cellName}>짤릴 수 있는 행사명 D</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>5</Text>
-                        <Text style={styles.cellName}>짤릴 수 있는 행사명 E</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>6</Text>
-                        <Text style={styles.cellName}>짤릴 수 있는 행사명 F</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>7</Text>
-                        <Text style={styles.cellName}>짤릴 수 있는 행사명 G</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.cellNum}>8</Text>
-                        <Text style={styles.cellName}>짤릴 수 있는 행사명 H</Text>
-                    </View>
-                </View>
+                {option?.map((e, i) => renderList(e, i))}
             </View>
-
             <View
                 style={styles.closeBtn}>
-                <Text style={styles.closeText}>닫기</Text>
+                <TouchableOpacity onPress={() => closeModal()}>
+                    <Text style={styles.closeText}>닫기</Text>
+                </TouchableOpacity>
+
             </View>
         </View>
     );
