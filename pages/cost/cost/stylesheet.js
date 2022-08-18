@@ -68,8 +68,8 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     "inputWrap": {
       "flexDirection": "row",
       "justifyContent": 'space-between',
-      "alignItems": "baseline",
-      "marginBottom": "5%",
+      "alignItems": "flex-start",
+      "marginBottom": "3%",
       "position": "relative",
     },
 
@@ -77,7 +77,8 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "fontFamily": "Apple SD Gothic Neo",
       "color": "#1d1d1d",
       "fontWeight": '700',
-      "fontSize": 18
+      "fontSize": 18,
+      'marginTop' : 10,
     },
     "searchBtn": {
       "width": 22,
@@ -86,7 +87,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "position": "absolute",
       "right": 0,
       "top": 10,
-      zIndex: 1
+      'zIndex': 1
     },
     "searchIcon": {
       "width": "100%",
@@ -120,35 +121,32 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     "addBtn": {
       "position": "absolute",
       "right": 0,
-      "width": 22,
-      "height": 22,
+      "width": 20,
+      "height": 20,
       "backgroundColor": "#00878d",
       "borderRadius": 50,
-      "marginTop": 5,
-      zIndex: 1
+      "marginTop": 7,
+      'zIndex': 1
     },
 
     "addIcon": {
-      "width": 18,
-      "height": 18,
+      "width": 13,
+      "height": 13,
       'marginLeft': 'auto',
       'marginRight': 'auto',
-      'marginTop': 1.5,
-    },
-    "textfieldWrap": {
-      "marginTop": "5%"
+      'marginTop': 3,
     },
 
     "textfield": {
-      // "width": windowWidth * 0.75,
-      "height": windowHeight * 0.12,
-      "borderRadius": 20,
+      "height": windowHeight * 0.19,
+      "borderRadius": 10,
       "borderWidth": 3,
       "borderColor": "#707070",
-      "marginTop": 10,
+      "marginTop": 8,
+      'paddingLeft' : 10,
       "fontFamily": "Apple SD Gothic Neo",
       "fontSize": 14,
-      "textAlignVertical": "top"
+      "textAlignVertical": "top",
     },
 
     "selectBox": {
@@ -160,12 +158,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
     "btnWrap": {
       "width": "100%",
-      // "width": windowWidth * 0.85,
-      "position": "absolute",
-      "left": 0,
-      "right": 0,
-      "bottom": 40,
-      "margin": 0,
+      "marginTop": 6,
       "marginLeft": 'auto',
       "flexDirection": "row",
       "justifyContent": "space-between",

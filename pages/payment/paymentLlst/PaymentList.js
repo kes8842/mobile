@@ -60,12 +60,6 @@ const PaymentList = (props) => {
           <View style={styles.highlight}></View><Text style={styles.title}>결제요청현황</Text>
         </View>
         <View style={styles.layer1}>
-          {/* <SelectBox style={styles.searchInput}>
-                <option>구분</option>
-                <option>구분</option>
-                <option>구분</option>
-                <option>구분</option>
-              </SelectBox> */}
           <View style={styles.searchBtn}>
             <TouchableOpacity onPress={() => {
               callList()

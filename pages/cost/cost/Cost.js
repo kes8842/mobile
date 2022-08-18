@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Image } from 'react-native';
+import { Text, View, TextInput, Image, Keyboard } from 'react-native';
 import { styleSheet } from './stylesheet';
 import React, { useState, useEffect } from 'react';
 import { Image as ReactImage } from 'react-native';
@@ -51,7 +51,13 @@ const Cost = (props) => {
   }
 
   const openDateModal = () => {
+    Keyboard.dismiss()
     setDateState({ ...dateState, viewModal: true })
+  }
+
+  const openEventModal = () => {
+    Keyboard.dismiss()
+    setOpenmodal(true)
   }
 
   const confirmDateChange = (val) => {
@@ -146,7 +152,7 @@ const Cost = (props) => {
           <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
             <View style={styles.searchBtn} >
-              <TouchableOpacity onPressIn={() => setOpenmodal(true)} >
+              <TouchableOpacity onPressIn={() => openEventModal()} >
                 <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
               </TouchableOpacity>
             </View>
@@ -186,12 +192,12 @@ const Cost = (props) => {
               onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
             />
           </View>
-        </View>
-        <View style={styles.btnWrap}>
-          <TouchableOpacity onPress={regist}>
-            <Text style={styles.requestBtn}>등록</Text>
-          </TouchableOpacity>
-          <Text style={styles.delBtn}>삭제</Text>
+          <View style={styles.btnWrap}>
+            <TouchableOpacity onPress={regist}>
+              <Text style={styles.requestBtn}>등록</Text>
+            </TouchableOpacity>
+            <Text style={styles.delBtn}>삭제</Text>
+          </View>
         </View>
       </View>
       <DateTimePickerModal

@@ -50,19 +50,14 @@ const CostList = (props) => {
     <View style={styles.wrap}>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
-
           <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
         </View>
         <View style={styles.titleWrap}>
           <View style={styles.highlight}></View><Text style={styles.title}>비용요청현황</Text>
         </View>
         <View style={styles.layer1}>
-          {/* <SelectBox style={styles.searchInput}>
-                <option>구분</option>
-                <option>구분</option>
-                <option>구분</option>
-                <option>구분</option>
-              </SelectBox> */}
+          <View style={styles.searchInput}>
+          </View>
           <View style={styles.searchBtn}>
             <TouchableOpacity onPress={() => {
               callList()
