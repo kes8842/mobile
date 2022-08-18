@@ -24,12 +24,12 @@ const TempoModal = (props) => {
     }
 
     const renderList = (item, i) => {
- 
+
         const { text, value } = item
 
         return (
             <View style={styles.contentsWrap} key={i}>
-                <TouchableOpacity onPress={() => onClick(value)}>
+                <TouchableOpacity onPress={() => onClick(value, text)}>
                     <View style={styles.cell}>
                         <Text style={styles.cellNum}>{i + 1}</Text>
                         <Text style={styles.cellName}>{text}</Text>

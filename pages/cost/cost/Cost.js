@@ -1,14 +1,14 @@
-import { SelectBox, Text, View, TextInput, FlatList, ScrollView, Styled, Image } from 'react-native';
+import { Text, View, TextInput, Image } from 'react-native';
 import { styleSheet } from './stylesheet';
-import React, { Component, useRef, useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image as ReactImage } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import client from '../../../api/client';
-import { Picker } from '@react-native-picker/picker';
 import TempoModal from '../../share/modal/modal';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const Cost = (props) => {
 
@@ -23,7 +23,8 @@ const Cost = (props) => {
   })
   const [eventOption, setEventOption] = useState([])
   const [inputData, setInputData] = useState({
-    "eventId": 6,
+    "eventId": "",
+    "eventNm": "",
     "useAmount": 0,
     "useComment": "",
     "useProStatus": "C",
@@ -112,13 +113,22 @@ const Cost = (props) => {
     })
   }
 
-  const onClick = (e) => {
-    console.log(e)
+  const onClick = (e, text) => {
+    setInputData({ ...inputData, eventId: e, eventNm: text })
+    setOpenmodal(false)
   }
 
   return (
 
-    <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
+    <KeyboardAwareScrollView
+      style={styles.wrap}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      enableOnAndroid={true}
+      scrollEnabled={true}
+      extraScrollHeight={100}
+      scrollToOverflowEnabled={true}
+      enableAutomaticScroll={true}
+      keyboardShouldPersistTaps='always'>
       <View style={styles.inner}>
         <View style={styles.backBtn}>
           <TouchableOpacity onPress={goback} >
@@ -140,7 +150,10 @@ const Cost = (props) => {
                 <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
               </TouchableOpacity>
             </View>
-            <TextInput style={styles.input} editable={false} value={""}></TextInput>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              value={inputData.eventNm}></TextInput>
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label} >사용일자</Text>
@@ -196,7 +209,7 @@ const Cost = (props) => {
         onClose={() => setOpenmodal(false)}
         option={eventOption}
       />
-    </View>
+    </KeyboardAwareScrollView>
   )
 }
 

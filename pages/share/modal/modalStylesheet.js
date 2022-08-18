@@ -13,7 +13,6 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       "marginRight": 'auto',
       'backgroundColor': 'white',
       "position": 'absolute',
-      // 'display': 'none',
       'zIndex' : 9,
     },
 
@@ -26,7 +25,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
 
     'titleSection': {
       "width": '100%',
-      'height': 40,
+      'height': 50,
       'borderBottomWidth': 2,
       'borderBottomColor': '#707070',
       'textAlignVertical': 'center',
@@ -39,7 +38,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'fontWeight': '900',
       'fontFamily': "Apple SD Gothic Neo",
       'color': '#000000',
-      'lineHeight': 40,
+      'lineHeight': 50,
 
     },
 
@@ -52,33 +51,38 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
 
     'cell': {
       'width': '100%',
+      'height': 60,
       'flexDirection': 'row',
-      'marginBottom': '7%',
+      'paddingLeft' : 20,
+      'borderColor' : '#00878d',
+      'borderWidth' : 2,
+      'borderRadius' : 10,
+      'alignItems' :'center',
+
     },
 
     'cellNum': {
 
       'fontSize': 18,
-      'fontWeight': '500',
+      'fontWeight': '900',
       'fontFamily': "Apple SD Gothic Neo",
-      'color': '#000000'
-
+      'color': '#00878d',
     },
     'cellName': {
 
       'fontSize': 18,
       'fontWeight': '800',
       'fontFamily': "Apple SD Gothic Neo",
-      'color': '#000000',
+      'color': '#1d1d1d',
       'marginLeft': 30,
 
     },
 
     'closeBtn': {
-
+      
       'position': 'absolute',
       'right': 20,
-      'bottom': 15,
+      'bottom': 20,
 
     },
 
