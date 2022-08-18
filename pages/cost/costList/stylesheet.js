@@ -100,30 +100,27 @@ export const styleSheet = (windowHeight, windowWidth) => {
     },
     "layer1": {
       "display": "flex",
+      'flexDirection': 'row',
       "alignItems": "center",
       "position": "absolute",
       "top": 150,
-
     },
 
     "searchInput": {
       "width": 126,
-      "height": 38,
+      "height": 40,
       "borderWidth": 2,
       "borderColor": "#707070",
       "borderRadius": 50,
-      "color": "#707070",
-      "text-align": "center",
-      "lineHeight": 38,
+      "textAlign": "center",
       "fontFamily": " Apple SD Gothic Neo",
-      "fontSize": 16,
-      "fontWeight": "700",
-      "marginRight": 30,
-      // -webkit-appearance: none,
-      //  -moz-appearance: none,
-      //  appearance: none,
+      "marginRight": 10,
+      "color": "#ababab",
+      "fontSize": 14,
+      "backgroundColor": "transparent",
+      'alignItems': 'center',
+      'lineHeight': 40
     },
-
 
     "searchBtn": {
       "width": 37,
@@ -138,21 +135,15 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "marginTop": 5,
       "marginLeft": "auto",
       "marginRight": "auto",
-
     },
 
-
     "layer2": {
-
       "position": "absolute",
       "top": 200,
       "width": "100%",
-
     },
 
-
     "searchDate": {
-
       "width": "100%",
       "height": 40,
       "borderWidth": 2,
@@ -164,36 +155,17 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "flexDirection": "row",
       "justifyContent": "space-evenly",
       "alignItems": "center",
-
-
     },
 
-
     "inputDate": {
-      "width": "70%",
-      "height": "100%",
-      "marginTop": 5,
+      "height": 40,
       "color": "#ababab",
       "fontSize": 14,
       "textAlign": "center",
       "backgroundColor": "transparent",
+      "alignItems": "center",
+      "lineHeight": 40
     },
-
-
-    //   input[type="date"]::before {
-
-    //       content:attr(data-placeholder),
-    //       width:100%,
-    //       color:#ababab,
-    //   }
-
-
-    //   input[type="date"]:focus:before,
-    //   input[type="date"]:valid:before{
-    //       display: none,
-
-    //   }
-
 
     "cellWrap": {
       "width": "100%",
@@ -251,8 +223,5 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "fontWeight": "800",
       "lineHeight": 25.2,
     },
-
-
-
   })
 }

@@ -1,18 +1,30 @@
 import React from "react";
-import { Text, View, styles } from 'react-native';
+import { Text, View, styles, BackHandler } from 'react-native';
 import Modal from 'react-native-simple-modal';
 import { modalStyleSheet } from './modalStylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useState, useEffect } from "react";
 
 const TempoModal = (props) => {
-    const { onClick, onClose, option } = props
+    const { onClick, onClose, option, openModal } = props
     const [display, setDisplay] = useState(false)
     const styles = modalStyleSheet()
 
     useEffect(() => {
-        setDisplay(props.openModal)
-    }, [props])
+        setDisplay(openModal)
+        BackHandler.addEventListener('hardwareBackPress', close)
+        return () => {
+            BackHandler.removeEventListener('hardwareBackPress', close)
+        }
+    }, [openModal])
+
+    const close = () => {
+        if (openModal) {
+            onClose()
+            return true
+        }
+        return false
+    }
 
     const closeModal = () => {
         if (typeof (onClose) === 'function') {
@@ -24,9 +36,7 @@ const TempoModal = (props) => {
     }
 
     const renderList = (item, i) => {
-
         const { text, value } = item
-
         return (
             <View style={styles.contentsWrap} key={i}>
                 <TouchableOpacity onPress={() => onClick(value, text)}>
@@ -53,7 +63,6 @@ const TempoModal = (props) => {
                 <TouchableOpacity onPress={() => closeModal()}>
                     <Text style={styles.closeText}>닫기</Text>
                 </TouchableOpacity>
-
             </View>
         </View>
     );

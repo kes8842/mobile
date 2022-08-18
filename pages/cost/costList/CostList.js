@@ -5,21 +5,48 @@ import { styleSheet } from './stylesheet';
 import client from '../../../api/client';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TempoModal from '../../share/modal/modal';
 
 const CostList = (props) => {
-  const [listData, setListData] = useState([])
   const styles = styleSheet()
 
+  const [listData, setListData] = useState([])
+  const [eventOption, setEventOption] = useState([])
+  const [openModal, setOpenmodal] = useState(false)
+  const [eventState, setEventState] = useState({
+    eventId: "",
+    eventNm: ""
+  })
   useEffect(() => {
-    callList()
+    callModalData()
   }, [])
 
   const callList = async () => {
     const memberId = await AsyncStorage.getItem('memberId')
     const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=2022-01-01&toDate=2022-12-31`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
-    console.log(JSON.stringify(response?.data, null, 4))
+    // console.log(JSON.stringify(response?.data, null, 4))
     setListData(response?.data?.data || [])
+  }
+
+  const callModalData = async () => {
+    const res = await client.get(`/rest/v1/s0221a2000/event-list?&orgId=39`).catch(e => {
+      // console.log(JSON.stringify(e, null, 4))
+    })
+    // console.log(JSON.stringify(res, null, 4))
+    if (res.status === 200) {
+      const option = res.data?.data?.map(i => {
+        return {
+          text: i.eventNm, value: i.eventId
+        }
+      })
+      setEventOption(option)
+    }
+  }
+
+  const modalOnClick = (value, text) => {
+    setEventState({ eventId: value, eventNm: text })
+    setOpenmodal(false)
   }
 
   const listItem = (item, index) => {
@@ -56,8 +83,11 @@ const CostList = (props) => {
           <View style={styles.highlight}></View><Text style={styles.title}>비용요청현황</Text>
         </View>
         <View style={styles.layer1}>
-          <View style={styles.searchInput}>
-          </View>
+          <TouchableOpacity onPress={() => setOpenmodal(true)} >
+            <Text style={styles.searchInput}
+            >{eventState?.eventNm || '구분'}
+            </Text>
+          </TouchableOpacity>
           <View style={styles.searchBtn}>
             <TouchableOpacity onPress={() => {
               callList()
@@ -70,10 +100,11 @@ const CostList = (props) => {
 
         <View style={styles.layer2}>
           <View style={styles.searchDate}>
-            <TextInput style={styles.inputDate}
+            <Text style={styles.inputDate}
               type="date"
-              placeholder="날짜선택"
-              required aria-required="true"></TextInput>
+              required aria-required="true"
+              editable={false}
+              onPress={() => setOpenmodal(true)}>날짜선택</Text>
             <Text style={styles.wave}>~</Text>
             <TextInput style={styles.inputDate}
               type="date"
@@ -94,6 +125,12 @@ const CostList = (props) => {
           <Text style={styles.regBtnText}>등록</Text>
         </TouchableOpacity>
       </View>
+      <TempoModal
+        openModal={openModal}
+        onClick={modalOnClick}
+        onClose={() => setOpenmodal(false)}
+        option={eventOption}
+      />
     </View >
   )
 }
