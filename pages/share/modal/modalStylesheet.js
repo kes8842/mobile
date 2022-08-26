@@ -3,24 +3,36 @@ import { color } from 'react-native-reanimated';
 
 export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, windowWidth = Dimensions.get('window').width) => {
   const wp = windowWidth / 360
-  const hp = windowHeight / 640
+  const hp = windowHeight / 800
   return StyleSheet.create({
 
     "modalBox": {
       "width": '100%',
-      "height": '98%',
-      "marginLeft": 'auto',
-      "marginRight": 'auto',
-      'backgroundColor': 'white',
+      "height": windowHeight,
+      'backgroundColor': 'rgba(0,0,0,0.7)',
       "position": 'absolute',
-      'zIndex' : 9,
+      // display: 'none',
+      "zIndex" : 9,
+    
+    },
+    "box": {
+      "width": '90%',
+      "height": '75%',
+      'backgroundColor': 'white',
+      'marginLeft' : 'auto',
+      'marginRight' : 'auto',
+      'marginTop' : 80,
+      'marginBottom' : 'auto',
+     
     },
 
     'modalInner': {
       "position": "relative",
       "width": "85%",
+      'height' : '80%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
+      'overflow' :'hidden'
     },
 
     'titleSection': {
@@ -42,11 +54,12 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
 
     },
 
-    'contentsWrap': {
+    'cellWrap': {
       'width': '90%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'marginTop': 30,
+    
     },
 
     'cell': {
@@ -54,7 +67,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'height': 60,
       'flexDirection': 'row',
       'paddingLeft' : 20,
-      'borderColor' : '#00878d',
+      'borderColor' : '#f15a24',
       'borderWidth' : 2,
       'borderRadius' : 10,
       'alignItems' :'center',
@@ -66,7 +79,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'fontSize': 18,
       'fontWeight': '900',
       'fontFamily': "Apple SD Gothic Neo",
-      'color': '#00878d',
+      'color': '#f15a24',
     },
     'cellName': {
 
@@ -90,7 +103,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'fontSize': 18,
       'fontWeight': '900',
       'fontFamily': "Apple SD Gothic Neo",
-      'color': '#00878D',
+      'color': '#f15a24',
     },
   })
 }

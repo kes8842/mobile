@@ -3,82 +3,70 @@ import { color } from 'react-native-reanimated';
 
 export const styleSheet = (windowHeight = Dimensions.get('window').height, windowWidth = Dimensions.get('window').width) => {
   const wp = windowWidth / 360
-  const hp = windowHeight / 640
+  const hp = windowHeight / 800
   return StyleSheet.create({
 
     "wrap": {
-      "width": windowWidth,
-      "height": windowHeight,
+      'position': 'relative',
+      "width": '100%',
+      "height": '100%',
+      'backgroundColor': 'white',
     },
     "inner": {
-      "position": "relative",
-      // "width": windowWidth * 0.85,
       "width": "85%",
-      "height": windowHeight,
+      'height': '100%',
       "marginLeft": 'auto',
-      "marginRight": 'auto'
+      "marginRight": 'auto',
+      'position': 'relative',
     },
-
+    "topMenu": {
+      "width": "100%",
+      "height": 66,
+      "position": "relative",
+      "marginLeft": 'auto',
+      "marginRight": 'auto',
+      'paddingHorizontal': 20,
+      'borderBottomColor': '#707070',
+      'borderBottomWidth': 2,
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'center',
+    },
     "backBtn": {
       "overflow": "hidden",
-      "position": "absolute",
-      "width": 30,
-      "height": 30,
-      "top": 25,
-    },
-
-    "backBtnIcon": {
-      "width": "100%",
-      "height": "100%"
-    },
-
-    "titleWrap": {
-      "opacity": 1,
-      "position": "absolute",
-      // "overflow": "hidden",
-      "width": 172,
+      'position': 'absolute',
+      'left': 16,
+      'top': 15,
+      "width": 40,
       "height": 40,
-      "top": 80
     },
-
-    "highlight": {
-      "width": 113,
-      "height": 19,
-      "backgroundColor": "rgba(252, 242, 0, 0.9599999785423279)",
-      "opacity": 1,
-      "position": "absolute",
-      "top": 21,
+    "backBtnIcon": {
+      "width": 30,
+      "height": 30
     },
     "title": {
-      "width": 172,
-      "color": "#1d1d1d",
-      "position": "absolute",
-      "top": 0,
-      "left": 0,
+      "color": "#F15A24",
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '800',
-      "fontSize": 33,
+      "fontSize": 22,
     },
     "form": {
-      // "width": windowWidth * 0.75,
       "width": "100%",
-      "position": "absolute",
-      "top": 130
+      'marginTop': 20
+
     },
     "inputWrap": {
-      "flexDirection": "row",
-      "justifyContent": 'space-between',
-      "alignItems": "flex-start",
+      'width': '100%',
       "marginBottom": "3%",
       "position": "relative",
     },
 
     "label": {
       "fontFamily": "Apple SD Gothic Neo",
-      "color": "#1d1d1d",
+      "color": "#707070",
       "fontWeight": '700',
       "fontSize": 18,
-      'marginTop' : 10,
+      'marginTop': 10,
     },
     "searchBtn": {
       "width": 22,
@@ -86,7 +74,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "marginTop": -5,
       "position": "absolute",
       "right": 0,
-      "top": 10,
+      "bottom": 10,
       'zIndex': 1
     },
     "searchIcon": {
@@ -96,36 +84,36 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
     "input": {
       // "width": windowWidth * 0.85 * 0.8,
-      "width": "70%",
+      "width": "100%",
       "height": 35,
       "overflow": "hidden",
-      "borderBottomWidth": 3,
+      "borderBottomWidth": 2,
       "borderBottomColor": "#707070",
+      "fontFamily": "Apple SD Gothic Neo",
       "fontSize": 20,
+      "fontWeight": '700',
+      "color": "#383838",
       "paddingTop": 0,
-      "paddingBottom": 0,
-      "position": "relative"
+      "paddingBottom": 10,
     },
 
     "won": {
       "position": "absolute",
       "right": 0,
-      "top": 10,
+      "bottom": 10,
       "fontSize": 14,
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": "700",
-      "color": "#1d1d1d"
-
-
+      "color": "#1d1d1d",
     },
     "addBtn": {
       "position": "absolute",
       "right": 0,
+      "bottom": 10,
       "width": 20,
       "height": 20,
-      "backgroundColor": "#00878d",
+      "backgroundColor": "#f15a24",
       "borderRadius": 50,
-      "marginTop": 7,
       'zIndex': 1
     },
 
@@ -138,12 +126,12 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     },
 
     "textfield": {
-      "height": windowHeight * 0.19,
+      "height": windowHeight * 0.15,
       "borderRadius": 10,
-      "borderWidth": 3,
+      "borderWidth": 2,
       "borderColor": "#707070",
       "marginTop": 8,
-      'paddingLeft' : 10,
+      'paddingLeft': 10,
       "fontFamily": "Apple SD Gothic Neo",
       "fontSize": 14,
       "textAlignVertical": "top",
@@ -158,8 +146,10 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
     "btnWrap": {
       "width": "100%",
-      "marginTop": 6,
-      "marginLeft": 'auto',
+      "height": 50,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'marginTop': 40,
       "flexDirection": "row",
       "justifyContent": "space-between",
       "alignItems": "center",
@@ -168,7 +158,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     "requestBtn": {
       "width": 140,
       "height": 50,
-      "backgroundColor": "#00878d",
+      "backgroundColor": "#F15A24",
       "borderRadius": 50,
       "textAlign": "center",
       "color": "white",
@@ -181,7 +171,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     "delBtn": {
       "width": 140,
       "height": 50,
-      "backgroundColor": "rgba(226, 56, 56, 1)",
+      "backgroundColor": "#707070",
       "borderRadius": 50,
       "color": "white",
       "fontFamily": "Apple SD Gothic Neo",

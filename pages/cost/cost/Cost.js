@@ -131,19 +131,20 @@ const Cost = (props) => {
       resetScrollToCoords={{ x: 0, y: 0 }}
       enableOnAndroid={true}
       scrollEnabled={true}
-      extraScrollHeight={100}
       scrollToOverflowEnabled={true}
       enableAutomaticScroll={true}
       keyboardShouldPersistTaps='always'>
-      <View style={styles.inner}>
+
+      <View style={styles.topMenu}>
         <View style={styles.backBtn}>
           <TouchableOpacity onPress={goback} >
             <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
           </TouchableOpacity>
         </View>
-        <View style={styles.titleWrap}>
-          <View style={styles.highlight}></View><Text style={styles.title}>비용작성</Text>
-        </View>
+        <Text style={styles.title}>비용작성</Text>
+      </View>
+
+      <View style={styles.inner}>
         <View style={styles.form}>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>제목</Text>
@@ -177,11 +178,13 @@ const Cost = (props) => {
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>첨부파일</Text>
+
             <View style={styles.addBtn}>
-              <TouchableOpacity onPressIn={() => ShowPicker()} >
+              <TouchableOpacity onPressIn={() => ShowPicker()}>
                 <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
               </TouchableOpacity>
             </View>
+
             <TextInput style={styles.input}></TextInput>
           </View>
           <View style={styles.textfieldWrap}>
@@ -192,12 +195,12 @@ const Cost = (props) => {
               onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
             />
           </View>
-          <View style={styles.btnWrap}>
-            <TouchableOpacity onPress={regist}>
-              <Text style={styles.requestBtn}>등록</Text>
-            </TouchableOpacity>
-            <Text style={styles.delBtn}>삭제</Text>
-          </View>
+        </View>
+        <View style={styles.btnWrap}>
+          <TouchableOpacity onPress={regist}>
+            <Text style={styles.requestBtn}>등록</Text>
+          </TouchableOpacity>
+          <Text style={styles.delBtn}>삭제</Text>
         </View>
       </View>
       <DateTimePickerModal

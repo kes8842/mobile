@@ -72,11 +72,14 @@ const Payment = (props) => {
 
   return (
     <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
-      <View style={styles.inner}>
+      <View style={styles.topMenu}>
         <View style={styles.backBtn}>
           <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
         </View>
+      </View>
+      <View style={styles.inner}>
         {console.log(detailData)}
+
         <View style={styles.title}>
           <Text style={styles.date}>사용일자: {detailData?.header?.usedDate}</Text>
           <View style={styles.amountWrap}>
