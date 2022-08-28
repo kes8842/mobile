@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, styles, BackHandler } from 'react-native';
+import { Text, View, styles, BackHandler, ScrollView } from 'react-native';
 import Modal from 'react-native-simple-modal';
 import { modalStyleSheet } from './modalStylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,10 +56,9 @@ const TempoModal = (props) => {
                     <Text style={styles.modalTitle}>구분</Text>
                 </View>
 
-                <View style={styles.modalInner}> 
-                {/* 스크롤 적용 필요 */}
-                        {option?.map((e, i) => renderList(e, i))}
-                </View>
+                <ScrollView style={styles.modalInner}>
+                    {option?.map((e, i) => renderList(e, i))}
+                </ScrollView>
                 <View
                     style={styles.closeBtn}>
                     <TouchableOpacity onPress={() => closeModal()}>

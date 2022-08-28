@@ -75,30 +75,25 @@ const CostList = (props) => {
 
   return (
     <View style={styles.wrap}>
+      <View style={styles.topMenu}>
+          <View style={styles.backBtn}>
+            <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          </View>
+          <Text style={styles.title}>비용요청현황</Text>
+        </View>
       <View style={styles.inner}>
-        <View style={styles.backBtn}>
-          <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
-        </View>
-        <View style={styles.titleWrap}>
-          <View style={styles.highlight}></View><Text style={styles.title}>비용요청현황</Text>
-        </View>
-        <View style={styles.layer1}>
+        
+        
+        {/* <View style={styles.layer1}>
           <TouchableOpacity onPress={() => setOpenmodal(true)} >
             <Text style={styles.searchInput}
             >{eventState?.eventNm || '구분'}
             </Text>
           </TouchableOpacity>
-          <View style={styles.searchBtn}>
-            <TouchableOpacity onPress={() => {
-              callList()
-            }}>
-              <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
-            </TouchableOpacity>
+          
+        </View> */}
 
-          </View>
-        </View>
-
-        <View style={styles.layer2}>
+        <View style={styles.layer1}>
           <View style={styles.searchDate}>
             <Text style={styles.inputDate}
               type="date"
@@ -111,20 +106,33 @@ const CostList = (props) => {
               placeholder="날짜선택"
               required aria-required="true"></TextInput>
           </View>
-        </View>
-        <View style={styles.cellWrap}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-            {listData.map((t, i) => listItem(t, i))}
-          </ScrollView>
+
+          <View style={styles.searchBtn}>
+            <TouchableOpacity onPress={() => {
+              callList()
+            }}>
+              <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
+            </TouchableOpacity>
+
+          </View>
         </View>
       </View>
-      <View style={styles.regBtn}>
-        <TouchableOpacity onPress={() => {
+        <View style={styles.cellWrap}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
+              {listData.map((t, i) => listItem(t, i))}
+            </ScrollView>
+        </View>
+       <View>
+       </View>
+      <View style={styles.regBtnWrap}>
+        <TouchableOpacity style={styles.regBtn} onPress={() => {
           props.navigation.navigate('Cost', { refresh: callList })
         }}>
           <Text style={styles.regBtnText}>등록</Text>
         </TouchableOpacity>
       </View>
+      
+
       <TempoModal
         openModal={openModal}
         onClick={modalOnClick}

@@ -23,50 +23,46 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
     },
 
+    "topMenu": {
+
+      "width": "100%",
+      "height": 66,
+      "position": "relative",
+      "marginLeft": 'auto',
+      "marginRight": 'auto',
+      'paddingHorizontal' : 20,
+      'borderBottomColor' : '#707070',
+      'borderBottomWidth' : 2,
+      'flexDirection' : 'row',
+      'alignItems' : 'center',
+      'justifyContent' : 'center',
+
+
+    },
+
 
     "backBtn": {
       "overflow": "hidden",
-      "position": "absolute",
-      "width": 30,
-      "height": 30,
-      "top": 25,
+      'position' : 'absolute',
+      'left' : 16,
+      'top' : 15,
+      "width": 40,
+      "height": 40,
     },
 
 
     "backBtnIcon": {
-      "width": "100%",
-      "height": "100%"
+      "width": 30,
+      "height": 30
     },
 
-    "titleWrap": {
-
-      "opacity": 1,
-      "position": "absolute",
-      "width": 250,
-      "height": 40,
-      "top": 80,
-
-    },
+  
 
     "title": {
-
-      "color": "#1d1d1d",
-      "position": "absolute",
-      "top": 0,
-      "left": 0,
+      "color": "#F15A24",
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '800',
-      "fontSize": 33,
-    },
-
-
-    "highlight": {
-      "width": 120,
-      "height": 19,
-      "backgroundColor": "rgba(252, 242, 0, 0.9599999785423279)",
-      "top": 21,
-
-
+      "fontSize": 22,
     },
 
     "name": {
@@ -79,57 +75,37 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "fontWeight": "800",
       "fontSize": 33,
     },
-    "regBtn": {
-      "left": 0,
-      "right": 0,
-      "bottom": 60,
-      "marginLeft": "auto",
-      "marginRight": "auto",
-      "width": 140,
-      "height": 50,
-      "borderRadius": 50,
-      "backgroundColor": "rgba(0, 135, 141, 1)",
-    },
-    "regBtnText": {
-      "fontFamily": "Apple SD Gothic Neo",
-      "fontWeight": "700",
-      "fontSize": 21,
-      "textAlign": "center",
-      "lineHeight": 50,
-      "color": "white",
-    },
+  
     "layer1": {
-      "display": "flex",
-      "alignItems": "center",
-      "position": "absolute",
-      "top": 150,
-
+      'marginTop' : 30,
+      "width": "100%",
+      'flexDirection' :'row',
+      'alignItems' :'center',
+      'justifyContent' : 'space-between',
     },
+
 
     "searchInput": {
-      "width": 126,
-      "height": 38,
+      "width": 120,
+      "height": 40,
       "borderWidth": 2,
       "borderColor": "#707070",
       "borderRadius": 50,
-      "color": "#707070",
-      "text-align": "center",
-      "lineHeight": 38,
+      "textAlign": "center",
       "fontFamily": " Apple SD Gothic Neo",
-      "fontSize": 16,
-      "fontWeight": "700",
-      "marginRight": 30,
-      // -webkit-appearance: none,
-      //  -moz-appearance: none,
-      //  appearance: none,
+      "marginRight": 10,
+      "color": "#ababab",
+      "fontSize": 14,
+      "backgroundColor": "transparent",
+      'lineHeight' : 40
     },
-
 
     "searchBtn": {
       "width": 37,
       "height": 37,
       "borderRadius": 50,
-      "backgroundColor": "#00878d",
+      "backgroundColor": "#f14a24",
+
     },
 
     "searchIcon": {
@@ -138,22 +114,10 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "marginTop": 5,
       "marginLeft": "auto",
       "marginRight": "auto",
-
     },
-
-
-    "layer2": {
-
-      "position": "absolute",
-      "top": 200,
-      "width": "100%",
-
-    },
-
 
     "searchDate": {
-
-      "width": "100%",
+      "width": '85%',
       "height": 40,
       "borderWidth": 2,
       "borderColor": "#707070",
@@ -164,22 +128,17 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "flexDirection": "row",
       "justifyContent": "space-evenly",
       "alignItems": "center",
-
-
     },
 
-
     "inputDate": {
-      "width": "70%",
-      "height": "100%",
-      "marginTop": 5,
+      "height": 40,
       "color": "#ababab",
       "fontSize": 14,
       "textAlign": "center",
       "backgroundColor": "transparent",
+      "alignItems": "center",
+      "lineHeight": 40
     },
-
-
     //   input[type="date"]::before {
 
     //       content:attr(data-placeholder),
@@ -207,7 +166,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "height": 70,
       "margin-bottom": 10,
       "borderWidth": 2.5,
-      "borderColor": "#00878d",
+      "borderColor": "#f15a24",
       "borderRadius": 10,
       "marginBottom": 10
     },
@@ -246,13 +205,42 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "position": "absolute",
       "right": 0,
       "top": 22.5,
-      "color": "#00878d",
+      "color": "#f15a24",
       "fontSize": 21,
       "fontWeight": "800",
       "lineHeight": 25.2,
     },
 
+    "regBtnWrap": {
+      'position' : 'absolute',
+      'left' :0,
+      'right' :0,
+      'bottom' :60,
+      "width" : '100%',
+      'height' : 80,
+      'zIndex' :9,  
+    },
 
+    "regBtn": {
+      'marginLeft' :'auto',
+      'marginRight' :'auto',
+      "width" : '90%',
+      'height' : 80,
+      "borderRadius": 50,
+      'backgroundColor' : "#F15A24",
+      'elevation' : 6,
+    },
+    "regBtnText": {
+      'width' : '100%',
+      'height' : '100%',
+      'fontSize' : 36,
+      "fontFamily" :"Apple SD Gothic Neo",
+      "fontWeight": '700',
+      'color' : 'white',
+      'textAlign' : 'center',
+      'lineHeight' : 80,
+      
+    },
 
   })
 }

@@ -51,26 +51,17 @@ const PaymentList = (props) => {
 
   return (
     <View style={styles.wrap}>
-      <View style={styles.inner}>
-        <View style={styles.backBtn}>
 
+      <View style={styles.topMenu}>
+        <View style={styles.backBtn}>
           <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
         </View>
-        <View style={styles.titleWrap}>
-          <View style={styles.highlight}></View><Text style={styles.title}>결제요청현황</Text>
-        </View>
+        <Text style={styles.title}>결제요청현황</Text>
+      </View>
+
+      <View style={styles.inner}>
+
         <View style={styles.layer1}>
-          <View style={styles.searchBtn}>
-            <TouchableOpacity onPress={() => {
-              callList()
-            }}>
-              <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
-            </TouchableOpacity>
-
-          </View>
-        </View>
-
-        <View style={styles.layer2}>
           <View style={styles.searchDate}>
             <TextInput style={styles.inputDate}
               type="date"
@@ -82,24 +73,31 @@ const PaymentList = (props) => {
               placeholder="날짜선택"
               required aria-required="true"></TextInput>
           </View>
+          <View style={styles.searchBtn}>
+            <TouchableOpacity onPress={() => {
+              callList()
+            }}>
+              <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.cellWrap}>
           <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-
             {listData.map((t, i) => listItem(t, i))}
           </ScrollView>
 
         </View>
 
       </View>
-      <View style={styles.regBtn}>
-        <TouchableOpacity onPress={() => {
+      <View style={styles.regBtnWrap}>
+        <TouchableOpacity style={styles.regBtn} onPress={() => {
           props.navigation.navigate('Payment', { refresh: callList })
         }}>
           <Text style={styles.regBtnText}>등록</Text>
         </TouchableOpacity>
       </View>
     </View >
+
   )
 }
 

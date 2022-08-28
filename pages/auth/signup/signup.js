@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState, useMemo } from 'react';
-import { Dimensions } from 'react-native';
+import { BackHandler, Dimensions, Keyboard } from 'react-native';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -9,11 +9,19 @@ import client from '../../../api/client';
 import { styleSheet } from './stylesheet';
 
 const Signup = (props) => {
+  const { windowWidth, windowHeight } = props
   const styles = styleSheet()
   const [name, setName] = useState('')
-  const [inputhpNo, setInputHpNo] = useState('')
+  const [inputhpNo, setInputHpNo] = useState({
+    first: '',
+    middle: '',
+    last: '',
+  })
   const [show, setShow] = useState(false)
   const [heightMagnifi, setheightMagnifi] = useState(1)
+  const [isFocus, setIsFoucs] = useState(false)
+
+  let keyboardSub = null;
 
   useEffect(() => {
     try {
@@ -24,9 +32,6 @@ const Signup = (props) => {
 
         if (localName && hpNo) {
           doLogin(localName, hpNo)
-          // const result = await client.get(`/rest/v1/s0221a0030/sign-up?member-name=${name}&hp-no=${hpNo}`)
-          // console.log(JSON.stringify(result, null, 4))
-          // await props.navigation.reset({ routes: [{ name: 'QrCode' }] })
         } else {
           setShow(true)
         }
@@ -35,13 +40,38 @@ const Signup = (props) => {
 
       getLocalData()
 
+
     } catch (error) {
       console.log(error)
       setShow(true)
     }
+
+
   }, [])
 
+  useEffect(() => {
+    keyboardSub = Keyboard.addListener('keyboardDidHide', blurTextInput)
+    return () => {
+      keyboardSub?.remove()
+      // Keyboard.addListener('keyboardDidHide', blurTextInput).remove()
+      // Keyboard.addListener('keyboardDidHide', blurTextInput).remove()
+      // BackHandler.removeEventListener('hardwareBackPress', blurTextInput)
+    }
+  }, [isFocus])
+
+  const blurTextInput = () => {
+    console.log('?')
+    if (isFocus) {
+      Keyboard.dismiss()
+      setIsFoucs(false)
+      setheightMagnifi(1.2)
+    }
+  }
+
   const doLogin = async (paramName, paramHpNo) => {
+
+    keyboardSub?.remove()
+
     if (!paramName || !paramHpNo) {
       return
     }
@@ -83,17 +113,24 @@ const Signup = (props) => {
     await props.navigation.reset({ routes: [{ name: 'QrCode' }] })
   }
 
-  const { windowWidth, windowHeight } = props
-  // const styles = useMemo(() => styless(windowWidth, windowHeight), [windowHeight, windowWidth])
+  const checkHeight = () => {
+    if (windowHeight < 800) {
+      return heightMagnifi
+    } else {
+      return 1
+    }
+  }
+
+
   return (
     <>
       {show && <KeyboardAwareScrollView
         resetScrollToCoords={{ x: 0, y: 0 }}
         scrollToOverflowEnabled={false}
-        enableAutomaticScroll={true}
-        scrollEnabled={true}
+        enableAutomaticScroll
+        enableOnAndroid
         keyboardShouldPersistTaps='always'
-        contentContainerStyle={{ height: windowHeight * heightMagnifi }}
+        contentContainerStyle={{ height: windowHeight * checkHeight() }}
       >
         <View
           style={styles.wrap}
@@ -111,45 +148,60 @@ const Signup = (props) => {
                 style={styles.inputName}
                 placeholder={"이름"}
                 onChange={(e) => setName(e.nativeEvent.text)}
-                onFocus={() => setheightMagnifi(1.2)}
-                onEndEditing={() => { setheightMagnifi(1) }} />
+                onFocus={() => {
+                  setheightMagnifi(1.5)
+                  setIsFoucs(true)
+                }}
+                onBlur={() => { setheightMagnifi(1.2) }} />
               <View style={styles.phoneInputWrap}>
                 <TextInput
                   style={styles.phoneInput1}
-                  onFocus={() => setheightMagnifi(1.2)}
-                  onEndEditing={() => { setheightMagnifi(1) }}
+                  onFocus={() => {
+                    setheightMagnifi(1.5)
+                    setIsFoucs(true)
+                  }}
+                  onBlur={() => { setheightMagnifi(1.2) }}
                   placeholder={"010"}
-                  onChange={(e) => setInputHpNo(e.nativeEvent.text)}
+                  onChange={(e) => setInputHpNo({ ...inputhpNo, first: e.nativeEvent.text })}
                   keyboardType="number-pad"
                   maxLength={3}
+                  onKeyPress={(e) => { console.log(e) }}
                   returnKeyType="done"
                 />
                 <View style={styles.dash}></View>
                 <TextInput
                   style={styles.phoneInput2}
                   placeholder={"0000"}
-                  onChange={(e) => setInputHpNo(e.nativeEvent.text)}
+                  onChange={(e) => setInputHpNo({ ...inputhpNo, middle: e.nativeEvent.text })}
                   keyboardType="number-pad"
                   maxLength={4}
-                  onFocus={() => setheightMagnifi(1.2)}
-                  onEndEditing={() => { setheightMagnifi(1) }}
+                  onFocus={() => {
+                    setheightMagnifi(1.5)
+                    setIsFoucs(true)
+                  }}
+                  onBlur={() => { setheightMagnifi(1.2) }}
                   returnKeyType="done" />
                 <View style={styles.dash}></View>
                 <TextInput
                   style={styles.phoneInput3}
                   placeholder={"0000"}
-                  onChange={(e) => setInputHpNo(e.nativeEvent.text)}
+                  onChange={(e) => setInputHpNo({ ...inputhpNo, last: e.nativeEvent.text })}
                   keyboardType="number-pad"
-                  onFocus={() => setheightMagnifi(1.5)}
-                  onEndEditing={() => { setheightMagnifi(1.2) }}
+                  onFocus={() => {
+                    setheightMagnifi(1.5)
+                    setIsFoucs(true)
+                  }}
+                  onBlur={() => { setheightMagnifi(1.2) }}
                   maxLength={4}
                   returnKeyType="done" />
               </View>
-              <View style={styles.infoAggWrap}>
-                <View style={styles.checkBox}></View>
-                <Text style={styles.infoAgg}>개인정보 수집 및 이용 동의</Text>
-              </View>
+              <TouchableOpacity>
 
+                <View style={styles.infoAggWrap}>
+                  <View style={styles.checkBox}></View>
+                  <Text style={styles.infoAgg}>개인정보 수집 및 이용 동의</Text>
+                </View>
+              </TouchableOpacity>
               <View style={styles.textBox}>
                 <View>
                   <Text style={styles.textBoxTitle}>[ 개인정보수집 및 사용 ]</Text>
@@ -159,7 +211,7 @@ const Signup = (props) => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.loginBtnWrap} onPress={() => doLogin(name, inputhpNo)}>
+              <TouchableOpacity style={styles.loginBtnWrap} onPress={() => doLogin(name, `${inputhpNo.first}${inputhpNo.middle}${inputhpNo.last}`)}>
                 <Text style={styles.loginBtn}>로그인</Text>
               </TouchableOpacity>
             </View>
