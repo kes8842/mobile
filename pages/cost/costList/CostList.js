@@ -76,14 +76,14 @@ const CostList = (props) => {
   return (
     <View style={styles.wrap}>
       <View style={styles.topMenu}>
-          <View style={styles.backBtn}>
+        <View style={styles.backBtn}>
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
-          </View>
-          <Text style={styles.title}>비용요청현황</Text>
+          </TouchableOpacity>
         </View>
+        <Text style={styles.title}>비용요청현황</Text>
+      </View>
       <View style={styles.inner}>
-        
-        
         {/* <View style={styles.layer1}>
           <TouchableOpacity onPress={() => setOpenmodal(true)} >
             <Text style={styles.searchInput}
@@ -92,7 +92,6 @@ const CostList = (props) => {
           </TouchableOpacity>
           
         </View> */}
-
         <View style={styles.layer1}>
           <View style={styles.searchDate}>
             <Text style={styles.inputDate}
@@ -113,17 +112,16 @@ const CostList = (props) => {
             }}>
               <ReactImage source={require('./assets/searchIcon.png')} style={styles.searchIcon}></ReactImage>
             </TouchableOpacity>
-
           </View>
         </View>
       </View>
-        <View style={styles.cellWrap}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-              {listData.map((t, i) => listItem(t, i))}
-            </ScrollView>
-        </View>
-       <View>
-       </View>
+      <View style={styles.cellWrap}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
+          {listData.map((t, i) => listItem(t, i))}
+        </ScrollView>
+      </View>
+      <View>
+      </View>
       <View style={styles.regBtnWrap}>
         <TouchableOpacity style={styles.regBtn} onPress={() => {
           props.navigation.navigate('Cost', { refresh: callList })
@@ -131,8 +129,6 @@ const CostList = (props) => {
           <Text style={styles.regBtnText}>등록</Text>
         </TouchableOpacity>
       </View>
-      
-
       <TempoModal
         openModal={openModal}
         onClick={modalOnClick}

@@ -85,6 +85,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
     },
 
 
+
     "searchInput": {
       "width": 120,
       "height": 40,
@@ -156,9 +157,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
     "cellWrap": {
       "width": "100%",
-      "position": "absolute",
-      "top": 260,
-      "height": "55%"
+      "height": "60%",
+      'marginTop': '5%',
+      'overflow' : 'hidden'
     },
 
     "cell": {

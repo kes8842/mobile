@@ -12,27 +12,27 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'backgroundColor': 'rgba(0,0,0,0.7)',
       "position": 'absolute',
       // display: 'none',
-      "zIndex" : 9,
-    
+      "zIndex": 9,
+
     },
     "box": {
       "width": '90%',
       "height": '75%',
       'backgroundColor': 'white',
-      'marginLeft' : 'auto',
-      'marginRight' : 'auto',
-      'marginTop' : 80,
-      'marginBottom' : 'auto',
-     
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'marginTop': 80,
+      'marginBottom': 'auto',
+
     },
 
     'modalInner': {
       "position": "relative",
       "width": "85%",
-      'height' : '80%',
+      'height': '80%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
-      'overflow' :'hidden'
+      'overflow': 'hidden'
     },
 
     'titleSection': {
@@ -59,18 +59,18 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'marginTop': 30,
-    
+
     },
 
     'cell': {
       'width': '100%',
       'height': 60,
       'flexDirection': 'row',
-      'paddingLeft' : 20,
-      'borderColor' : '#f15a24',
-      'borderWidth' : 2,
-      'borderRadius' : 10,
-      'alignItems' :'center',
+      'paddingLeft': 20,
+      'borderColor': '#f15a24',
+      'borderWidth': 2,
+      'borderRadius': 10,
+      'alignItems': 'center',
 
     },
 
@@ -92,10 +92,11 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
     },
 
     'closeBtn': {
-      
+      'width': '100%',
+      'height': 50,
       'position': 'absolute',
-      'right': 20,
-      'bottom': 20,
+      'bottom': 0,
+      'backgroundColor': 'white'
 
     },
 
@@ -104,6 +105,9 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'fontWeight': '900',
       'fontFamily': "Apple SD Gothic Neo",
       'color': '#f15a24',
+      'textAlign': 'right',
+      'lineHeight': 50,
+      'marginRight': 20,
     },
   })
 }

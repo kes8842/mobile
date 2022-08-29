@@ -54,7 +54,9 @@ const PaymentList = (props) => {
 
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>
-          <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          </TouchableOpacity>
         </View>
         <Text style={styles.title}>결제요청현황</Text>
       </View>

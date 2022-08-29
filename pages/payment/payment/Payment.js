@@ -1,7 +1,6 @@
-import React, { Component, useEffect, useMemo, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, FlatList, Picker, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Image as ReactImage } from 'react-native';
-import Svg, { Defs, Pattern } from 'react-native-svg';
 import { styleSheet } from './stylesheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../../../api/client';
@@ -74,12 +73,12 @@ const Payment = (props) => {
     <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>
-          <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
+            <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.inner}>
-        {console.log(detailData)}
-
         <View style={styles.title}>
           <Text style={styles.date}>사용일자: {detailData?.header?.usedDate}</Text>
           <View style={styles.amountWrap}>
