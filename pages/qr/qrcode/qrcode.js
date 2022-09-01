@@ -34,7 +34,7 @@ const QrCode = (props) => {
   const logOut = async () => {
     await AsyncStorage.setItem('id', '')
     await AsyncStorage.setItem('hpNo', '')
-    props.navigation.reset({ routes: [{ name: 'Home' }] })
+    props.navigation.reset({ routes: [{ name: 'Signup' }] })
   }
 
   return (

@@ -30,12 +30,12 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "position": "relative",
       "marginLeft": 'auto',
       "marginRight": 'auto',
-      'paddingHorizontal' : 20,
-      'borderBottomColor' : '#707070',
-      'borderBottomWidth' : 2,
-      'flexDirection' : 'row',
-      'alignItems' : 'center',
-      'justifyContent' : 'center',
+      'paddingHorizontal': 20,
+      'borderBottomColor': '#707070',
+      'borderBottomWidth': 2,
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'center',
 
 
     },
@@ -43,9 +43,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
     "backBtn": {
       "overflow": "hidden",
-      'position' : 'absolute',
-      'left' : 16,
-      'top' : 15,
+      'position': 'absolute',
+      'left': 16,
+      'top': 15,
       "width": 40,
       "height": 40,
     },
@@ -56,7 +56,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "height": 30
     },
 
-  
+
 
     "title": {
       "color": "#F15A24",
@@ -75,13 +75,13 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "fontWeight": "800",
       "fontSize": 33,
     },
-  
+
     "layer1": {
-      'marginTop' : 30,
+      'marginTop': 30,
       "width": "100%",
-      'flexDirection' :'row',
-      'alignItems' :'center',
-      'justifyContent' : 'space-between',
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'space-between',
     },
 
 
@@ -98,7 +98,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "color": "#ababab",
       "fontSize": 14,
       "backgroundColor": "transparent",
-      'lineHeight' : 40
+      'lineHeight': 40
     },
 
     "searchBtn": {
@@ -157,19 +157,27 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
     "cellWrap": {
       "width": "100%",
-      "height": "60%",
-      'marginTop': '5%',
-      'overflow' : 'hidden'
+      "height": "80%",
+      "position": "absolute",
+      "top": 165,
+      'backgroundColor': '#e9e9e9',
+      'zIndex': 3,
+      'paddingTop': '10%',
+      'paddingBottom': '10%',
     },
 
     "cell": {
-      "width": "100%",
+      "width": "90%",
       "height": 70,
-      "margin-bottom": 10,
-      "borderWidth": 2.5,
-      "borderColor": "#f15a24",
+      // "borderWidth": 2.5,
+      // "borderColor": "#F15A24",
+      'backgroundColor': 'white',
       "borderRadius": 10,
-      "marginBottom": 10
+      "marginBottom": 15,
+      "marginLeft": 'auto',
+      "marginRight": 'auto',
+      'elevation': 6,
+      'zIndex': 9
     },
 
     "cellInner": {
@@ -200,47 +208,49 @@ export const styleSheet = (windowHeight, windowWidth) => {
     "name": {
       "fontSize": 14,
       "fontWeight": "700",
+      'lineHeight': 20,
     },
 
     "cellAmount": {
       "position": "absolute",
       "right": 0,
       "top": 22.5,
-      "color": "#f15a24",
+      "color": "#F15A24",
       "fontSize": 21,
       "fontWeight": "800",
       "lineHeight": 25.2,
     },
 
+
     "regBtnWrap": {
-      'position' : 'absolute',
-      'left' :0,
-      'right' :0,
-      'bottom' :60,
-      "width" : '100%',
-      'height' : 80,
-      'zIndex' :9,  
+      'position': 'absolute',
+      'left': 0,
+      'right': 0,
+      'bottom': 60,
+      "width": '100%',
+      'height': 80,
+      'zIndex': 9,
     },
 
     "regBtn": {
-      'marginLeft' :'auto',
-      'marginRight' :'auto',
-      "width" : '90%',
-      'height' : 80,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      "width": '90%',
+      'height': 80,
       "borderRadius": 50,
-      'backgroundColor' : "#F15A24",
-      'elevation' : 6,
+      'backgroundColor': "#F15A24",
+      'elevation': 6,
     },
     "regBtnText": {
-      'width' : '100%',
-      'height' : '100%',
-      'fontSize' : 36,
-      "fontFamily" :"Apple SD Gothic Neo",
+      'width': '100%',
+      'height': '100%',
+      'fontSize': 36,
+      "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '700',
-      'color' : 'white',
-      'textAlign' : 'center',
-      'lineHeight' : 80,
-      
+      'color': 'white',
+      'textAlign': 'center',
+      'lineHeight': 80,
+
     },
 
   })

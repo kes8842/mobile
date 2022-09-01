@@ -17,16 +17,16 @@ import Cost from './pages/cost/cost/Cost';
 import CostList from './pages/cost/costList/CostList';
 import Payment from './pages/payment/payment/Payment';
 import PaymentList from './pages/payment/paymentLlst/PaymentList';
-import { View } from 'react-native'
+import Access from './pages/auth/access/Access'
+import SplashScreen from './pages/auth/splash/SplashScreen';
+
 const Stack = createStackNavigator();
-
 const App = () => {
-
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='Splash'>
         <Stack.Screen
-          name="Home"
+          name="Signup"
           component={Signup}
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
         />
@@ -64,6 +64,16 @@ const App = () => {
           name="PaymentList"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={PaymentList}
+        />
+        <Stack.Screen
+          name="Access"
+          options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
+          component={Access}
+        />
+        <Stack.Screen
+          name="Splash"
+          options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
+          component={SplashScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -128,8 +128,13 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
     },
 
+    'contentsTextarea' : {
+      'height' : '30%'
+
+    },
+
     'opinion': {
-      'height': 150,
+      'height': '100%',
       'width': '100%',
       'borderRadius': 10,
       'borderWidth': 2,
@@ -137,62 +142,47 @@ export const styleSheet = (windowHeight, windowWidth) => {
       'marginTop': 10,
       'fontFamily': 'Apple SD Gothic Neo',
       'fontSize': 12,
-      'marginBottom': 10,
       'textAlignVertical': 'top'
     },
 
 
     'btnWrap': {
-
-      'width': '100%',
-      'position' : 'absolute',
-      'bottom' : 120,
-      'marginLeft': "auto",
+      "width": "100%",
+      "height": 50,
+      'marginLeft': 'auto',
       'marginRight': 'auto',
-      'display': 'flex',
-      'flexDirection': 'row',
-      'justifyContent': 'space-between',
-      ' alignItems': 'center',
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "alignItems": "center",
     },
 
-
-
     'confBtn': {
-      'width': 95,
-      'height': 45,
-      'borderRadius': 50,
-      'backgroundColor': '#00878d',
-      'color': 'white',
-      'fontFamily': 'Apple SD Gothic Neo',
-      'fontWeight': '500',
-      'fontSize': 21,
-      'textAlign': 'center',
-      'lineHeight': 45,
+      
+      "width": 140,
+      "height": 50,
+      "backgroundColor": "#F15A24",
+      "borderRadius": 50,
+      "textAlign": "center",
+      "color": "white",
+      "fontSize": 21,
+      "fontWeight": "500",
+      "lineHeight": 50,
+      "fontFamily": "Apple SD Gothic Neo"
     },
 
     'rejBtn': {
-      'width': 95,
-      'height': 45,
-      'backgroundColor': '#e23838',
-      'borderRadius': 50,
-      'color': 'white',
-      'fontFamily': 'Apple SD Gothic Neo',
-      'fontWeight': '500',
-      'fontSize': 21,
-      'textAlign': 'center',
-      'lineHeight': 45,
+     
+      "width": 140,
+      "height": 50,
+      "backgroundColor": "#707070",
+      "borderRadius": 50,
+      "color": "white",
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontWeight": '500',
+      "fontSize": 21,
+      "textAlign": "center",
+      "lineHeight": 50,
     },
-    'canBtn': {
-      'width': 95,
-      'height': 45,
-      'backgroundColor': '#a8a8a8',
-      'borderRadius': 50,
-      'color': 'white',
-      'fontFamily': 'Apple SD Gothic Neo',
-      'fontWeight': '500',
-      'fontSize': 21,
-      'textAlign': 'center',
-      'lineHeight': 45,
-    }
+    
   })
 }

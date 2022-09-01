@@ -24,7 +24,6 @@ const PaymentList = (props) => {
 
   const listItem = (item, index) => {
     try {
-      // console.log(item)
       const eventUseId = item?.eventUseId
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
@@ -83,23 +82,13 @@ const PaymentList = (props) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.cellWrap}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
-            {listData.map((t, i) => listItem(t, i))}
-          </ScrollView>
-
-        </View>
-
       </View>
-      <View style={styles.regBtnWrap}>
-        <TouchableOpacity style={styles.regBtn} onPress={() => {
-          props.navigation.navigate('Payment', { refresh: callList })
-        }}>
-          <Text style={styles.regBtnText}>등록</Text>
-        </TouchableOpacity>
+      <View style={styles.cellWrap}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
+          {listData.map((t, i) => listItem(t, i))}
+        </ScrollView>
       </View>
     </View >
-
   )
 }
 

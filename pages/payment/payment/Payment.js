@@ -126,9 +126,9 @@ const Payment = (props) => {
           <TouchableOpacity onPress={() => requestPay("N")}>
             <Text style={styles.rejBtn}>반려</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Text style={styles.canBtn}>취소</Text>
-          </TouchableOpacity>
+          {/* <TouchableOpacity style={styles.canBtn} onPress={() => props.navigation.goBack()}>
+            <Text style={styles.canBtnText}>취소</Text>
+          </TouchableOpacity> */}
         </View>
       </View>
     </View>

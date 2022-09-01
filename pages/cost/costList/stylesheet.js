@@ -130,22 +130,27 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
     "cellWrap": {
       "width": "100%",
-      "height": "100%",
+      "height": "80%",
       "position": "absolute",
       "top": 165,
       'backgroundColor': '#e9e9e9',
-      'zIndex': 3
+      'zIndex': 3,
+      'paddingTop' : '10%',
+      'paddingBottom' : '10%',
     },
 
     "cell": {
-      "width": "100%",
+      "width": "90%",
       "height": 70,
-      "margin-bottom": 10,
-      "borderWidth": 2.5,
-      "borderColor": "#F15A24",
+      // "borderWidth": 2.5,
+      // "borderColor": "#F15A24",
+      'backgroundColor' : 'white',
       "borderRadius": 10,
-      "marginBottom": 10,
-      'zIndex': 1
+      "marginBottom": 15,
+      "marginLeft": 'auto',
+      "marginRight": 'auto',
+      'elevation' : 6,
+      'zIndex': 9
     },
 
     "cellInner": {
@@ -176,6 +181,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
     "name": {
       "fontSize": 14,
       "fontWeight": "700",
+      'lineHeight' :20,
     },
 
     "cellAmount": {

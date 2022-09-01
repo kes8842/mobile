@@ -1,6 +1,6 @@
-import React, { Component, useEffect, useState, useMemo } from 'react';
-import { BackHandler, Dimensions, Keyboard } from 'react-native';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Keyboard } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,8 +9,7 @@ import client from '../../../api/client';
 import { styleSheet } from './stylesheet';
 
 const Signup = (props) => {
-  const { windowWidth, windowHeight } = props
-  const styles = styleSheet()
+  const { windowHeight } = props
   const [name, setName] = useState('')
   const [inputhpNo, setInputHpNo] = useState({
     first: '',
@@ -18,49 +17,41 @@ const Signup = (props) => {
     last: '',
   })
   const [show, setShow] = useState(false)
-  const [heightMagnifi, setheightMagnifi] = useState(1)
+  const [heightMagnifi, setheightMagnifi] = useState(1.2)
   const [isFocus, setIsFoucs] = useState(false)
+  const [privacyAgree, setPrivacyAgree] = useState(false)
+
+  const styles = styleSheet()
 
   let keyboardSub = null;
 
   useEffect(() => {
     try {
-
       const getLocalData = async () => {
         const localName = await AsyncStorage.getItem('memberName')
         const hpNo = await AsyncStorage.getItem('hpNo')
-
         if (localName && hpNo) {
-          doLogin(localName, hpNo)
+          doLogin(localName, hpNo, true)
         } else {
           setShow(true)
         }
         return
       }
-
       getLocalData()
-
-
     } catch (error) {
       console.log(error)
       setShow(true)
     }
-
-
   }, [])
 
   useEffect(() => {
     keyboardSub = Keyboard.addListener('keyboardDidHide', blurTextInput)
     return () => {
       keyboardSub?.remove()
-      // Keyboard.addListener('keyboardDidHide', blurTextInput).remove()
-      // Keyboard.addListener('keyboardDidHide', blurTextInput).remove()
-      // BackHandler.removeEventListener('hardwareBackPress', blurTextInput)
     }
   }, [isFocus])
 
   const blurTextInput = () => {
-    console.log('?')
     if (isFocus) {
       Keyboard.dismiss()
       setIsFoucs(false)
@@ -68,24 +59,35 @@ const Signup = (props) => {
     }
   }
 
-  const doLogin = async (paramName, paramHpNo) => {
+  const doLogin = async (paramName, paramHpNo, privacy) => {
+    if (!privacy) {
+      alert('개인정보 수집에 동의해주세요')
+      return
+    }
+    if (paramName === '') {
+      alert('성명을 입력해주세요')
+      return
+    }
 
-    keyboardSub?.remove()
+    if (paramHpNo === '' || paramHpNo.length < 11) {
+      alert('핸드폰 번호를 확인해주세요')
+      return
+    }
 
     if (!paramName || !paramHpNo) {
       return
     }
+    keyboardSub?.remove()
 
     try {
-      const result = await client.get(`/rest/v1/s0221a0030/sign-up?memberName=${paramName}&hpNo=${paramHpNo}`).catch((error) => {
-        console.log('error!!')
-        console.log(JSON.stringify(error.response, null, 4))
-      })
-
-      console.log(JSON.stringify(result, null, 4))
+      const result = await client
+        .get(`/rest/v1/s0221a0030/sign-up?memberName=${paramName}&hpNo=${paramHpNo}`)
+        .catch((error) => {
+          console.log('error!!')
+          console.log(JSON.stringify(error.response, null, 4))
+        })
 
       if (result?.status === 200) {
-
         const { data } = result
         const loginData = data?.data
         if (!loginData) {
@@ -120,7 +122,6 @@ const Signup = (props) => {
       return 1
     }
   }
-
 
   return (
     <>
@@ -195,10 +196,11 @@ const Signup = (props) => {
                   maxLength={4}
                   returnKeyType="done" />
               </View>
-              <TouchableOpacity>
-
+              <TouchableOpacity onPress={() => setPrivacyAgree(!privacyAgree)}>
                 <View style={styles.infoAggWrap}>
-                  <View style={styles.checkBox}></View>
+                  <View style={privacyAgree ? styles.checkBox : styles.unCheckBox}>
+                    <ReactImage source={require('./assets/check.png')} style={styles.checkIcon} />
+                  </View>
                   <Text style={styles.infoAgg}>개인정보 수집 및 이용 동의</Text>
                 </View>
               </TouchableOpacity>
@@ -211,7 +213,7 @@ const Signup = (props) => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.loginBtnWrap} onPress={() => doLogin(name, `${inputhpNo.first}${inputhpNo.middle}${inputhpNo.last}`)}>
+              <TouchableOpacity style={styles.loginBtnWrap} onPress={() => doLogin(name, `${inputhpNo.first}${inputhpNo.middle}${inputhpNo.last}`, privacyAgree)}>
                 <Text style={styles.loginBtn}>로그인</Text>
               </TouchableOpacity>
             </View>
@@ -220,7 +222,6 @@ const Signup = (props) => {
 
       </KeyboardAwareScrollView >}
     </>
-
   );
 }
 
@@ -232,8 +233,5 @@ Signup.defaultProps = {
   windowWidth: Dimensions.get('window').width,
   windowHeight: Dimensions.get('window').height
 }
-
-
-
 
 export default Signup
