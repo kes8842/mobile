@@ -6,6 +6,7 @@ import client from '../../../api/client';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TempoModal from '../../share/modal/modal';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const CostList = (props) => {
   const styles = styleSheet()
@@ -17,23 +18,36 @@ const CostList = (props) => {
     eventId: "",
     eventNm: ""
   })
+  const [dateState, setDateState] = useState({
+    viewModal: false,
+    fromToFlag: '',
+    confirmFromVal: '',
+    confirmToVal: '',
+    confirmFromDate: new Date(),
+    confirmToDate: new Date(),
+  })
+
   useEffect(() => {
     callModalData()
   }, [])
 
   const callList = async () => {
+    const { confirmFromVal, confirmToVal } = dateState
+    if (!confirmFromVal || !confirmToVal) {
+      return
+    }
     const memberId = await AsyncStorage.getItem('memberId')
-    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=2022-01-01&toDate=2022-12-31`)
+    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=${confirmFromVal}&toDate=${confirmToVal}`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
-    // console.log(JSON.stringify(response?.data, null, 4))
+    console.log(JSON.stringify(response?.data, null, 4))
     setListData(response?.data?.data || [])
   }
 
   const callModalData = async () => {
     const res = await client.get(`/rest/v1/s0221a2000/event-list?&orgId=39`).catch(e => {
-      // console.log(JSON.stringify(e, null, 4))
+      console.log(JSON.stringify(e, null, 4))
     })
-    // console.log(JSON.stringify(res, null, 4))
+    console.log(JSON.stringify(res, null, 4))
     if (res.status === 200) {
       const option = res.data?.data?.map(i => {
         return {
@@ -49,13 +63,29 @@ const CostList = (props) => {
     setOpenmodal(false)
   }
 
+  const confirmDateChange = (val, flag) => {
+    const year = val.getFullYear()
+    const month = val.getMonth() + 1
+    const date = val.getDate()
+    if (flag === 'from') {
+      setDateState({ ...dateState, confirmFromVal: `${year}-${month}-${date}`, confirmFromDate: val, viewModal: false })
+    } else {
+      setDateState({ ...dateState, confirmToVal: `${year}-${month}-${date}`, confirmToDate: val, viewModal: false })
+    }
+  }
+
+  const openDateModal = (flag) => {
+    setDateState({ ...dateState, viewModal: true, fromToFlag: flag })
+  }
+
   const listItem = (item, index) => {
     try {
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
       // return (<Text style={{ height: 150 }}>teset</Text>)
+      console.log(item)
       return (
-        <TouchableOpacity key={index}>
+        <TouchableOpacity key={index} onPress={() => { props.navigation.navigate('CostModify', { data: { ...item }, refresh: callList }) }}>
           <View style={styles.cell} >
             <View style={styles.cellInner}>
               <Text style={styles.cellTitle}>{cutTitle}</Text>
@@ -98,12 +128,13 @@ const CostList = (props) => {
               type="date"
               required aria-required="true"
               editable={false}
-              onPress={() => setOpenmodal(true)}>날짜선택</Text>
+              onPress={() => openDateModal('from')}>{dateState.confirmFromVal || `날짜선택`}</Text>
             <Text style={styles.wave}>~</Text>
-            <TextInput style={styles.inputDate}
+            <Text style={styles.inputDate}
               type="date"
-              placeholder="날짜선택"
-              required aria-required="true"></TextInput>
+              required aria-required="true"
+              editable={false}
+              onPress={() => openDateModal('to')}>{dateState.confirmToVal || `날짜선택`}</Text>
           </View>
 
           <View style={styles.searchBtn}>
@@ -134,6 +165,15 @@ const CostList = (props) => {
         onClick={modalOnClick}
         onClose={() => setOpenmodal(false)}
         option={eventOption}
+      />
+      <DateTimePickerModal
+        isVisible={dateState.viewModal}
+        mode="date"
+        onConfirm={(a) => confirmDateChange(a, dateState.fromToFlag)}
+        onCancel={() =>
+          setDateState({ ...dateState, viewModal: false })
+        }
+        date={dateState.fromToFlag === 'from' ? dateState.confirmFromDate : dateState.confirmToDate}
       />
     </View >
   )

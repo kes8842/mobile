@@ -8,15 +8,14 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
         "wrap": {
             'width': '100%',
             'height': '100%',
-            'position': 'relative',
             'backgroundColor': 'white',
             'overflow': 'hidden',
         },
+
         "inner": {
-            'width': '90%',
-            'height': '117%',
-            'marginLeft': 'auto',
-            'marginRight': 'auto',
+            'width': '100%',
+            'height': windowHeight < 900 ? '120%' : '100%',
+            'position': 'relative',
         },
 
         "topLogoWrap": {
@@ -48,9 +47,11 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
         },
 
         'divider': {
-            'width': '100%',
+            'width': '90%',
             'height': 1.5,
-            'backgroundColor': '#a9a9a9'
+            'backgroundColor': '#a9a9a9',
+            'marginLeft': 'auto',
+            'marginRight': 'auto'
 
         },
 
@@ -73,9 +74,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
         },
 
         'infoText': {
-
             'marginLeft': '5%'
-
         },
 
         'text1': {
@@ -93,14 +92,12 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
         'BtnWrap': {
             'position': 'absolute',
-            'bottom': 20,
+            'bottom': 0,
             'width': '100%',
             'height': 72,
             'backgroundColor': '#f15a24'
-
         },
         'confirmBtn': {
-
             'lineHeight': 72,
             'backgroundColor': '#f15a24',
             'color': 'white',
@@ -108,18 +105,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             'fontWeight': '500',
             'fontSize': 36,
             'textAlign': 'center'
-
-
         }
-
-
-
-
-
-
-
-
-
-
     })
 }

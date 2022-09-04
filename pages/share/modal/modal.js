@@ -1,8 +1,7 @@
 import React from "react";
-import { Text, View, styles, BackHandler, ScrollView } from 'react-native';
-import Modal from 'react-native-simple-modal';
+import { Text, View, BackHandler, } from 'react-native';
 import { modalStyleSheet } from './modalStylesheet';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { useState, useEffect } from "react";
 
 const TempoModal = (props) => {
@@ -50,13 +49,12 @@ const TempoModal = (props) => {
     }
 
     return (
-        <View style={{ ...styles.modalBox, display: display ? 'flex' : 'none' }}>
+        <View style={{ ...styles.modalBox, display: display ? 'flex' : 'none' }} nestedScrollEnabled={true}>
             <View style={styles.box}>
                 <View style={styles.titleSection}>
                     <Text style={styles.modalTitle}>구분</Text>
                 </View>
-
-                <ScrollView style={styles.modalInner}>
+                <ScrollView style={styles.modalInner} contentContainerStyle={{ height: option ? option.length * 90 + 70 : '100%' }}>
                     {option?.map((e, i) => renderList(e, i))}
                 </ScrollView>
                 <View

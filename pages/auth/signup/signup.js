@@ -142,7 +142,6 @@ const Signup = (props) => {
             </Text>
             <Text style={styles.title}>토  브</Text>
           </View>
-
           <View style={styles.contentsWrap}>
             <View style={styles.contentsInner}>
               <TextInput
@@ -219,7 +218,6 @@ const Signup = (props) => {
             </View>
           </View>
         </View>
-
       </KeyboardAwareScrollView >}
     </>
   );

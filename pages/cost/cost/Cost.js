@@ -27,7 +27,7 @@ const Cost = (props) => {
     "eventNm": "",
     "useAmount": 0,
     "useComment": "",
-    "useProStatus": "C",
+    "useProStatus": "A",
     "useReceiptId": "",
     "useSubject": "",
     "usedDate": ""
@@ -69,7 +69,7 @@ const Cost = (props) => {
   }
 
   const regist = async () => {
-    const body = { ...inputData, usedDate: `2022-06-06`, "eventUserId": memberId, }
+    const body = { ...inputData, usedDate: dateState.confirmVal, "eventUserId": memberId, }
     console.log(JSON.stringify(body, null, 4))
     const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).catch((e) => {
       console.log('error')
@@ -133,7 +133,9 @@ const Cost = (props) => {
       scrollEnabled={true}
       scrollToOverflowEnabled={true}
       enableAutomaticScroll={true}
-      keyboardShouldPersistTaps='always'>
+      keyboardShouldPersistTaps='always'
+      nestedScrollEnabled = {true}
+      >
 
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>

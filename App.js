@@ -14,6 +14,7 @@ import Qrscan from './pages/qr/qrscan/qrscan';
 import Qrcode from './pages/qr/qrcode/qrcode';
 import EventList from './pages/event/list/list';
 import Cost from './pages/cost/cost/Cost';
+import CostModify from './pages/cost/cost/CostModify';
 import CostList from './pages/cost/costList/CostList';
 import Payment from './pages/payment/payment/Payment';
 import PaymentList from './pages/payment/paymentLlst/PaymentList';
@@ -49,6 +50,11 @@ const App = () => {
           name="Cost"
           options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
           component={Cost}
+        />
+        <Stack.Screen
+          name="CostModify"
+          options={{ title: null, headerShown: false }} // 각 화면 타이틀(헤더에 렌더링됨)
+          component={CostModify}
         />
         <Stack.Screen
           name="CostList"

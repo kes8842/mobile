@@ -8,7 +8,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
 
     "modalBox": {
       "width": '100%',
-      "height": windowHeight,
+      "height": '100%',
       'backgroundColor': 'rgba(0,0,0,0.7)',
       "position": 'absolute',
       // display: 'none',
@@ -17,22 +17,20 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
     },
     "box": {
       "width": '90%',
-      "height": '75%',
+      "height": '60%',
       'backgroundColor': 'white',
       'marginLeft': 'auto',
       'marginRight': 'auto',
       'marginTop': 80,
       'marginBottom': 'auto',
-
     },
 
     'modalInner': {
       "position": "relative",
       "width": "85%",
-      'height': '80%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
-      'overflow': 'hidden'
+      // 'overflow': 'scroll'
     },
 
     'titleSection': {
@@ -59,7 +57,6 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'marginTop': 30,
-
     },
 
     'cell': {
@@ -71,7 +68,6 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'borderWidth': 2,
       'borderRadius': 10,
       'alignItems': 'center',
-
     },
 
     'cellNum': {

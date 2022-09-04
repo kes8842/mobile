@@ -1,52 +1,74 @@
-import { SelectBox, Text, View, TextInput, FlatList, Picker, ScrollView, Styled, Image } from 'react-native';
+import { Text, View, TextInput, Image, Keyboard, Alert } from 'react-native';
 import { styleSheet } from './stylesheet';
-import React, { Component, useRef, useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image as ReactImage } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import client from '../../../api/client';
+import TempoModal from '../../share/modal/modal';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AlertAsync from 'react-native-alert-async';
 
 const CostModify = (props) => {
 
   const styles = styleSheet()
-
-  const [memberName, setMemberName] = useState('')
   const [memberId, setMemberId] = useState('')
-  const [mobileId, setMobileId] = useState('')
   const [dateState, setDateState] = useState({
     viewModal: false,
     confirmVal: '',
     confirmDate: new Date()
   })
+  const [eventOption, setEventOption] = useState([])
   const [inputData, setInputData] = useState({
-    "eventId": 6,
+    "eventId": "",
+    "eventNm": "",
     "useAmount": 0,
     "useComment": "",
-    "useProStatus": "C",
+    "useProStatus": "A",
     "useReceiptId": "",
     "useSubject": "",
     "usedDate": ""
   })
+  const [openModal, setOpenmodal] = useState(false)
 
   useEffect(() => {
-    console.log(props.route.params.refresh)
     getData()
-  }, [])
+    callModalData()
+  }, [props])
 
   const getData = async () => {
-    const localName = await AsyncStorage.getItem('memberName')
     const localMemberId = await AsyncStorage.getItem('memberId')
-    const localMobileId = await AsyncStorage.getItem('mobileId')
-    if (localName) {
-      setMemberName(localName)
+    if (localMemberId) {
       setMemberId(localMemberId)
-      setMobileId(localMobileId)
     }
+    console.log(JSON.stringify(props.route.params.data, null, 4))
+    const { data } = props.route.params
+    setInputData({ ...data })
+    setDateState({ ...dateState, confirmDate: new Date(data.usedDate), confirmVal: data.usedDate })
+    console.log(data.usedDate)
+    console.log(new Date(data.usedDate))
+
+    // if (!eventUseId) {
+    //   alert('error')
+    //   props.navigation.goBack()
+    // }
+    // const res = await client.get(`rest/v1/s0221a0060/event-cost?eventUseId=${eventUseId}`).catch((e) => {
+    //   console.log(JSON.stringify(e, null, 4))
+
+    // })
+    // console.log(JSON.stringify(res, null, 4))
   }
 
   const openDateModal = () => {
+    Keyboard.dismiss()
     setDateState({ ...dateState, viewModal: true })
+  }
+
+  const openEventModal = () => {
+    Keyboard.dismiss()
+    setOpenmodal(true)
   }
 
   const confirmDateChange = (val) => {
@@ -57,12 +79,9 @@ const CostModify = (props) => {
     setInputData({ ...inputData, usedDate: `${year}-${month}-${date}` })
   }
 
-  const regist = async () => {
-    const body = { ...inputData, usedDate: `2022-06-06`, "eventUserId": memberId, }
-    const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).then((e) => {
-      console.log(e)
-      return e
-    }).catch((e) => {
+  const modifyEvent = async () => {
+    const body = { ...inputData, usedDate: dateState.confirmVal, }
+    const response = await client.post(`rest/v1/s0221a0060/patch-event-cost`, body).catch((e) => {
       console.log('error')
       console.log(JSON.stringify(e, null, 4))
     })
@@ -71,6 +90,33 @@ const CostModify = (props) => {
     if (response.status === 200) {
       goback()
     }
+  }
+
+  const deleteEvent = async () => {
+    await AlertAsync(
+      "등록 내역을 삭제합니다.",
+      "정말 삭제하시겠습니까?",
+      [
+        {
+          text: '예',
+          onPress: async () => {
+            const { eventUseId } = inputData
+            const response = await client.post(`/rest/v1/s0221a0060/delete-event-cost`, [eventUseId]).catch((e) => {
+              console.log(e)
+            })
+            console.log(response)
+            if (response.status === 200) {
+              await AlertAsync('삭제되었습니다.')
+              await goback()
+            }
+          }
+        },
+        {
+          text: '아니오',
+        },
+      ],
+      { cancelable: false }
+    )
   }
 
   const goback = async () => {
@@ -82,26 +128,75 @@ const CostModify = (props) => {
     props.navigation.goBack()
   }
 
+  const callModalData = async () => {
+    const res = await client.get(`/rest/v1/s0221a2000/event-list?&orgId=39`).catch(e => {
+      console.log(JSON.stringify(e, null, 4))
+    })
+    if (res.status === 200) {
+      const option = res.data?.data?.map(i => {
+        return {
+          text: i.eventNm, value: i.eventId
+        }
+      })
+      setEventOption(option)
+    }
+  }
+
+  const ShowPicker = () => {
+    //launchImageLibrary : 사용자 앨범 접근
+    console.log('res');
+
+    launchImageLibrary({}, (res) => {
+      alert(res.assets[0].uri)
+      const formdata = new FormData()
+      formdata.append('file', res.assets[0].uri);
+      console.log(res);
+    })
+  }
+
+  const onClick = (e, text) => {
+    setInputData({ ...inputData, eventId: e, eventNm: text })
+    setOpenmodal(false)
+  }
+
   return (
-    <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
-      <View style={styles.inner}>
+    <KeyboardAwareScrollView
+      style={styles.wrap}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      enableOnAndroid={true}
+      scrollEnabled={true}
+      scrollToOverflowEnabled={true}
+      enableAutomaticScroll={true}
+      keyboardShouldPersistTaps='always'
+      nestedScrollEnabled={true}
+    >
+      <View style={styles.topMenu}>
         <View style={styles.backBtn}>
           <TouchableOpacity onPress={goback} >
             <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
           </TouchableOpacity>
         </View>
-        <View style={styles.titleWrap}>
-          <View style={styles.highlight}></View><Text style={styles.title}>비용작성</Text>
-        </View>
+        <Text style={styles.title}>비용작성</Text>
+      </View>
+
+      <View style={styles.inner}>
         <View style={styles.form}>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>제목</Text>
-            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} />
+            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} value={inputData?.useSubject} />
           </View>
-          {/* <View style={styles.inputWrap}>
+          <View style={styles.inputWrap}>
             <Text style={styles.label}>구분</Text>
-            <SelectBox style={styles.selectBox}></SelectBox>
-          </View> */}
+            <View style={styles.searchBtn} >
+              <TouchableOpacity onPressIn={() => openEventModal()} >
+                <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
+              </TouchableOpacity>
+            </View>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              value={inputData.eventNm}></TextInput>
+          </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label} >사용일자</Text>
             <View style={styles.searchBtn} >
@@ -113,14 +208,17 @@ const CostModify = (props) => {
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>사용금액</Text>
-            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useAmount: e.nativeEvent.text })}></TextInput>
+            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useAmount: e.nativeEvent.text })} value={`${inputData.useAmount}`} />
             <Text style={styles.won}>원</Text>
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>첨부파일</Text>
             <View style={styles.addBtn}>
-              <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+              <TouchableOpacity onPressIn={() => ShowPicker()}>
+                <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+              </TouchableOpacity>
             </View>
+
             <TextInput style={styles.input}></TextInput>
           </View>
           <View style={styles.textfieldWrap}>
@@ -129,14 +227,17 @@ const CostModify = (props) => {
               style={styles.textfield}
               multiline={true}
               onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
+              value={inputData.useComment}
             />
           </View>
         </View>
         <View style={styles.btnWrap}>
-          <TouchableOpacity onPress={regist}>
-            <Text style={styles.requestBtn}>등록</Text>
+          <TouchableOpacity onPress={modifyEvent}>
+            <Text style={styles.requestBtn}>수정</Text>
           </TouchableOpacity>
-          <Text style={styles.delBtn}>삭제</Text>
+          <TouchableOpacity onPress={deleteEvent}>
+            <Text style={styles.delBtn}>삭제</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <DateTimePickerModal
@@ -148,7 +249,13 @@ const CostModify = (props) => {
         }
         date={dateState.confirmDate}
       />
-    </View>
+      <TempoModal
+        openModal={openModal}
+        onClick={onClick}
+        onClose={() => setOpenmodal(false)}
+        option={eventOption}
+      />
+    </KeyboardAwareScrollView>
   )
 }
 
