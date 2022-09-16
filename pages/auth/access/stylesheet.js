@@ -14,9 +14,10 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
         "inner": {
             'width': '100%',
-            'height': windowHeight < 900 ? '120%' : '100%',
+            'height': windowHeight < 800 ? '120%' : '100%',
             'position': 'relative',
         },
+
 
         "topLogoWrap": {
             'width': '100%',

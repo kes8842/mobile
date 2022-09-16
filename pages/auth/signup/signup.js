@@ -4,13 +4,13 @@ import { Text, View, TextInput, TouchableOpacity, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { useEffect, useState, useMemo } from 'react/cjs/react.development';
 import client from '../../../api/client';
 import { styleSheet } from './stylesheet';
 
 const Signup = (props) => {
   const { windowHeight } = props
   const [name, setName] = useState('')
+  const [eventCode, setEventCode] = useState('')
   const [inputhpNo, setInputHpNo] = useState({
     first: '',
     middle: '',
@@ -30,8 +30,10 @@ const Signup = (props) => {
       const getLocalData = async () => {
         const localName = await AsyncStorage.getItem('memberName')
         const hpNo = await AsyncStorage.getItem('hpNo')
-        if (localName && hpNo) {
-          doLogin(localName, hpNo, true)
+        const localEventCode = await AsyncStorage.getItem('eventCode')
+
+        if (localName && hpNo && localEventCode) {
+          doLogin(localName, hpNo, localEventCode, true)
         } else {
           setShow(true)
         }
@@ -59,7 +61,8 @@ const Signup = (props) => {
     }
   }
 
-  const doLogin = async (paramName, paramHpNo, privacy) => {
+
+  const doLogin = async (paramName, paramHpNo, paramEventCode, privacy) => {
     if (!privacy) {
       alert('개인정보 수집에 동의해주세요')
       return
@@ -81,20 +84,20 @@ const Signup = (props) => {
 
     try {
       const result = await client
-        .get(`/rest/v1/s0221a0030/sign-up?memberName=${paramName}&hpNo=${paramHpNo}`)
-        .catch((error) => {
+        .get(`/rest/v1/s0221a0030/sign-up?memberName=${paramName}&hpNo=${paramHpNo}&eventCode=${paramEventCode}`).catch((error) => {
           console.log('error!!')
           console.log(JSON.stringify(error.response, null, 4))
         })
 
       if (result?.status === 200) {
+
         const { data } = result
         const loginData = data?.data
         if (!loginData) {
           return
         }
 
-        const { orgId, memberTp, orgEventName, mobileId, memberId, memberName, hpNo } = loginData
+        const { orgId, memberTp, orgEventName, mobileId, memberId, memberName, hpNo, eventCode } = loginData
 
         await AsyncStorage.setItem('memberName', memberName || '')
         await AsyncStorage.setItem('hpNo', hpNo || '')
@@ -103,7 +106,7 @@ const Signup = (props) => {
         await AsyncStorage.setItem('orgEventName', orgEventName || '')
         await AsyncStorage.setItem('memberTp', memberTp || '')
         await AsyncStorage.setItem('orgId', JSON.stringify(orgId) || '')
-
+        await AsyncStorage.setItem('eventCode', eventCode || '')
       } else {
         return
       }
@@ -195,6 +198,12 @@ const Signup = (props) => {
                   maxLength={4}
                   returnKeyType="done" />
               </View>
+              <TextInput
+                style={styles.inputCode}
+                placeholder={'코드번호'}
+
+                onChange={(e) => setEventCode(e.nativeEvent.text)}
+              />
               <TouchableOpacity onPress={() => setPrivacyAgree(!privacyAgree)}>
                 <View style={styles.infoAggWrap}>
                   <View style={privacyAgree ? styles.checkBox : styles.unCheckBox}>
@@ -212,7 +221,7 @@ const Signup = (props) => {
                 </View>
               </View>
 
-              <TouchableOpacity style={styles.loginBtnWrap} onPress={() => doLogin(name, `${inputhpNo.first}${inputhpNo.middle}${inputhpNo.last}`, privacyAgree)}>
+              <TouchableOpacity style={styles.loginBtnWrap} onPress={() => doLogin(name, `${inputhpNo.first}${inputhpNo.middle}${inputhpNo.last}`, eventCode, privacyAgree)}>
                 <Text style={styles.loginBtn}>로그인</Text>
               </TouchableOpacity>
             </View>

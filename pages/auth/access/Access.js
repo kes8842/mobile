@@ -50,7 +50,7 @@ const Signup = (props) => {
               <Text style={styles.text1}>
                 사진/미디어(선택){"\n"}
                 <Text style={styles.text2}>
-                  상대방의 QR코드 검증 용도
+                  프로필 사진 설정시 이미지 파일 첨부 용도
                 </Text>
               </Text>
             </View>
@@ -65,7 +65,7 @@ const Signup = (props) => {
               <Text style={styles.text1}>
                 파일(선택){"\n"}
                 <Text style={styles.text2}>
-                  상대방의 QR코드 검증 용도
+                  기타 파일 첨부 용도
                 </Text>
               </Text>
             </View>

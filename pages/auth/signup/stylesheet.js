@@ -71,6 +71,20 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             "paddingTop": 0,
             "paddingBottom": 10,
         },
+        "inputCode": {
+            "width": "100%",
+            "height": 35,
+            "overflow": "hidden",
+            "borderBottomWidth": 2,
+            "borderBottomColor": "#707070",
+            "fontFamily": "Apple SD Gothic Neo",
+            "fontSize": 20,
+            "fontWeight": '700',
+            "color": "#383838",
+            "paddingTop": 0,
+            "paddingBottom": 10,
+            'marginTop': '8%',
+        },
         "phoneInputWrap": {
             'flexDirection': 'row',
             'justifyContent': 'space-between',
@@ -128,8 +142,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             'height': 3,
             'backgroundColor': '#a9a9a9',
         },
-
-
         "infoAggWrap": {
             'marginTop': 30,
             'flexDirection': 'row',
@@ -146,12 +158,12 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
         // 체크시 체크박스 배경이 변경됨
 
-        'checkBox' : {
-            'width' :30,
-            'height' :30,
-            'backgroundColor' : '#f15a24',
-            'borderRadius' : 100,
-            'marginRight' : 10,
+        'checkBox': {
+            'width': 30,
+            'height': 30,
+            'backgroundColor': '#f15a24',
+            'borderRadius': 100,
+            'marginRight': 10,
         },
 
         'checkIcon': {
@@ -171,7 +183,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
         },
 
         "textBox": {
-            'marginTop': 20,
+            'marginTop': 10,
             'width': '100%',
             'height': 110,
             'borderWidth': 2,
