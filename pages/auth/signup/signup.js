@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Dimensions, Keyboard } from 'react-native';
 import { Text, View, TextInput, TouchableOpacity, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
@@ -21,6 +21,13 @@ const Signup = (props) => {
   const [isFocus, setIsFoucs] = useState(false)
   const [privacyAgree, setPrivacyAgree] = useState(false)
 
+  const ref_input = []
+  ref_input[0] = useRef(null)
+  ref_input[1] = useRef(null)
+  ref_input[2] = useRef(null)
+  ref_input[3] = useRef(null)
+  ref_input[4] = useRef(null)
+
   const styles = styleSheet()
 
   let keyboardSub = null;
@@ -31,7 +38,7 @@ const Signup = (props) => {
         const localName = await AsyncStorage.getItem('memberName')
         const hpNo = await AsyncStorage.getItem('hpNo')
         const localEventCode = await AsyncStorage.getItem('eventCode')
-
+        console.log(localName, hpNo, localEventCode)
         if (localName && hpNo && localEventCode) {
           doLogin(localName, hpNo, localEventCode, true)
         } else {
@@ -61,7 +68,6 @@ const Signup = (props) => {
     }
   }
 
-
   const doLogin = async (paramName, paramHpNo, paramEventCode, privacy) => {
     if (!privacy) {
       alert('개인정보 수집에 동의해주세요')
@@ -88,15 +94,18 @@ const Signup = (props) => {
           console.log('error!!')
           console.log(JSON.stringify(error.response, null, 4))
         })
-
+      console.log(JSON.stringify(result, null, 4))
       if (result?.status === 200) {
-
         const { data } = result
+        console.log(data)
+        if (data.massage === '등록되지 않은 부서코드입니다.') {
+          alert(data.massage)
+          return
+        }
         const loginData = data?.data
         if (!loginData) {
           return
         }
-
         const { orgId, memberTp, orgEventName, mobileId, memberId, memberName, hpNo, eventCode } = loginData
 
         await AsyncStorage.setItem('memberName', memberName || '')
@@ -165,17 +174,27 @@ const Signup = (props) => {
                   }}
                   onBlur={() => { setheightMagnifi(1.2) }}
                   placeholder={"010"}
-                  onChange={(e) => setInputHpNo({ ...inputhpNo, first: e.nativeEvent.text })}
+                  onChange={(e) => {
+                    setInputHpNo({ ...inputhpNo, first: e.nativeEvent.text })
+                    if (e.nativeEvent.text.length === 3) {
+                      ref_input[2].current.focus()
+                    }
+                  }}
                   keyboardType="number-pad"
                   maxLength={3}
-                  onKeyPress={(e) => { console.log(e) }}
                   returnKeyType="done"
+                  ref={ref_input[1]}
                 />
                 <View style={styles.dash}></View>
                 <TextInput
                   style={styles.phoneInput2}
                   placeholder={"0000"}
-                  onChange={(e) => setInputHpNo({ ...inputhpNo, middle: e.nativeEvent.text })}
+                  onChange={(e) => {
+                    setInputHpNo({ ...inputhpNo, middle: e.nativeEvent.text })
+                    if (e.nativeEvent.text.length === 4) {
+                      ref_input[3].current.focus()
+                    }
+                  }}
                   keyboardType="number-pad"
                   maxLength={4}
                   onFocus={() => {
@@ -183,12 +202,19 @@ const Signup = (props) => {
                     setIsFoucs(true)
                   }}
                   onBlur={() => { setheightMagnifi(1.2) }}
-                  returnKeyType="done" />
+                  returnKeyType="done"
+                  ref={ref_input[2]}
+                />
                 <View style={styles.dash}></View>
                 <TextInput
                   style={styles.phoneInput3}
                   placeholder={"0000"}
-                  onChange={(e) => setInputHpNo({ ...inputhpNo, last: e.nativeEvent.text })}
+                  onChange={(e) => {
+                    setInputHpNo({ ...inputhpNo, last: e.nativeEvent.text })
+                    if (e.nativeEvent.text.length === 4) {
+                      ref_input[4].current.focus()
+                    }
+                  }}
                   keyboardType="number-pad"
                   onFocus={() => {
                     setheightMagnifi(1.5)
@@ -196,12 +222,14 @@ const Signup = (props) => {
                   }}
                   onBlur={() => { setheightMagnifi(1.2) }}
                   maxLength={4}
-                  returnKeyType="done" />
+                  returnKeyType="done"
+                  ref={ref_input[3]}
+                />
               </View>
               <TextInput
                 style={styles.inputCode}
                 placeholder={'코드번호'}
-
+                ref={ref_input[4]}
                 onChange={(e) => setEventCode(e.nativeEvent.text)}
               />
               <TouchableOpacity onPress={() => setPrivacyAgree(!privacyAgree)}>

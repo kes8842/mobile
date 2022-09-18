@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Image, Keyboard } from 'react-native';
+import { Text, View, TextInput, Image, Keyboard, PermissionsAndroid, Linking, Platform } from 'react-native';
 import { styleSheet } from './stylesheet';
 import React, { useState, useEffect } from 'react';
 import { Image as ReactImage } from 'react-native';
@@ -9,9 +9,9 @@ import client from '../../../api/client';
 import TempoModal from '../../share/modal/modal';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import AlertAsync from 'react-native-alert-async';
 
 const Cost = (props) => {
-
   const styles = styleSheet()
   const [memberName, setMemberName] = useState('')
   const [memberId, setMemberId] = useState('')
@@ -33,11 +33,18 @@ const Cost = (props) => {
     "usedDate": ""
   })
   const [openModal, setOpenmodal] = useState(false)
+  const [fileState, setFileState] = useState({
+  })
 
   useEffect(() => {
     getData()
     callModalData()
+    test()
   }, [])
+
+  const test = () => {
+
+  }
 
   const getData = async () => {
     const localName = await AsyncStorage.getItem('memberName')
@@ -69,9 +76,16 @@ const Cost = (props) => {
   }
 
   const regist = async () => {
+
+    const filebody = new FormData()
     const body = { ...inputData, usedDate: dateState.confirmVal, "eventUserId": memberId, }
     console.log(JSON.stringify(body, null, 4))
-    const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body).catch((e) => {
+
+    const headers = {
+      'Content-Type': 'multipart/form-data; boundary=someArbitraryUniqueString',
+    };
+
+    const response = await client.post(`rest/v1/s0221a0060/register-event-cost`, body, headers).catch((e) => {
       console.log('error')
       console.log(JSON.stringify(e, null, 4))
     })
@@ -102,21 +116,79 @@ const Cost = (props) => {
           text: i.eventNm, value: i.eventId
         }
       })
-      console.log(option)
       setEventOption(option)
     }
   }
 
-  const ShowPicker = () => {
-    //launchImageLibrary : 사용자 앨범 접근
-    console.log('res');
+  const ShowPicker = async () => {
+    let options = {
+      title: "Upload Prescription",
+      takePhotoButtonTitle: "Take a Photo",
+      chooseFromLibraryButtonTitle: "Select From Gallery",
+      storageOptions: {
+        skipBackup: true,
+        path: "images",
+      },
+      includeBase64: true
+    };
 
-    launchImageLibrary({}, (res) => {
-      alert(res.assets[0].uri)
-      const formdata = new FormData()
-      formdata.append('file', res.assets[0].uri);
-      console.log(res);
-    })
+    const cameraGranted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.CAMERA
+    )
+
+    if (cameraGranted === PermissionsAndroid.RESULTS.GRANTED) {
+      await AlertAsync(
+        "사진을 선택해주세요.",
+        "카메라로 촬영 혹은 파일을 선택해주세요.",
+        [
+          {
+            text: '카메라',
+            onPress: async () => {
+              launchCamera({ saveToPhotos: true, includeBase64: true }, async (res) => {
+                setInputData({
+                  ...inputData,
+                  base64: res.assets[0].base64,
+                  fileName: res.assets[0].fileName
+                })
+              }).catch((e) => {
+                console.log(e)
+              })
+            }
+          },
+          {
+            text: '파일',
+            onPress: async () => {
+              launchImageLibrary(options, async (res) => {
+                setInputData({
+                  ...inputData,
+                  base64: res.assets[0].base64,
+                  fileName: res.assets[0].fileName
+                })
+              }).catch((e) => {
+                console.log(e)
+              })
+            }
+          },
+        ],
+        { cancelable: true })
+
+    } else {
+      await AlertAsync(
+        "카메라 권한이없습니다.",
+        "권한을 직접 설정해주세요",
+        [
+          {
+            text: '예',
+            onPress: async () => {
+              Linking.openSettings()
+            }
+          },
+          {
+            text: '아니오',
+          },
+        ],
+        { cancelable: false })
+    }
   }
 
   const onClick = (e, text) => {
@@ -134,8 +206,8 @@ const Cost = (props) => {
       scrollToOverflowEnabled={true}
       enableAutomaticScroll={true}
       keyboardShouldPersistTaps='always'
-      nestedScrollEnabled = {true}
-      >
+      nestedScrollEnabled={true}
+    >
 
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>
@@ -153,7 +225,7 @@ const Cost = (props) => {
             <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} />
           </View>
           <View style={styles.inputWrap}>
-            <Text style={styles.label}>구분</Text>
+            <Text style={styles.label}>행사명</Text>
             <View style={styles.searchBtn} >
               <TouchableOpacity onPressIn={() => openEventModal()} >
                 <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
@@ -180,14 +252,12 @@ const Cost = (props) => {
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>첨부파일</Text>
-
             <View style={styles.addBtn}>
               <TouchableOpacity onPressIn={() => ShowPicker()}>
                 <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
               </TouchableOpacity>
             </View>
-
-            <TextInput style={styles.input}></TextInput>
+            <TextInput style={styles.input} editable={false}>{inputData.fileName}</TextInput>
           </View>
           <View style={styles.textfieldWrap}>
             <Text style={styles.label}>사용내역</Text>
