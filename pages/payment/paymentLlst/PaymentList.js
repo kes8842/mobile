@@ -27,6 +27,7 @@ const PaymentList = (props) => {
       const eventUseId = item?.eventUseId
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
+      console.log(item)
       return (
         <TouchableOpacity key={index} onPress={() => {
           props.navigation.navigate('Payment', { eventUseId: eventUseId })
@@ -35,7 +36,7 @@ const PaymentList = (props) => {
             <View style={styles.cellInner}>
               <Text style={styles.cellTitle}>{cutTitle}</Text>
               <Text style={styles.cellDate}>
-                <Text style={styles.name}>{item?.memberName}</Text> {item?.useDate}
+                <Text style={styles.name}>{item?.memberName}</Text> /{item?.usedDate}/{item?.useProStatusNm}
               </Text>
               <Text style={styles.cellAmount}>{item?.useAmount && `${item?.useAmount} 원`}</Text>
             </View>

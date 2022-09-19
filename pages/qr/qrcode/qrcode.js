@@ -40,13 +40,15 @@ const QrCode = (props) => {
   return (
     <View style={styles.wrap} contentContainerStyle={{ flex: 1, height: 500 }}>
 
+      <View style={styles.circle}></View>
+
       <View style={styles.topMenu}>
         <View style={styles.topLogoWrap}>
           <Text style={styles.topLogo}>TOV</Text>
         </View>
         <View style={styles.logoutBtn}>
           <TouchableOpacity onPress={() => logOut()}>
-            <ReactImage source={require('./assets/power-off.png')} style={styles.logout} />
+            <ReactImage source={require('./assets/power-off-w.png')} style={styles.logout} />
           </TouchableOpacity>
         </View>
 
@@ -56,50 +58,128 @@ const QrCode = (props) => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.profileCard} >
           <View style={styles.profileTextGroup}>
-            <Text style={styles.welcome}>환영합니다!</Text>
-            <Text style={styles.memberName}>{memberName} 님</Text>
+            <Text style={styles.memberName}>{memberName}</Text>
             <Text style={styles.memberPosition}>소속부서 / 직책</Text>
+          </View>
+
+          <View style={styles.processInfoWrap}>
+
+            <View style={styles.leftProcessBox}>
+
+              <Text style={styles.processTitle}>비용요청 진행현황</Text>
+
+              <View style={styles.processInner}>
+                <View style={styles.process}>
+
+                  <Text style={styles.processText}>
+                    요청
+                  </Text>
+
+                  <Text style={styles.processNumber}>
+                    3
+                  </Text>
+
+
+                </View>
+                <View style={styles.divider}></View>
+                <View style={styles.process}>
+
+                  <Text style={styles.processText}>
+                    진행
+                  </Text>
+
+                  <Text style={styles.processNumber}>
+                    3
+                  </Text>
+                </View>
+                <View style={styles.divider}></View>
+                <View style={styles.process}>
+                  <Text style={styles.processText}>
+                    완료
+                  </Text>
+                  <Text style={styles.processNumber}>
+                    3
+                  </Text>
+                </View>
+                <View style={styles.divider}></View>
+                <View style={styles.process}>
+                  <Text style={styles.processText}>
+                    지급
+                  </Text>
+                  <Text style={styles.processNumber}>
+                    3
+                  </Text>
+                </View>
+                <View style={styles.divider}></View>
+                <View style={styles.process}>
+
+                  <Text style={styles.processText}>
+                    반려
+                  </Text>
+
+                  <Text style={styles.processNumber}>
+                    3
+                  </Text>
+                </View>
+              </View>
+
+            </View>
+
+            <View style={styles.rightProcessBox}>
+              <Text style={styles.processTitle}>결제요청</Text>
+
+              <View style={styles.processInner}>
+                <View style={styles.processRight}>
+                  <Text style={styles.processText}>
+                    요청
+                  </Text>
+
+                  <Text style={styles.processNumber}>
+                    3
+                  </Text>
+
+                </View>
+              </View>
+            </View>
+
           </View>
 
         </View>
         <View style={styles.centerBtnWrap}>
           <View style={styles.layer1}>
-            <View style={styles.centerCostBtnWrap}>
+
+            <TouchableOpacity style={styles.centerCostBtnWrap} onPress={() => props.navigation.navigate('CostList')}>
               <View style={styles.centerCostBtn}>
                 <ReactImage source={require('./assets/receipt-w.png')} style={styles.centerIcon} />
               </View>
               <Text style={styles.centerText}>비용등록</Text>
-            </View>
+            </TouchableOpacity>
 
-            <View style={styles.centerpaymentBtnWrap}>
+            <TouchableOpacity style={styles.centerpaymentBtnWrap} onPress={() => props.navigation.navigate('PaymentList')}>
               <View style={styles.centerpaymentBtn}>
                 <ReactImage source={require('./assets/stamp-w.png')} style={styles.centerIcon} />
               </View>
               <Text style={styles.centerText}>비용결제</Text>
-            </View>
+            </TouchableOpacity>
 
           </View>
           <View style={styles.layer2}>
-            <View style={styles.centerQrBtnWrap}>
+            <TouchableOpacity style={styles.centerQrBtnWrap} onPress={() => props.navigation.navigate('')}>
               <View style={styles.centerQrBtn}>
                 <ReactImage source={require('./assets/sampleQr-w.png')} style={styles.centerIcon} />
               </View>
               <Text style={styles.centerText}>QR보기</Text>
-            </View>
-            <View style={styles.centerGuideBtnWrap}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.centerGuideBtnWrap}>
               <View style={styles.centerGuideBtn}>
                 <ReactImage source={require('./assets/guide-w.png')} style={styles.centerIcon} />
               </View>
               <Text style={styles.centerText}>가이드</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
         </View>
 
-        {/* 광고배너의 영역 */}
-        <View style={styles.adWrap}>
-          <Text style={styles.adText}>광고배너 영역</Text>
-        </View>
 
       </ScrollView>
       <View style={styles.bottomMenu}>

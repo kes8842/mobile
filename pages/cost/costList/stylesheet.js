@@ -30,8 +30,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'paddingHorizontal': 20,
-      'borderBottomColor': '#707070',
-      'borderBottomWidth': 2,
+      'backgroundColor': '#f15a24',
       'flexDirection': 'row',
       'alignItems': 'center',
       'justifyContent': 'center',
@@ -58,14 +57,14 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
 
     "title": {
-      "color": "#F15A24",
+      "color": "white",
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '800',
       "fontSize": 22,
     },
 
     "layer1": {
-      'marginTop': 30,
+      'marginTop': 20,
       "width": "100%",
       'flexDirection': 'row',
       'alignItems': 'center',
@@ -83,9 +82,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "fontFamily": " Apple SD Gothic Neo",
       "marginRight": 10,
       "color": "#ababab",
-      "fontSize": 14,
+      "fontSize": 12,
       "backgroundColor": "transparent",
-      'lineHeight': 40
+      'lineHeight': 40,
     },
 
     "searchBtn": {
@@ -121,7 +120,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
     "inputDate": {
       "height": 40,
       "color": "#ababab",
-      "fontSize": 14,
+      "fontSize": 12,
       "textAlign": "center",
       "backgroundColor": "transparent",
       "alignItems": "center",
@@ -133,23 +132,30 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "height": "80%",
       "position": "absolute",
       "top": 165,
-      'backgroundColor': '#e9e9e9',
       'zIndex': 3,
-      'paddingTop' : '10%',
-      'paddingBottom' : '10%',
+      'marginTop': -20,
+      'paddingBottom': '10%',
+    },
+
+    'divider': {
+
+      'width': '90%',
+      'height': 2,
+      'backgroundColor': '#707070',
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'marginBottom': -5
+
     },
 
     "cell": {
       "width": "90%",
-      "height": 70,
-      // "borderWidth": 2.5,
-      // "borderColor": "#F15A24",
-      'backgroundColor' : 'white',
-      "borderRadius": 10,
+      "height": 67,
+      "borderBottomWidth": 2.5,
+      "borderBottomColor": "#707070",
       "marginBottom": 15,
       "marginLeft": 'auto',
       "marginRight": 'auto',
-      'elevation' : 6,
       'zIndex': 9
     },
 
@@ -181,7 +187,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
     "name": {
       "fontSize": 14,
       "fontWeight": "700",
-      'lineHeight' :20,
+      'lineHeight': 20,
     },
 
     "cellAmount": {

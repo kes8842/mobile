@@ -9,9 +9,17 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "width": '100%',
             "height": '100%',
         },
+        "circle": {
+            "backgroundColor": "#f15a24",
+            "width": 600,
+            "height": 600,
+            'borderRadius': 500,
+            'position': 'absolute',
+            'left': -180,
+            'top': -350,
+        },
 
         'topMenu': {
-            "backgroundColor": "white",
             'width': '100%',
             'height': 55,
             'flexDirection': 'row',
@@ -25,7 +33,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
         'topLogo': {
 
             'fontFamily': 'Jalnan',
-            'color': '#F15A24',
+            'color': 'white',
             'fontSize': 32,
 
         },
@@ -34,26 +42,122 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
 
         "profileCard": {
-            'backgroundColor': ' rgba(255, 168, 0 , 0.3)',
-            'width': '100%',
-            'height': 150,
+            'backgroundColor': 'white',
+            'width': '90%',
+            'height': 240,
+            'borderRadius': 20,
             'marginLeft': 'auto',
             'marginRight': 'auto',
-            'flexDirection': 'row',
-            'alignItems': 'center',
+            'marginTop': '10%',
+            'justifyContent': 'center',
             'position': 'relative',
+            'elevation': 10,
         },
 
+        'profileTextGroup': {
+            'marginTop': 'auto',
+        },
 
-        "profileTextGroup": {
-            'marginLeft': 30,
+        'processInfoWrap': {
+            'width': '100%',
+            'height': 100,
+            'borderBottomRightRadius': 20,
+            'borderBottomLeftRadius': 20,
+            'backgroundColor': '#f15a24',
+            'marginTop': 'auto',
+            'flexDirection': 'row',
+            'alignItems': 'center',
+            'justifyContent': 'space-between',
+            'paddingHorizontal': 20,
+
+        },
+        'leftProcessBox': {
+
+            'width': '70%',
+            'height': 70,
+            'backgroundColor': 'rgba(255,255,255,0.3)',
+            'borderRadius': 10,
+
+
+        },
+        'rightProcessBox': {
+
+            'width': '25%',
+            'height': 70,
+            'backgroundColor': 'rgba(255,255,255,0.3)',
+            'borderRadius': 10,
+
+        },
+
+        'processTitle': {
+            'color': 'white',
+            'fontSize': 8,
+            'lineHeight': 18,
+            'fontWeight': '700',
+            'textAlign': 'center',
+            'marginLeft': 'auto',
+            'marginRight': 'auto',
+            'width': '90%',
+            'borderBottomWidth': 1,
+            'borderBottomColor': 'white'
+
+        },
+        'processInner': {
+            'width': '95%',
+            'marginLeft': 'auto',
+            'marginRight': 'auto',
+            'marginTop': 5,
+            'flexDirection': 'row',
+            'alignItems': 'center'
+
+        },
+
+        'process': {
+            'width': '19%',
+            'height': 40,
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContents': 'space-around',
+
+        },
+        'processRight': {
+            'width': '100%',
+            'height': 40,
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContents': 'space-around',
+
+        },
+
+        'processText': {
+            'fontSize': 8,
+            'color': 'white',
+            'fontWeight': '500',
+            'marginBottom': -8,
+
+        },
+        'processNumber': {
+
+            'color': 'white',
+            'fontSize': 32,
+            'fontWeight': '700',
+
+        },
+
+        'divider': {
+
+            'height': '80%',
+            'width': 1,
+            'backgroundColor': 'white'
+
         },
 
         'memberName': {
 
             'fontFamily': "Apple SD Gothic Neo",
             'color': '#383838',
-            'fontSize': 38,
+            'fontSize': 40,
+            'textAlign': 'center',
             'fontWeight': '700',
             'marginBottom': 5
         },
@@ -64,42 +168,20 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'color': '#707070',
             'fontSize': 22,
             'fontWeight': '700',
+            'textAlign': 'center',
             'marginBottom': 5
         },
-        'welcome': {
-
-            'fontFamily': "Apple SD Gothic Neo",
-            'color': '#383838',
-            'fontSize': 16,
-            'fontWeight': '700',
-            'marginBottom': 2
-        },
-
 
         'logoutBtn': {
             'width': 30,
             'height': 30,
         },
         'logout': {
-
             'width': 30,
             'height': 30,
         },
 
 
-        'qrCard': {
-            'backgroundColor': 'white',
-            'width': '90%',
-            'height': 300,
-            'marginLeft': 'auto',
-            'marginRight': 'auto',
-            'marginTop': 20,
-            'borderRadius': 20,
-            'flexDirection': 'row',
-            'justifyContent': 'space-around',
-            'alignItems': 'center',
-            'elevation': 9,
-        },
         'bottomMenu': {
             'width': '100%',
             'height': 80,
@@ -193,7 +275,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'width': '70%',
             'marginLeft': 'auto',
             'marginRight': 'auto',
-            'marginTop': '15%',
+            'marginTop': '12%',
             'display': 'flex',
             'flexDirection': 'column',
             'justifyContent': 'space-around',
@@ -216,21 +298,21 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'width': 100,
             'height': 100,
             'borderRadius': 20,
-            'backgroundColor': '#f29433'
+            'backgroundColor': '#f15a24'
 
         },
         'centerpaymentBtn': {
             'width': 100,
             'height': 100,
             'borderRadius': 20,
-            'backgroundColor': '#f29433'
+            'backgroundColor': '#f15a24'
 
         },
         'centerQrBtn': {
             'width': 100,
             'height': 100,
             'borderRadius': 20,
-            'backgroundColor': '#f15a24'
+            'backgroundColor': '#f29433'
 
         },
         'centerGuideBtn': {

@@ -27,8 +27,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'paddingHorizontal': 20,
-      'borderBottomColor': '#707070',
-      'borderBottomWidth': 2,
+      'backgroundColor': '#f15a24',
       'flexDirection': 'row',
       'alignItems': 'center',
       'justifyContent': 'center',
@@ -46,7 +45,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "height": 30
     },
     "title": {
-      "color": "#F15A24",
+      "color": "white",
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '800',
       "fontSize": 22,
@@ -64,10 +63,12 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
     "label": {
       "fontFamily": "Apple SD Gothic Neo",
-      "color": "#707070",
+      "color": "#f15a24",
       "fontWeight": '700',
       "fontSize": 18,
       'marginTop': 10,
+      'marginBottom': 5,
+
     },
     "searchBtn": {
       "width": 22,
@@ -96,6 +97,23 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "color": "#383838",
       "paddingTop": 0,
       "paddingBottom": 10,
+      'textAlign': 'center'
+    },
+    "amountInput": {
+      // "width": windowWidth * 0.85 * 0.8,
+      "width": "100%",
+      "height": 35,
+      "overflow": "hidden",
+      "borderBottomWidth": 2,
+      "borderBottomColor": "#707070",
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontSize": 20,
+      "fontWeight": '700',
+      "color": "#383838",
+      "paddingTop": 0,
+      "paddingBottom": 10,
+      'paddingRight': 25,
+      'textAlign': 'right'
     },
 
     "won": {
@@ -151,6 +169,18 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       'marginLeft': 'auto',
       'marginRight': 'auto',
       'marginTop': 40,
+      'marginBottom': "20%",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "alignItems": "center",
+    },
+    "btnWrap2": {
+      "width": "100%",
+      "height": 50,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'marginTop': 40,
+      'marginBottom': "20%",
       "flexDirection": "row",
       "justifyContent": "space-between",
       "alignItems": "center",

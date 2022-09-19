@@ -77,10 +77,8 @@ const Cost = (props) => {
 
   const regist = async () => {
 
-    const filebody = new FormData()
     const body = { ...inputData, usedDate: dateState.confirmVal, "eventUserId": memberId, }
     console.log(JSON.stringify(body, null, 4))
-
     const headers = {
       'Content-Type': 'multipart/form-data; boundary=someArbitraryUniqueString',
     };
@@ -212,7 +210,7 @@ const Cost = (props) => {
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>
           <TouchableOpacity onPress={goback} >
-            <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+            <Image source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>비용작성</Text>
@@ -221,7 +219,7 @@ const Cost = (props) => {
       <View style={styles.inner}>
         <View style={styles.form}>
           <View style={styles.inputWrap}>
-            <Text style={styles.label}>제목</Text>
+            <Text style={styles.label}>사용제목</Text>
             <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} />
           </View>
           <View style={styles.inputWrap}>
@@ -247,7 +245,15 @@ const Cost = (props) => {
           </View>
           <View style={styles.inputWrap}>
             <Text style={styles.label}>사용금액</Text>
-            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useAmount: e.nativeEvent.text })}></TextInput>
+            <TextInput
+              style={styles.amountInput}
+              onChange={(e) => {
+                console.log(e.nativeEvent.text.replace(/,/gi, ""))
+                setInputData({ ...inputData, useAmount: e.nativeEvent.text.replace(/,/gi, "") })
+              }}
+              value={inputData?.useAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              keyboardType={'number-pad'}
+            />
             <Text style={styles.won}>원</Text>
           </View>
           <View style={styles.inputWrap}>
@@ -255,6 +261,7 @@ const Cost = (props) => {
             <View style={styles.addBtn}>
               <TouchableOpacity onPressIn={() => ShowPicker()}>
                 <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+
               </TouchableOpacity>
             </View>
             <TextInput style={styles.input} editable={false}>{inputData.fileName}</TextInput>
@@ -272,7 +279,6 @@ const Cost = (props) => {
           <TouchableOpacity onPress={regist}>
             <Text style={styles.requestBtn}>등록</Text>
           </TouchableOpacity>
-          <Text style={styles.delBtn}>삭제</Text>
         </View>
       </View>
       <DateTimePickerModal

@@ -8,9 +8,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TempoModal from '../../share/modal/modal';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
+
 const CostList = (props) => {
   const styles = styleSheet()
-
   const [listData, setListData] = useState([])
   const [eventOption, setEventOption] = useState([])
   const [openModal, setOpenmodal] = useState(false)
@@ -21,9 +21,7 @@ const CostList = (props) => {
   const [dateState, setDateState] = useState({
     viewModal: false,
     fromToFlag: '',
-    confirmFromVal: '',
-    confirmToVal: '',
-    confirmFromDate: new Date(),
+    confirmFromDate: new Date(new Date().setMonth(new Date().getMonth() - 1)),
     confirmToDate: new Date(),
   })
 
@@ -31,12 +29,20 @@ const CostList = (props) => {
     callModalData()
   }, [])
 
+  const convertDateToVal = (val) => {
+    console.log(val)
+    const year = val.getFullYear()
+    const month = val.getMonth() + 1
+    const date = val.getDate()
+    return `${year}-${month}-${date}`
+  }
+
   const callList = async () => {
-    const { confirmFromVal, confirmToVal } = dateState
-    if (!confirmFromVal || !confirmToVal) {
-      return
-    }
+    const { confirmFromDate, confirmToDate } = dateState
+    const confirmFromVal = convertDateToVal(confirmFromDate)
+    const confirmToVal = convertDateToVal(confirmToDate)
     const memberId = await AsyncStorage.getItem('memberId')
+
     const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=${confirmFromVal}&toDate=${confirmToVal}`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
     console.log(JSON.stringify(response?.data, null, 4))
@@ -64,13 +70,10 @@ const CostList = (props) => {
   }
 
   const confirmDateChange = (val, flag) => {
-    const year = val.getFullYear()
-    const month = val.getMonth() + 1
-    const date = val.getDate()
     if (flag === 'from') {
-      setDateState({ ...dateState, confirmFromVal: `${year}-${month}-${date}`, confirmFromDate: val, viewModal: false })
+      setDateState({ ...dateState, confirmFromVal: convertDateToVal(val), confirmFromDate: val, viewModal: false })
     } else {
-      setDateState({ ...dateState, confirmToVal: `${year}-${month}-${date}`, confirmToDate: val, viewModal: false })
+      setDateState({ ...dateState, confirmToVal: convertDateToVal(val), confirmToDate: val, viewModal: false })
     }
   }
 
@@ -82,8 +85,6 @@ const CostList = (props) => {
     try {
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
-      // return (<Text style={{ height: 150 }}>teset</Text>)
-      console.log(item)
       return (
         <TouchableOpacity key={index} onPress={() => { props.navigation.navigate('CostModify', { data: { ...item }, refresh: callList }) }}>
           <View style={styles.cell} >
@@ -108,33 +109,25 @@ const CostList = (props) => {
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+            <ReactImage source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>비용요청현황</Text>
       </View>
       <View style={styles.inner}>
-        {/* <View style={styles.layer1}>
-          <TouchableOpacity onPress={() => setOpenmodal(true)} >
-            <Text style={styles.searchInput}
-            >{eventState?.eventNm || '구분'}
-            </Text>
-          </TouchableOpacity>
-          
-        </View> */}
         <View style={styles.layer1}>
           <View style={styles.searchDate}>
             <Text style={styles.inputDate}
               type="date"
               required aria-required="true"
               editable={false}
-              onPress={() => openDateModal('from')}>{dateState.confirmFromVal || `날짜선택`}</Text>
+              onPress={() => openDateModal('from')}>{convertDateToVal(dateState.confirmFromDate) || `날짜선택`}</Text>
             <Text style={styles.wave}>~</Text>
             <Text style={styles.inputDate}
               type="date"
               required aria-required="true"
               editable={false}
-              onPress={() => openDateModal('to')}>{dateState.confirmToVal || `날짜선택`}</Text>
+              onPress={() => openDateModal('to')}>{convertDateToVal(dateState.confirmToDate) || `날짜선택`}</Text>
           </View>
 
           <View style={styles.searchBtn}>
@@ -147,6 +140,7 @@ const CostList = (props) => {
         </View>
       </View>
       <View style={styles.cellWrap}>
+        <View style={styles.divider}></View>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} >
           {listData.map((t, i) => listItem(t, i))}
         </ScrollView>

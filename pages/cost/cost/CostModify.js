@@ -173,7 +173,7 @@ const CostModify = (props) => {
       <View style={styles.topMenu}>
         <View style={styles.backBtn}>
           <TouchableOpacity onPress={goback} >
-            <Image source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
+            <Image source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>비용작성</Text>
@@ -182,11 +182,11 @@ const CostModify = (props) => {
       <View style={styles.inner}>
         <View style={styles.form}>
           <View style={styles.inputWrap}>
-            <Text style={styles.label}>제목</Text>
+            <Text style={styles.label}>사용제목</Text>
             <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} value={inputData?.useSubject} />
           </View>
           <View style={styles.inputWrap}>
-            <Text style={styles.label}>구분</Text>
+            <Text style={styles.label}>행사명</Text>
             <View style={styles.searchBtn} >
               <TouchableOpacity onPressIn={() => openEventModal()} >
                 <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
@@ -231,7 +231,7 @@ const CostModify = (props) => {
             />
           </View>
         </View>
-        <View style={styles.btnWrap}>
+        <View style={styles.btnWrap2}>
           <TouchableOpacity onPress={modifyEvent}>
             <Text style={styles.requestBtn}>수정</Text>
           </TouchableOpacity>
