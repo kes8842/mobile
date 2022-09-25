@@ -11,18 +11,16 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       "height": '100%',
       'backgroundColor': 'rgba(0,0,0,0.7)',
       "position": 'absolute',
-      // display: 'none',
       "zIndex": 9,
 
     },
     "box": {
       "width": '90%',
-      "height": '73%',
+      "height": '50%',
       'backgroundColor': 'white',
       'marginLeft': 'auto',
       'marginRight': 'auto',
-      'marginTop': 40,
-      'marginBottom': 'auto',
+      'marginTop':'40%',
     },
 
     'modalInner': {
@@ -51,47 +49,42 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       'lineHeight': 50,
 
     },
+    'memberName': {
 
-    'cellWrap': {
-      'width': '100%',
-      "marginLeft": 'auto',
-      "marginRight": 'auto',
-    },
-
-    'divider' : {
-      'width' : '90%',
-      'height' : 2,
-      "marginLeft": 'auto',
-      "marginRight": 'auto',
-      'backgroundColor' :'rgb(224, 221, 220)',
-      
-    },
-
-    'cell': {
-      'width': '100%',
-      'height': 50,
-      'flexDirection': 'row',
-      'paddingLeft': 20,
-      'alignItems': 'center',
-    },
-
-    'cellNum': {
-
-      'fontSize': 18,
-      'fontWeight': '900',
       'fontFamily': "Apple SD Gothic Neo",
-      'color': '#f15a24',
-    },
-    'cellName': {
+      'color': '#383838',
+      'fontSize': 28,
+      'textAlign' : 'center',
+      'fontWeight': '700',
+      'marginTop': 10,
+      'marginBottom': 5
+  },
 
-      'fontSize': 18,
-      'fontWeight': '800',
+  'memberPosition': {
+
       'fontFamily': "Apple SD Gothic Neo",
-      'color': '#1d1d1d',
-      'marginLeft': 30,
+      'color': '#707070',
+      'fontSize': 12,
+      'fontWeight': '700',
+      'textAlign' : 'center',
+  },
+    'qrcodeWrap': {
+   
+      'marginLeft' : 'auto',
+      'marginRight' : 'auto',
+      'marginTop' : 'auto',
+      'marginBottom' : 'auto',
 
     },
-
+    'qrcode': {
+      'width' : 250,
+      'height' : 250,
+      'marginLeft' : 'auto',
+      'marginRight' : 'auto',
+      'marginTop' : 'auto',
+      'marginBottom' : 'auto',
+      'backgroundColor' : '#888'
+    },
     'closeBtn':{
       'width' :25,
       'height' :25,

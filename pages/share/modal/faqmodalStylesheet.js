@@ -67,31 +67,7 @@ export const modalStyleSheet = (windowHeight = Dimensions.get('window').height, 
       
     },
 
-    'cell': {
-      'width': '100%',
-      'height': 50,
-      'flexDirection': 'row',
-      'paddingLeft': 20,
-      'alignItems': 'center',
-    },
-
-    'cellNum': {
-
-      'fontSize': 18,
-      'fontWeight': '900',
-      'fontFamily': "Apple SD Gothic Neo",
-      'color': '#f15a24',
-    },
-    'cellName': {
-
-      'fontSize': 18,
-      'fontWeight': '800',
-      'fontFamily': "Apple SD Gothic Neo",
-      'color': '#1d1d1d',
-      'marginLeft': 30,
-
-    },
-
+    
     'closeBtn':{
       'width' :25,
       'height' :25,

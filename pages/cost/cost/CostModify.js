@@ -1,4 +1,4 @@
-import { Text, View, TextInput, Image, Keyboard, Alert } from 'react-native';
+import { Text, View, TextInput, Image, Keyboard, Dimensions } from 'react-native';
 import { styleSheet } from './stylesheet';
 import React, { useState, useEffect } from 'react';
 import { Image as ReactImage } from 'react-native';
@@ -10,9 +10,10 @@ import TempoModal from '../../share/modal/modal';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import AlertAsync from 'react-native-alert-async';
+import Footer from '../../share/footer/Footer';
 
 const CostModify = (props) => {
-
+  const height = Dimensions.get('window').height
   const styles = styleSheet()
   const [memberId, setMemberId] = useState('')
   const [dateState, setDateState] = useState({
@@ -151,7 +152,7 @@ const CostModify = (props) => {
       const formdata = new FormData()
       formdata.append('file', res.assets[0].uri);
       console.log(res);
-    })
+    }).catch(e => { console.log(e) })
   }
 
   const onClick = (e, text) => {
@@ -160,102 +161,153 @@ const CostModify = (props) => {
   }
 
   return (
-    <KeyboardAwareScrollView
-      style={styles.wrap}
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      enableOnAndroid={true}
-      scrollEnabled={true}
-      scrollToOverflowEnabled={true}
-      enableAutomaticScroll={true}
-      keyboardShouldPersistTaps='always'
-      nestedScrollEnabled={true}
-    >
-      <View style={styles.topMenu}>
-        <View style={styles.backBtn}>
-          <TouchableOpacity onPress={goback} >
-            <Image source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
-          </TouchableOpacity>
+    <View style={styles.wrap}>
+      <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        enableOnAndroid={true}
+        scrollEnabled={true}
+        scrollToOverflowEnabled={true}
+        enableAutomaticScroll={true}
+        keyboardShouldPersistTaps='always'
+        nestedScrollEnabled={true}
+        contentContainerStyle={{ height: height + 80 }}
+      >
+        <View style={styles.topMenu}>
+          <View style={styles.backBtn}>
+            <TouchableOpacity onPress={goback} >
+              <Image source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.topTitle}>비용상세</Text>
         </View>
-        <Text style={styles.title}>비용작성</Text>
-      </View>
-
-      <View style={styles.inner}>
-        <View style={styles.form}>
-          <View style={styles.inputWrap}>
-            <Text style={styles.label}>사용제목</Text>
-            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} value={inputData?.useSubject} />
-          </View>
-          <View style={styles.inputWrap}>
-            <Text style={styles.label}>행사명</Text>
-            <View style={styles.searchBtn} >
-              <TouchableOpacity onPressIn={() => openEventModal()} >
-                <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
-              </TouchableOpacity>
+        <View style={styles.inner}>
+          <View style={styles.contentsWrap}>
+            <View style={styles.contents}>
+              <View style={styles.contentsInner}>
+                <Text style={styles.modifyLabel}>작성자</Text>
+                <TextInput style={styles.modifyText} />
+              </View>
+              <View style={styles.contentsInner}>
+                <Text style={styles.modifyLabel}>결제상태</Text>
+                <TextInput style={styles.modifyText} />
+              </View>
             </View>
-            <TextInput
-              style={styles.input}
-              editable={false}
-              value={inputData.eventNm}></TextInput>
-          </View>
-          <View style={styles.inputWrap}>
-            <Text style={styles.label} >사용일자</Text>
-            <View style={styles.searchBtn} >
-              <TouchableOpacity onPressIn={() => openDateModal()} >
-                <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
-              </TouchableOpacity>
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>사용제목</Text>
+              <TextInput style={styles.modifyTextLong}
+                onChange={(e) => setInputData({ ...inputData, useSubject: e.nativeEvent.text })} value={inputData?.useSubject} />
             </View>
-            <TextInput style={styles.input} editable={false} value={dateState.confirmVal}></TextInput>
-          </View>
-          <View style={styles.inputWrap}>
-            <Text style={styles.label}>사용금액</Text>
-            <TextInput style={styles.input} onChange={(e) => setInputData({ ...inputData, useAmount: e.nativeEvent.text })} value={`${inputData.useAmount}`} />
-            <Text style={styles.won}>원</Text>
-          </View>
-          <View style={styles.inputWrap}>
-            <Text style={styles.label}>첨부파일</Text>
-            <View style={styles.addBtn}>
-              <TouchableOpacity onPressIn={() => ShowPicker()}>
-                <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
-              </TouchableOpacity>
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>행사명</Text>
+              <View style={styles.modifyInputWrap}>
+                <TextInput
+                  style={styles.modifyTextLong}
+                  editable={false}
+                  value={inputData.eventNm}></TextInput>
+                <View style={styles.modifySearchBtn} >
+                  <TouchableOpacity onPressIn={() => openEventModal()} >
+                    <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
 
-            <TextInput style={styles.input}></TextInput>
+            <View style={styles.contents}>
+              <View style={styles.contentsInner}>
+                <Text style={styles.modifyLabel}>사용일자</Text>
+                <View style={styles.modifyInputWrap}>
+                  <TextInput style={styles.modifyText} editable={false} value={dateState.confirmVal}>
+                  </TextInput>
+                  <View style={styles.modifySearchBtn} >
+                    <TouchableOpacity onPressIn={() => openDateModal()} >
+                      <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.contentsInner}>
+                <View style={styles.modifyInputWrap}>
+                  <Text style={styles.modifyLabel}>결제금액</Text>
+                  <TextInput style={styles.modifyText} onChange={(e) => setInputData({ ...inputData, useAmount: e.nativeEvent.text })} value={`${inputData.useAmount}`} />
+                  <Text style={styles.modifyWon}>원</Text>
+                </View>
+              </View>
+
+            </View>
+
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>첨부파일</Text>
+              <View style={styles.modifyInputWrap}>
+                <TextInput style={styles.modifyTextLong}></TextInput>
+                <View style={styles.modifyAddBtn}>
+                  <TouchableOpacity onPressIn={() => ShowPicker()}>
+                    <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+            </View>
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>사용내역</Text>
+              <TextInput
+                style={styles.modifyTextLong}
+                multiline={true}
+                onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
+                value={inputData.useComment}
+              />
+            </View>
+
+            <View style={styles.sepLine}></View>
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>결제자명</Text>
+              <TextInput>결제자A</TextInput>
+              <Text style={styles.modifyLabel}>결제여부</Text>
+              <TextInput>승인</TextInput>
+            </View>
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>결제일자</Text>
+              <TextInput>2022-01-01</TextInput>
+            </View>
+            <View style={styles.contents}>
+              <Text style={styles.modifyLabel}>결제의견</Text>
+              <TextInput>상기 내역을 승인함.</TextInput>
+            </View>
+            <View style={styles.sepLine}></View>
+            <View style={styles.contentsTextarea}>
+              <Text style={styles.modifyLabel}>결제의견</Text>
+              <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payComment: e.nativeEvent.text })} />
+            </View>
           </View>
-          <View style={styles.textfieldWrap}>
-            <Text style={styles.label}>사용내역</Text>
-            <TextInput
-              style={styles.textfield}
-              multiline={true}
-              onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
-              value={inputData.useComment}
-            />
+          <View style={styles.btnWrap2}>
+            <TouchableOpacity onPress={modifyEvent}>
+              <Text style={styles.requestBtn}>수정</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={deleteEvent}>
+              <Text style={styles.delBtn}>삭제</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.btnWrap2}>
-          <TouchableOpacity onPress={modifyEvent}>
-            <Text style={styles.requestBtn}>수정</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={deleteEvent}>
-            <Text style={styles.delBtn}>삭제</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <DateTimePickerModal
-        isVisible={dateState.viewModal}
-        mode="date"
-        onConfirm={(a) => confirmDateChange(a)}
-        onCancel={() =>
-          setDateState({ ...dateState, viewModal: false })
-        }
-        date={dateState.confirmDate}
+
+        <DateTimePickerModal
+          isVisible={dateState.viewModal}
+          mode="date"
+          onConfirm={(a) => confirmDateChange(a)}
+          onCancel={() =>
+            setDateState({ ...dateState, viewModal: false })
+          }
+          date={dateState.confirmDate}
+        />
+        <TempoModal
+          openModal={openModal}
+          onClick={onClick}
+          onClose={() => setOpenmodal(false)}
+          option={eventOption}
+        />
+      </KeyboardAwareScrollView>
+      <Footer
+        navigation={props.navigation}
       />
-      <TempoModal
-        openModal={openModal}
-        onClick={onClick}
-        onClose={() => setOpenmodal(false)}
-        option={eventOption}
-      />
-    </KeyboardAwareScrollView>
+    </View>
   )
 }
 

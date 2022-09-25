@@ -8,6 +8,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "backgroundColor": "white",
             "width": '100%',
             "height": '100%',
+            zIndex: 1
         },
         "circle": {
             "backgroundColor": "#f15a24",
@@ -18,7 +19,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'left': -180,
             'top': -350,
         },
-
         'topMenu': {
             'width': '100%',
             'height': 55,
@@ -27,20 +27,12 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'alignItems': 'center',
             'paddingVertical': 5,
             'paddingHorizontal': 10,
-
         },
-
         'topLogo': {
-
             'fontFamily': 'Jalnan',
             'color': 'white',
             'fontSize': 32,
-
         },
-
-
-
-
         "profileCard": {
             'backgroundColor': 'white',
             'width': '90%',
@@ -53,11 +45,9 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'position': 'relative',
             'elevation': 10,
         },
-
         'profileTextGroup': {
             'marginTop': 'auto',
         },
-
         'processInfoWrap': {
             'width': '100%',
             'height': 100,
@@ -72,23 +62,17 @@ export const styleSheet = (windowHeight, windowWidth) => {
 
         },
         'leftProcessBox': {
-
             'width': '70%',
             'height': 70,
             'backgroundColor': 'rgba(255,255,255,0.3)',
             'borderRadius': 10,
-
-
         },
         'rightProcessBox': {
-
             'width': '25%',
             'height': 70,
             'backgroundColor': 'rgba(255,255,255,0.3)',
             'borderRadius': 10,
-
         },
-
         'processTitle': {
             'color': 'white',
             'fontSize': 8,
@@ -100,7 +84,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'width': '90%',
             'borderBottomWidth': 1,
             'borderBottomColor': 'white'
-
         },
         'processInner': {
             'width': '95%',
@@ -109,7 +92,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'marginTop': 5,
             'flexDirection': 'row',
             'alignItems': 'center'
-
         },
 
         'process': {
@@ -118,7 +100,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'display': 'flex',
             'alignItems': 'center',
             'justifyContents': 'space-around',
-
         },
         'processRight': {
             'width': '100%',
@@ -126,9 +107,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'display': 'flex',
             'alignItems': 'center',
             'justifyContents': 'space-around',
-
         },
-
         'processText': {
             'fontSize': 8,
             'color': 'white',
@@ -180,8 +159,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'width': 30,
             'height': 30,
         },
-
-
         'bottomMenu': {
             'width': '100%',
             'height': 80,
@@ -194,16 +171,12 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'paddingHorizontal': 30,
             'borderTopWidth': 2,
             'borderTopColor': "rgba(112, 112, 112 , 0.3)",
-
-
         },
         'scanBtn': {
             'width': 30,
             'height': 30,
             'alignItems': 'center',
             'marginTop': -20,
-
-
         },
         'scanBtnIcon': {
             'width': 30,
@@ -213,7 +186,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
         },
 
         'homeBtn': {
-
             'alignItems': 'center',
         },
 
@@ -372,8 +344,6 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'textAlign': 'center',
             'fontSize': 30,
             'lineHeight': 100,
-
         }
-
     });
 }
