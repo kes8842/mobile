@@ -1,140 +1,197 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
+import { color } from 'react-native-reanimated';
 
-export const styleSheet = (windowHeight, windowWidth) => {
+export const styleSheet = (windowHeight = Dimensions.get('window').height, windowWidth = Dimensions.get('window').width) => {
   const wp = windowWidth / 360
   const hp = windowHeight / 800
   return StyleSheet.create({
 
     "wrap": {
-      "width": "100%",
+      'position': 'relative',
+      "width": '100%',
       "height": '100%',
-      "backgroundColor": "#ffffff"
+      'backgroundColor': 'white',
+
 
     },
     "inner": {
       "width": "85%",
-      "height": "100%",
-      "position": "relative",
+      'height': windowHeight,
       "marginLeft": 'auto',
       "marginRight": 'auto',
+      'position': 'relative',
     },
 
 
     "topMenu": {
-
       "width": "100%",
       "height": 66,
       "position": "relative",
       "marginLeft": 'auto',
       "marginRight": 'auto',
-      'paddingHorizontal' : 20,
-      'flexDirection' : 'row',
-      'alignItems' : 'center',
-      'justifyContent' : 'center',
-
-
+      'paddingHorizontal': 20,
+      'backgroundColor': '#f15a24',
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'center',
     },
-
-
     "backBtn": {
       "overflow": "hidden",
-      'position' : 'absolute',
-      'left' : 16,
-      'top' : 15,
+      'position': 'absolute',
+      'left': 16,
+      'top': 15,
       "width": 40,
       "height": 40,
     },
-
-
     "backBtnIcon": {
       "width": 30,
       "height": 30
     },
-
-  
-
-
-    "title": {
-
-      "width": "100%",
-      "height": 70,
-      'marginTop' : 10,
-      "overflow": "hidden",
-      "borderBottomWidth": 3,
-      "borderBottomColor": "#bcbcbc",
-    },
-
-
-    "amountWrap": {
-      "width": "100%",
-      "display": "flex",
-      "flexDirection": "row",
-      "alignItems": "baseline",
-      "justifyContent": 'space-between'
-
-    },
-
-    "amount": {
+    "topTitle": {
+      "color": "white",
       "fontFamily": "Apple SD Gothic Neo",
-      "fontWeight": "700",
-      "fontSize": 33,
-      'color': '#1d1d1d'
-
+      "fontWeight": '800',
+      "fontSize": 22,
     },
 
-
-    "status": {
-      "fontFamily": "Apple SD Gothic Neo",
-      "fontWeight": "900",
-      "fontSize": 16,
-      "color": "#f15a24",
-    },
-
-    "date": {
-      "fontFamily": "Apple SD Gothic Neo",
-      "fontWeight": "200",
-      "fontSize": 10,
-      "color": "#707070"
-
-    },
 
     "contentsWrap": {
-      'width': '100%',
-      'marginTop' : 20,
-      
+      "width": "100%",
+      'marginTop': -5
     },
+
 
     "contents": {
       'display': 'flex',
       'flexDirection': 'row',
-      'justifyContent': 'space-between',
       'alignItems': 'center',
-      'marginBottom': '5%'
+      'justifyContent': 'space-between',
+      'marginBottom': -20,
+    },
+    "contentsInner": {
+      'width': '45%',
+      'height': '100%',
+      'display': 'flex',
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'space-between',
     },
 
-    'label': {
-      'font-family': 'Apple SD Gothic Neo',
-      'color': '#707070',
-      'font-weight': '200',
-      'fontSize': 14
+
+    "modifyLabel": {
+      "fontFamily": "Apple SD Gothic Neo",
+      "color": "#f15a24",
+      "fontWeight": '700',
+      "fontSize": 13,
+      'marginTop': 10,
+      'marginBottom': 5,
+
+    },
+    "modifyText": {
+      'width': 80,
+      'lineHeight': 5,
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontWeight": '500',
+      'color': '#383838',
+      'textAlign': 'center',
+      "fontSize": 13,
+
+
+    },
+    "modifyTextLong": {
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontWeight": '500',
+      'lineHeight': 30,
+      'textAlign': 'center',
+      'color': '#383838',
+      "fontSize": 13,
+      'marginTop': 10,
+      'marginBottom': 5,
+    },
+    "modifyWon": {
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontWeight": '500',
+      'color': '#1d1d1d',
+      "fontSize": 13,
+      'marginTop': 10,
+      'marginBottom': 5,
+
+    },
+    "modifySearchBtn": {
+      "marginTop": 5,
+      "width": 22,
+      "height": 22,
+      'zIndex': 1
+    },
+    "searchIcon": {
+      "width": "100%",
+      "height": "100%",
     },
 
+    "input": {
+      // "width": windowWidth * 0.85 * 0.8,
+      "width": "100%",
+      "height": 35,
+      "overflow": "hidden",
+      "borderBottomWidth": 2,
+      "borderBottomColor": "#707070",
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontSize": 20,
+      "fontWeight": '700',
+      "color": "#383838",
+      "paddingTop": 0,
+      "paddingBottom": 10,
+      'textAlign': 'center'
+    },
+    "modifyInputWrap": {
+      'flexDirection': 'row',
+      'alignItems': 'center',
+    },
+
+
+    "modifyAddBtn": {
+
+      "width": 20,
+      "height": 20,
+      "backgroundColor": "#f15a24",
+      "borderRadius": 50,
+      'zIndex': 1
+    },
+
+    "addIcon": {
+      "width": 13,
+      "height": 13,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'marginTop': 3,
+    },
     'sepLine': {
 
       'width': '100%',
       'height': 3,
       'backgroundColor': '#bcbcbc',
-      'marginBottom': 10,
+      'marginTop': 20,
 
     },
 
-    'contentsTextarea' : {
-      'height' : '30%'
-
+    "textfield": {
+      "height": windowHeight * 0.15,
+      "borderRadius": 10,
+      "borderWidth": 2,
+      "borderColor": "#707070",
+      "marginTop": 8,
+      'paddingLeft': 10,
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontSize": 14,
+      "textAlignVertical": "top",
+    },
+    'contentsTextarea': {
+      'marginTop': 10,
+      'height': '20%'
     },
 
     'opinion': {
-      'height': '100%',
+      'height': '50%',
       'width': '100%',
       'borderRadius': 10,
       'borderWidth': 2,
@@ -145,19 +202,19 @@ export const styleSheet = (windowHeight, windowWidth) => {
       'textAlignVertical': 'top'
     },
 
-
-    'btnWrap': {
+    "btnWrap": {
       "width": "100%",
       "height": 50,
       'marginLeft': 'auto',
       'marginRight': 'auto',
+      'marginTop': 40,
       "flexDirection": "row",
       "justifyContent": "space-between",
       "alignItems": "center",
+      "zIndex": 1
     },
 
-    'confBtn': {
-      
+    "confBtn": {
       "width": 140,
       "height": 50,
       "backgroundColor": "#F15A24",
@@ -170,8 +227,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "fontFamily": "Apple SD Gothic Neo"
     },
 
-    'rejBtn': {
-     
+    "rejBtn": {
       "width": 140,
       "height": 50,
       "backgroundColor": "#707070",
@@ -183,6 +239,85 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "textAlign": "center",
       "lineHeight": 50,
     },
-    
+    'bottomMenu': {
+      'width': '100%',
+      'height': 80,
+      'backgroundColor': 'white',
+      'position': 'absolute',
+      'bottom': 0,
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'space-around',
+      'paddingHorizontal': 30,
+      'borderTopWidth': 2,
+      'borderTopColor': "rgba(112, 112, 112 , 0.3)",
+
+
+    },
+    'scanBtnIcon': {
+      'width': 30,
+      'height': 30,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+    },
+
+    'homeBtn': {
+
+      'alignItems': 'center',
+    },
+
+    'homeIcon': {
+      'width': 30,
+      'height': 30,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+    },
+    'costIcon': {
+      'width': 30,
+      'height': 30,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+
+    },
+    'paymentIcon': {
+      'width': 30,
+      'height': 30,
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+    },
+
+    'homeText': {
+      'fontFamily': "Apple SD Gothic Neo",
+      'color': '#707070',
+      'fontSize': 12,
+      'fontWeight': '700',
+      'marginTop': 5,
+      'textAlign': 'center'
+
+    },
+    'costText': {
+      'fontFamily': "Apple SD Gothic Neo",
+      'color': '#707070',
+      'fontSize': 12,
+      'fontWeight': '700',
+      'marginTop': 5
+
+    },
+    'paymentText': {
+      'fontFamily': "Apple SD Gothic Neo",
+      'color': '#707070',
+      'fontSize': 12,
+      'fontWeight': '700',
+      'marginTop': 5
+    },
+    'qrscanText': {
+      'width': 50,
+      'fontFamily': "Apple SD Gothic Neo",
+      'color': '#707070',
+      'fontSize': 12,
+      'fontWeight': '700',
+      'marginTop': 5,
+      'textAlign': 'center'
+    },
   })
 }

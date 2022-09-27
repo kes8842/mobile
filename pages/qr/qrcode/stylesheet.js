@@ -8,126 +8,148 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "backgroundColor": "white",
             "width": '100%',
             "height": '100%',
-            zIndex: 1
         },
         "circle": {
             "backgroundColor": "#f15a24",
             "width": 600,
             "height": 600,
-            'borderRadius': 500,
-            'position': 'absolute',
-            'left': -180,
-            'top': -350,
+            'borderRadius' : 500,
+            'position' : 'absolute',
+            'left' : -180,
+            'top' : -350,
         },
+
         'topMenu': {
             'width': '100%',
-            'height': 55,
+            'height': 50,
             'flexDirection': 'row',
             'justifyContent': 'space-between',
             'alignItems': 'center',
             'paddingVertical': 5,
             'paddingHorizontal': 10,
+            'marginTop' : 10,
+
         },
+
         'topLogo': {
+
             'fontFamily': 'Jalnan',
             'color': 'white',
             'fontSize': 32,
+
         },
+
         "profileCard": {
             'backgroundColor': 'white',
             'width': '90%',
             'height': 240,
-            'borderRadius': 20,
+            'borderRadius' : 20,
             'marginLeft': 'auto',
             'marginRight': 'auto',
-            'marginTop': '10%',
+            'marginTop': '5%',
             'justifyContent': 'center',
             'position': 'relative',
-            'elevation': 10,
-        },
-        'profileTextGroup': {
-            'marginTop': 'auto',
-        },
-        'processInfoWrap': {
-            'width': '100%',
-            'height': 100,
-            'borderBottomRightRadius': 20,
-            'borderBottomLeftRadius': 20,
-            'backgroundColor': '#f15a24',
-            'marginTop': 'auto',
-            'flexDirection': 'row',
-            'alignItems': 'center',
-            'justifyContent': 'space-between',
-            'paddingHorizontal': 20,
-
-        },
-        'leftProcessBox': {
-            'width': '70%',
-            'height': 70,
-            'backgroundColor': 'rgba(255,255,255,0.3)',
-            'borderRadius': 10,
-        },
-        'rightProcessBox': {
-            'width': '25%',
-            'height': 70,
-            'backgroundColor': 'rgba(255,255,255,0.3)',
-            'borderRadius': 10,
-        },
-        'processTitle': {
-            'color': 'white',
-            'fontSize': 8,
-            'lineHeight': 18,
-            'fontWeight': '700',
-            'textAlign': 'center',
-            'marginLeft': 'auto',
-            'marginRight': 'auto',
-            'width': '90%',
-            'borderBottomWidth': 1,
-            'borderBottomColor': 'white'
-        },
-        'processInner': {
-            'width': '95%',
-            'marginLeft': 'auto',
-            'marginRight': 'auto',
-            'marginTop': 5,
-            'flexDirection': 'row',
-            'alignItems': 'center'
+            'elevation' : 10,
         },
 
-        'process': {
-            'width': '19%',
-            'height': 40,
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContents': 'space-around',
+        'profileTextGroup' : {
+            'marginTop' : 'auto',
         },
-        'processRight': {
-            'width': '100%',
-            'height': 40,
-            'display': 'flex',
-            'alignItems': 'center',
-            'justifyContents': 'space-around',
+
+        'processInfoWrap' : {
+            'width' :'100%',
+            'height' : 100,
+            'borderBottomRightRadius' :20,
+            'borderBottomLeftRadius' :20,
+            'backgroundColor' : '#f15a24',
+            'marginTop' : 'auto',
+            'flexDirection' : 'row',
+            'alignItems' : 'center',
+            'justifyContent' : 'space-between',
+            'paddingHorizontal' : 10,
+        
         },
-        'processText': {
-            'fontSize': 8,
-            'color': 'white',
-            'fontWeight': '500',
-            'marginBottom': -8,
+        'leftProcessBox' : {
+
+            'width' : '77%',
+            'height' : 70,
+            'backgroundColor' : 'rgba(255,255,255,0.3)',
+            'borderRadius' : 10,
+            
 
         },
-        'processNumber': {
+        'rightProcessBox' : {
 
-            'color': 'white',
-            'fontSize': 32,
-            'fontWeight': '700',
+            'width' : '20%',
+            'height' : 70,
+            'backgroundColor' : 'rgba(255,255,255,0.3)',
+            'borderRadius' : 10,
 
         },
 
-        'divider': {
+        'processTitle' : {
+            'color' : 'white',
+            'fontSize' : 8,
+            'lineHeight' : 18,
+            'fontWeight' : '700',
+            'textAlign' : 'center',
+            'marginLeft' : 'auto',
+            'marginRight' : 'auto',
+            'width' :'90%',
+            'borderBottomWidth' : 1,
+            'borderBottomColor' : 'white'
 
-            'height': '80%',
-            'width': 1,
-            'backgroundColor': 'white'
+        },
+        'processInner' : {
+            'width' : '95%',
+            'marginLeft' : 'auto',
+            'marginRight' : 'auto',
+            'marginTop' : 5,
+            'flexDirection' : 'row',
+            'alignItems' : 'center',
+            'justifyContents' :'space-around',
+
+        },
+
+        'process':{
+            'width' :'25%',
+            'height' : 40,
+            'display' : 'flex',
+            'alignItems' :'center',
+            'justifyContents' :'space-around',
+
+        },
+        'processRight':{
+            'width' :'100%',
+            'height' : 40,
+            'display' : 'flex',
+            'alignItems' :'center',
+            'justifyContents' :'space-around',
+
+        },
+
+        'processText' : {
+            'fontSize' : 10,
+            'color' : 'white',
+            'fontWeight' : '900',
+            'marginBottom' : -8,
+
+        },
+        'processNumber' : {
+
+            'color' : 'white',
+            'fontSize' : 26,
+            'fontWeight' : '700',
+            'marginTop' : 4,
+
+            
+        },
+
+        'divider' : {
+
+            'height' : '80%',
+            'width' : 1,
+            'backgroundColor' : 'white'
 
         },
 
@@ -136,7 +158,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'fontFamily': "Apple SD Gothic Neo",
             'color': '#383838',
             'fontSize': 40,
-            'textAlign': 'center',
+            'textAlign' : 'center',
             'fontWeight': '700',
             'marginBottom': 5
         },
@@ -147,7 +169,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'color': '#707070',
             'fontSize': 22,
             'fontWeight': '700',
-            'textAlign': 'center',
+            'textAlign' : 'center',
             'marginBottom': 5
         },
 
@@ -159,6 +181,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'width': 30,
             'height': 30,
         },
+
+
         'bottomMenu': {
             'width': '100%',
             'height': 80,
@@ -171,6 +195,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'paddingHorizontal': 30,
             'borderTopWidth': 2,
             'borderTopColor': "rgba(112, 112, 112 , 0.3)",
+
+
         },
         'scanBtn': {
             'width': 30,
@@ -186,6 +212,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
         },
 
         'homeBtn': {
+
             'alignItems': 'center',
         },
 
@@ -248,6 +275,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'marginLeft': 'auto',
             'marginRight': 'auto',
             'marginTop': '12%',
+            'marginBottom': '30%',
             'display': 'flex',
             'flexDirection': 'column',
             'justifyContent': 'space-around',
@@ -344,6 +372,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'textAlign': 'center',
             'fontSize': 30,
             'lineHeight': 100,
+
         }
+
     });
 }

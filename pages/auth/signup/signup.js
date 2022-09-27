@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../../../api/client';
 import { styleSheet } from './stylesheet';
+import { setUserTp } from '../../share/lib/getuserinfo';
 
 const Signup = (props) => {
   const { windowHeight } = props
@@ -98,7 +99,7 @@ const Signup = (props) => {
       if (result?.status === 200) {
         const { data } = result
         console.log(data)
-        if (data.massage === '등록되지 않은 부서코드입니다.') {
+        if (data.status === 500) {
           alert(data.massage)
           return
         }
@@ -106,16 +107,20 @@ const Signup = (props) => {
         if (!loginData) {
           return
         }
-        const { orgId, memberTp, orgEventName, mobileId, memberId, memberName, hpNo, eventCode } = loginData
+       
+        await AsyncStorage.setItem('memberName', paramName || '')
+        await AsyncStorage.setItem('hpNo', paramHpNo || '')
+        await AsyncStorage.setItem('eventCode', paramEventCode || '')
 
-        await AsyncStorage.setItem('memberName', memberName || '')
-        await AsyncStorage.setItem('hpNo', hpNo || '')
-        await AsyncStorage.setItem('mobileId', mobileId || '')
-        await AsyncStorage.setItem('memberId', JSON.stringify(memberId) || '')
+        const userInfo = await setUserTp()
+        const { orgId, memberTp, orgEventName, mobileId, memberId,  } = userInfo
+
         await AsyncStorage.setItem('orgEventName', orgEventName || '')
         await AsyncStorage.setItem('memberTp', memberTp || '')
+        await AsyncStorage.setItem('mobileId', mobileId || '')
         await AsyncStorage.setItem('orgId', JSON.stringify(orgId) || '')
-        await AsyncStorage.setItem('eventCode', eventCode || '')
+        await AsyncStorage.setItem('memberId', JSON.stringify(memberId) || '')
+
       } else {
         return
       }

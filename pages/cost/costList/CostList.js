@@ -42,15 +42,16 @@ const CostList = (props) => {
     const confirmFromVal = convertDateToVal(confirmFromDate)
     const confirmToVal = convertDateToVal(confirmToDate)
     const memberId = await AsyncStorage.getItem('memberId')
-
-    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=${confirmFromVal}&toDate=${confirmToVal}`)
+    const eventCode = await AsyncStorage.getItem('eventCode')
+    const response = await client.get(`rest/v1/s0221a0070/retrieve-cost-req?mobileMemberId=${memberId}&fromDate=${confirmFromVal}&toDate=${confirmToVal}&eventCode=${eventCode}`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
     console.log(JSON.stringify(response?.data, null, 4))
     setListData(response?.data?.data || [])
   }
 
   const callModalData = async () => {
-    const res = await client.get(`/rest/v1/s0221a2000/event-list?&orgId=39`).catch(e => {
+    const eventCode = await AsyncStorage.getItem('eventCode')
+    const res = await client.get(`/rest/v1/s0221a2000/event-list?&eventCode=${eventCode}&orgId=39`).catch(e => {
       console.log(JSON.stringify(e, null, 4))
     })
     console.log(JSON.stringify(res, null, 4))
@@ -174,34 +175,6 @@ const CostList = (props) => {
           }
           date={dateState.fromToFlag === 'from' ? dateState.confirmFromDate : dateState.confirmToDate}
         />
-
-        {/* <View style={styles.bottomMenu}>
-        <TouchableOpacity style={styles.homeBtn} onPress={() => props.navigation.navigate('QrCode')}>
-          <View>
-            <ReactImage source={require('./assets/home.png')} style={styles.homeIcon} />
-            <Text style={styles.homeText} >홈</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.costListBtn} onPress={() => props.navigation.navigate('CostList')}>
-          <View>
-            <ReactImage source={require('./assets/receipt.png')} style={styles.costIcon} />
-            <Text style={styles.costText} >비용등록</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.paymentListBtn} onPress={() => props.navigation.navigate('PaymentList')}>
-          <View>
-            <ReactImage source={require('./assets/stamp.png')} style={styles.paymentIcon} />
-            <Text style={styles.paymentText}>비용결제</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.scanBtn} onPress={() => props.navigation.navigate('Qrscan')}>
-          <View>
-            <ReactImage source={require('./assets/scanIcon.png')} style={styles.scanBtnIcon} />
-            <Text style={styles.qrscanText}>QR스캔</Text>
-          </View>
-        </TouchableOpacity>
-      </View> */}
       </View >
       <Footer
         navigation={props.navigation}

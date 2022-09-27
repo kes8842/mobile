@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { Image as ReactImage } from 'react-native';
 import { styleSheet } from './stylesheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import client from '../../../api/client';
+import Footer from '../../share/footer/Footer';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const Payment = (props) => {
   const [detailData, setDetailData] = useState({})
@@ -70,67 +72,144 @@ const Payment = (props) => {
   }
 
   return (
-    <View style={styles.wrap} contentContainerStyle={{ flex: 1 }}>
-      <View style={styles.topMenu}>
-        <View style={styles.backBtn}>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <ReactImage source={require('./assets/backBtnIcon.png')} style={styles.backBtnIcon} />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.inner}>
-        <View style={styles.title}>
-          <Text style={styles.date}>사용일자: {detailData?.header?.usedDate}</Text>
-          <View style={styles.amountWrap}>
-            <View>
-              <Text style={styles.amount}>{detailData?.header?.useAmount} 원</Text>
+    <View>
+      <View style={styles.wrap} >
+        <KeyboardAwareScrollView
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          enableOnAndroid={true}
+          scrollEnabled={true}
+          scrollToOverflowEnabled={true}
+          enableAutomaticScroll={true}
+          keyboardShouldPersistTaps='always'
+          nestedScrollEnabled={true}
+        >
+
+          <View style={styles.topMenu}>
+            <View style={styles.backBtn}>
+              <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                <ReactImage source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
+              </TouchableOpacity>
             </View>
-            <View >
-              <Text style={styles.status}>결제요청</Text>
+            <Text style={styles.topTitle}>상세현황</Text>
+          </View>
+          <View style={styles.inner}>
+            <View style={styles.contentsWrap}>
+
+              <View style={styles.contents}>
+                <View style={styles.contentsInner}>
+                  <Text style={styles.modifyLabel}>작성자</Text>
+                  <TextInput style={styles.modifyText} />
+                </View>
+                <View style={styles.contentsInner}>
+                  <Text style={styles.modifyLabel}>결제상태</Text>
+                  <TextInput style={styles.modifyText} />
+                </View>
+              </View>
+
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>사용제목</Text>
+                <TextInput style={styles.modifyTextLong} />
+              </View>
+
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>행사명</Text>
+                <View style={styles.modifyInputWrap}>
+                  <TextInput
+                    style={styles.modifyTextLong}></TextInput>
+                  <View style={styles.modifySearchBtn} >
+                    <TouchableOpacity>
+                      <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.contents}>
+                <View style={styles.contentsInner}>
+                  <Text style={styles.modifyLabel}>사용일자</Text>
+                  <View style={styles.modifyInputWrap}>
+                    <TextInput style={styles.modifyText}>
+                    </TextInput>
+
+                    <View style={styles.modifySearchBtn} >
+                      <TouchableOpacity>
+                        <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.contentsInner}>
+                  <View style={styles.modifyInputWrap}>
+                    <Text style={styles.modifyLabel}>결제금액</Text>
+                    <TextInput style={styles.modifyText} />
+                    <Text style={styles.modifyWon}>원</Text>
+                  </View>
+                </View>
+
+              </View>
+
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>첨부파일</Text>
+                <View style={styles.modifyInputWrap}>
+                  <TextInput style={styles.modifyTextLong}></TextInput>
+                  <View style={styles.modifyAddBtn}>
+                    <TouchableOpacity onPressIn={() => ShowPicker()}>
+                      <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+              </View>
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>사용내역</Text>
+                <TextInput
+                  style={styles.modifyTextLong}
+                  multiline={true}
+                  onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
+                  value={inputData.useComment}
+                />
+              </View>
+
+              <View style={styles.sepLine}></View>
+
+
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>결제자명</Text>
+                <TextInput>결제자A</TextInput>
+                <Text style={styles.modifyLabel}>결제여부</Text>
+                <TextInput>승인</TextInput>
+              </View>
+
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>결제일자</Text>
+                <TextInput>2022-01-01</TextInput>
+
+              </View>
+              <View style={styles.contents}>
+                <Text style={styles.modifyLabel}>결제의견</Text>
+                <TextInput>상기 내역을 승인함.</TextInput>
+              </View>
+
+              <View style={styles.sepLine}></View>
+              <View style={styles.contentsTextarea}>
+                <Text style={styles.modifyLabel}>결제의견</Text>
+                <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payComment: e.nativeEvent.text })} />
+              </View>
+              {detailData?.detail?.map((item) => renderDetailPay(item))}
             </View>
           </View>
-        </View>
-
-        <View style={styles.contentsWrap}>
-          <View style={styles.contents}>
-            <Text style={styles.label}>작성자</Text><Text>{detailData?.header?.userName}</Text>
-          </View>
-
-          <View style={styles.contents}>
-            <Text style={styles.label}>사용제목</Text><Text>{detailData?.header?.useSubject}</Text>
-          </View>
-
-          <View style={styles.contents}>
-            <Text style={styles.label}>행사명</Text><Text>{detailData?.header?.eventNm}</Text>
-          </View>
-
-          <View style={styles.contents}>
-            <Text style={styles.label}>첨부파일</Text><Text>sampleFile.jpg</Text>
-          </View>
-
-          <View style={styles.contents}>
-            <Text style={styles.label}>사용내역</Text>
-            <Text>{detailData?.header?.useComment}</Text>
-          </View>
-          {detailData?.detail?.map((item) => renderDetailPay(item))}
-          <View style={styles.sepLine}></View>
-          <View style={styles.contentsTextarea}>
-            <Text style={styles.label}>결제의견</Text>
-            <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payComment: e.nativeEvent.text })} />
-          </View>
-        </View>
-        <View style={styles.btnWrap}>
+          <View style={styles.btnWrap}>
           <TouchableOpacity onPress={() => requestPay("Y")}>
             <Text style={styles.confBtn}>승인</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => requestPay("N")}>
             <Text style={styles.rejBtn}>반려</Text>
           </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.canBtn} onPress={() => props.navigation.goBack()}>
-            <Text style={styles.canBtnText}>취소</Text>
-          </TouchableOpacity> */}
         </View>
+        </KeyboardAwareScrollView>
       </View>
+      <Footer
+        navigation={props.navigation}
+      />
     </View>
   )
 }
