@@ -6,11 +6,17 @@ import client from '../../../api/client';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Footer from '../../share/footer/Footer';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const PaymentList = (props) => {
-
   const styles = styleSheet()
   const [listData, setListData] = useState([])
+  const [dateState, setDateState] = useState({
+    viewModal: false,
+    fromToFlag: '',
+    confirmFromDate: new Date(new Date().setMonth(new Date().getMonth() - 1)),
+    confirmToDate: new Date(),
+  })
 
   useEffect(() => {
     callList()
@@ -18,10 +24,33 @@ const PaymentList = (props) => {
 
   const callList = async () => {
     const memberId = await AsyncStorage.getItem('memberId')
-    const response = await client.get(`rest/v1/s0221a0090/cost-pay-list?eventPayUserId=${41}&fromDate=2022-01-01&toDate=2022-12-31&eventCode=AAA03`)
+    const { confirmFromDate, confirmToDate } = dateState
+    const confirmFromVal = convertDateToVal(confirmFromDate)
+    const confirmToVal = convertDateToVal(confirmToDate)
+    const response = await client.get(`rest/v1/s0221a0090/cost-pay-list?eventPayUserId=${memberId}&fromDate=${confirmFromVal}&toDate=${confirmToVal}&eventCode=AAA03`)
       .catch((e) => console.log(JSON.stringify(e, null, 4)))
     console.log(console.log(JSON.stringify(response, null, 4)))
     setListData(response?.data?.data || [])
+  }
+
+  const convertDateToVal = (val) => {
+    console.log(val)
+    const year = val.getFullYear()
+    const month = val.getMonth() + 1
+    const date = val.getDate()
+    return `${year}-${month}-${date}`
+  }
+
+  const confirmDateChange = (val, flag) => {
+    if (flag === 'from') {
+      setDateState({ ...dateState, confirmFromVal: convertDateToVal(val), confirmFromDate: val, viewModal: false })
+    } else {
+      setDateState({ ...dateState, confirmToVal: convertDateToVal(val), confirmToDate: val, viewModal: false })
+    }
+  }
+
+  const openDateModal = (flag) => {
+    setDateState({ ...dateState, viewModal: true, fromToFlag: flag })
   }
 
   const listItem = (item, index) => {
@@ -73,15 +102,17 @@ const PaymentList = (props) => {
 
           <View style={styles.layer1}>
             <View style={styles.searchDate}>
-              <TextInput style={styles.inputDate}
+              <Text style={styles.inputDate}
                 type="date"
-                placeholder="날짜선택"
-                required aria-required="true"></TextInput>
+                required aria-required="true"
+                editable={false}
+                onPress={() => openDateModal('from')}>{convertDateToVal(dateState.confirmFromDate) || `날짜선택`}</Text>
               <Text style={styles.wave}>~</Text>
-              <TextInput style={styles.inputDate}
+              <Text style={styles.inputDate}
                 type="date"
-                placeholder="날짜선택"
-                required aria-required="true"></TextInput>
+                required aria-required="true"
+                editable={false}
+                onPress={() => openDateModal('to')}>{convertDateToVal(dateState.confirmToDate) || `날짜선택`}</Text>
             </View>
             <View style={styles.searchBtn}>
               <TouchableOpacity onPress={() => {
@@ -99,6 +130,15 @@ const PaymentList = (props) => {
           </ScrollView>
         </View>
       </View >
+      <DateTimePickerModal
+        isVisible={dateState.viewModal}
+        mode="date"
+        onConfirm={(a) => confirmDateChange(a, dateState.fromToFlag)}
+        onCancel={() =>
+          setDateState({ ...dateState, viewModal: false })
+        }
+        date={dateState.fromToFlag === 'from' ? dateState.confirmFromDate : dateState.confirmToDate}
+      />
       <Footer
         navigation={props.navigation}
       />

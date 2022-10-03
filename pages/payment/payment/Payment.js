@@ -68,7 +68,8 @@ const Payment = (props) => {
           <Text style={styles.label}>결제의견</Text>
           <Text>{item?.payComment}</Text>
         </View>
-      </View>)
+      </View>
+    )
   }
 
   return (
@@ -97,26 +98,26 @@ const Payment = (props) => {
 
               <View style={styles.contents}>
                 <View style={styles.contentsInner}>
-                  <Text style={styles.modifyLabel}>작성자</Text>
-                  <TextInput style={styles.modifyText} />
+                  <Text style={styles.label}>작성자</Text>
+                  <TextInput style={styles.inputText} />
                 </View>
                 <View style={styles.contentsInner}>
-                  <Text style={styles.modifyLabel}>결제상태</Text>
-                  <TextInput style={styles.modifyText} />
+                  <Text style={styles.label}>결제상태</Text>
+                  <TextInput style={styles.inputText} />
                 </View>
               </View>
 
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>사용제목</Text>
-                <TextInput style={styles.modifyTextLong} />
+                <Text style={styles.label}>사용제목</Text>
+                <TextInput style={styles.inputTextLong} />
               </View>
 
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>행사명</Text>
-                <View style={styles.modifyInputWrap}>
+                <Text style={styles.label}>행사명</Text>
+                <View style={styles.inputWrap}>
                   <TextInput
-                    style={styles.modifyTextLong}></TextInput>
-                  <View style={styles.modifySearchBtn} >
+                    style={styles.inputTextLong}></TextInput>
+                  <View style={styles.searchBtn} >
                     <TouchableOpacity>
                       <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
                     </TouchableOpacity>
@@ -125,12 +126,12 @@ const Payment = (props) => {
               </View>
               <View style={styles.contents}>
                 <View style={styles.contentsInner}>
-                  <Text style={styles.modifyLabel}>사용일자</Text>
-                  <View style={styles.modifyInputWrap}>
-                    <TextInput style={styles.modifyText}>
+                  <Text style={styles.label}>사용일자</Text>
+                  <View style={styles.inputWrap}>
+                    <TextInput style={styles.inputText}>
                     </TextInput>
 
-                    <View style={styles.modifySearchBtn} >
+                    <View style={styles.searchBtn} >
                       <TouchableOpacity>
                         <ReactImage source={require('./assets/magnifying-glass.png')} style={styles.searchIcon} />
                       </TouchableOpacity>
@@ -138,20 +139,20 @@ const Payment = (props) => {
                   </View>
                 </View>
                 <View style={styles.contentsInner}>
-                  <View style={styles.modifyInputWrap}>
-                    <Text style={styles.modifyLabel}>결제금액</Text>
-                    <TextInput style={styles.modifyText} />
-                    <Text style={styles.modifyWon}>원</Text>
+                  <View style={styles.inputWrap}>
+                    <Text style={styles.label}>결제금액</Text>
+                    <TextInput style={styles.inputText} />
+                    <Text style={styles.won}>원</Text>
                   </View>
                 </View>
 
               </View>
 
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>첨부파일</Text>
-                <View style={styles.modifyInputWrap}>
-                  <TextInput style={styles.modifyTextLong}></TextInput>
-                  <View style={styles.modifyAddBtn}>
+                <Text style={styles.label}>첨부파일</Text>
+                <View style={styles.inputWrap}>
+                  <TextInput style={styles.inputTextLong}></TextInput>
+                  <View style={styles.addBtn}>
                     <TouchableOpacity onPressIn={() => ShowPicker()}>
                       <ReactImage source={require('./assets/plus.png')} style={styles.addIcon} ></ReactImage>
                     </TouchableOpacity>
@@ -160,9 +161,9 @@ const Payment = (props) => {
 
               </View>
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>사용내역</Text>
+                <Text style={styles.label}>사용내역</Text>
                 <TextInput
-                  style={styles.modifyTextLong}
+                  style={styles.inputTextLong}
                   multiline={true}
                   onChange={(e) => setInputData({ ...inputData, useComment: e.nativeEvent.text })}
                   value={inputData.useComment}
@@ -171,40 +172,40 @@ const Payment = (props) => {
 
               <View style={styles.sepLine}></View>
 
-
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>결제자명</Text>
+                <Text style={styles.label}>결제자명</Text>
                 <TextInput>결제자A</TextInput>
-                <Text style={styles.modifyLabel}>결제여부</Text>
+                <Text style={styles.label}>결제여부</Text>
                 <TextInput>승인</TextInput>
               </View>
 
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>결제일자</Text>
+                <Text style={styles.label}>결제일자</Text>
                 <TextInput>2022-01-01</TextInput>
 
               </View>
               <View style={styles.contents}>
-                <Text style={styles.modifyLabel}>결제의견</Text>
+                <Text style={styles.label}>결제의견</Text>
                 <TextInput>상기 내역을 승인함.</TextInput>
               </View>
 
               <View style={styles.sepLine}></View>
               <View style={styles.contentsTextarea}>
-                <Text style={styles.modifyLabel}>결제의견</Text>
+                <Text style={styles.label}>결제의견</Text>
                 <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payComment: e.nativeEvent.text })} />
               </View>
               {detailData?.detail?.map((item) => renderDetailPay(item))}
             </View>
+            <View style={styles.btnWrap}>
+              <TouchableOpacity onPress={() => requestPay("Y")}>
+                <Text style={styles.confBtn}>승인</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => requestPay("N")}>
+                <Text style={styles.rejBtn}>반려</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.btnWrap}>
-          <TouchableOpacity onPress={() => requestPay("Y")}>
-            <Text style={styles.confBtn}>승인</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => requestPay("N")}>
-            <Text style={styles.rejBtn}>반려</Text>
-          </TouchableOpacity>
-        </View>
+
         </KeyboardAwareScrollView>
       </View>
       <Footer

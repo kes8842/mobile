@@ -60,7 +60,7 @@ const QrCode = (props) => {
         <View style={styles.circle}></View>
         <View style={styles.topMenu}>
           <View style={styles.topLogoWrap}>
-            <Text style={styles.topLogo}>TOV</Text>
+            <Text style={styles.topLogo}>TOVE</Text>
           </View>
           <View style={styles.logoutBtn}>
             <TouchableOpacity onPress={() => logOut()}>
@@ -116,7 +116,7 @@ const QrCode = (props) => {
                 </View>
               </View>
               <View style={styles.rightProcessBox}>
-                <Text style={styles.processTitle}>결제요청</Text>
+                <Text style={styles.processTitle}>결제진행</Text>
                 <View style={styles.processInner}>
                   <View style={styles.processRight}>
                     <Text style={styles.processText}>

@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Signup from './pages/auth/signup/signup';
@@ -20,9 +20,15 @@ import Payment from './pages/payment/payment/Payment';
 import PaymentList from './pages/payment/paymentLlst/PaymentList';
 import Access from './pages/auth/access/Access'
 import SplashScreen from './pages/auth/splash/SplashScreen';
+import RNSplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator();
 const App = () => {
+
+  useEffect(() => {
+    RNSplashScreen.hide();
+  }, []);
+
   return (
     <NavigationContainer >
       <Stack.Navigator initialRouteName='Splash'>

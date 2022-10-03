@@ -278,7 +278,7 @@ const CostModify = (props) => {
               <TextInput style={styles.opinion} onChange={(e) => setInputData({ ...inputData, payComment: e.nativeEvent.text })} />
             </View>
           </View>
-          <View style={styles.btnWrap2}>
+          <View style={styles.modifyBtnWrap}>
             <TouchableOpacity onPress={modifyEvent}>
               <Text style={styles.requestBtn}>수정</Text>
             </TouchableOpacity>

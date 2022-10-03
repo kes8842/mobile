@@ -1,28 +1,23 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
 
-export const styleSheet = (windowHeight = Dimensions.get('window').height, windowWidth = Dimensions.get('window').width) => {
+export const styleSheet = (windowHeight, windowWidth) => {
   const wp = windowWidth / 360
   const hp = windowHeight / 800
   return StyleSheet.create({
 
     "wrap": {
-      'position': 'relative',
-      "width": '100%',
+      "width": "100%",
       "height": '100%',
       'backgroundColor': 'white',
-
-
     },
+
     "inner": {
       "width": "85%",
-      'height': windowHeight,
+      'height': '100%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'position': 'relative',
     },
-
-
     "topMenu": {
       "width": "100%",
       "height": 66,
@@ -35,6 +30,14 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       'alignItems': 'center',
       'justifyContent': 'center',
     },
+
+    "topTitle": {
+      "color": "white",
+      "fontFamily": "Apple SD Gothic Neo",
+      "fontWeight": '800',
+      "fontSize": 22,
+    },
+
     "backBtn": {
       "overflow": "hidden",
       'position': 'absolute',
@@ -47,22 +50,23 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "width": 30,
       "height": 30
     },
-    "topTitle": {
-      "color": "white",
-      "fontFamily": "Apple SD Gothic Neo",
-      "fontWeight": '800',
-      "fontSize": 22,
-    },
+
 
 
     "contentsWrap": {
       "width": "100%",
       'marginTop': -5
     },
-
-
     "contents": {
       'display': 'flex',
+      'flexDirection': 'row',
+      'alignItems': 'center',
+      'justifyContent': 'space-between',
+      'marginBottom': -20,
+    },
+
+
+    "inputWrap": {
       'flexDirection': 'row',
       'alignItems': 'center',
       'justifyContent': 'space-between',
@@ -77,8 +81,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       'justifyContent': 'space-between',
     },
 
-
-    "modifyLabel": {
+    "label": {
       "fontFamily": "Apple SD Gothic Neo",
       "color": "#f15a24",
       "fontWeight": '700',
@@ -87,7 +90,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       'marginBottom': 5,
 
     },
-    "modifyText": {
+    "inputText": {
       'width': 80,
       'lineHeight': 5,
       "fontFamily": "Apple SD Gothic Neo",
@@ -98,7 +101,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
 
     },
-    "modifyTextLong": {
+    "inputTextLong": {
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '500',
       'lineHeight': 30,
@@ -108,16 +111,15 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       'marginTop': 10,
       'marginBottom': 5,
     },
-    "modifyWon": {
+    "won": {
       "fontFamily": "Apple SD Gothic Neo",
       "fontWeight": '500',
       'color': '#1d1d1d',
       "fontSize": 13,
       'marginTop': 10,
       'marginBottom': 5,
-
     },
-    "modifySearchBtn": {
+    "searchBtn": {
       "marginTop": 5,
       "width": 22,
       "height": 22,
@@ -128,28 +130,12 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "height": "100%",
     },
 
-    "input": {
-      // "width": windowWidth * 0.85 * 0.8,
-      "width": "100%",
-      "height": 35,
-      "overflow": "hidden",
-      "borderBottomWidth": 2,
-      "borderBottomColor": "#707070",
-      "fontFamily": "Apple SD Gothic Neo",
-      "fontSize": 20,
-      "fontWeight": '700',
-      "color": "#383838",
-      "paddingTop": 0,
-      "paddingBottom": 10,
-      'textAlign': 'center'
-    },
-    "modifyInputWrap": {
+    "inputWrap": {
       'flexDirection': 'row',
       'alignItems': 'center',
     },
 
-
-    "modifyAddBtn": {
+    "addBtn": {
 
       "width": 20,
       "height": 20,
@@ -157,7 +143,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "borderRadius": 50,
       'zIndex': 1
     },
-
     "addIcon": {
       "width": 13,
       "height": 13,
@@ -166,16 +151,14 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       'marginTop': 3,
     },
     'sepLine': {
-
       'width': '100%',
       'height': 3,
       'backgroundColor': '#bcbcbc',
       'marginTop': 20,
-
     },
 
     "textfield": {
-      "height": windowHeight * 0.15,
+      "height": 30,
       "borderRadius": 10,
       "borderWidth": 2,
       "borderColor": "#707070",
@@ -207,14 +190,14 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "height": 50,
       'marginLeft': 'auto',
       'marginRight': 'auto',
-      'marginTop': 40,
       "flexDirection": "row",
       "justifyContent": "space-between",
       "alignItems": "center",
-      "zIndex": 1
+      'marginBottom': 40,
+      "zIndex": 9
     },
+    'confBtn': {
 
-    "confBtn": {
       "width": 140,
       "height": 50,
       "backgroundColor": "#F15A24",
@@ -226,8 +209,8 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "lineHeight": 50,
       "fontFamily": "Apple SD Gothic Neo"
     },
+    'rejBtn': {
 
-    "rejBtn": {
       "width": 140,
       "height": 50,
       "backgroundColor": "#707070",
@@ -239,85 +222,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "textAlign": "center",
       "lineHeight": 50,
     },
-    'bottomMenu': {
-      'width': '100%',
-      'height': 80,
-      'backgroundColor': 'white',
-      'position': 'absolute',
-      'bottom': 0,
-      'flexDirection': 'row',
-      'alignItems': 'center',
-      'justifyContent': 'space-around',
-      'paddingHorizontal': 30,
-      'borderTopWidth': 2,
-      'borderTopColor': "rgba(112, 112, 112 , 0.3)",
 
-
-    },
-    'scanBtnIcon': {
-      'width': 30,
-      'height': 30,
-      'marginLeft': 'auto',
-      'marginRight': 'auto',
-    },
-
-    'homeBtn': {
-
-      'alignItems': 'center',
-    },
-
-    'homeIcon': {
-      'width': 30,
-      'height': 30,
-      'marginLeft': 'auto',
-      'marginRight': 'auto',
-    },
-    'costIcon': {
-      'width': 30,
-      'height': 30,
-      'marginLeft': 'auto',
-      'marginRight': 'auto',
-
-    },
-    'paymentIcon': {
-      'width': 30,
-      'height': 30,
-      'marginLeft': 'auto',
-      'marginRight': 'auto',
-    },
-
-    'homeText': {
-      'fontFamily': "Apple SD Gothic Neo",
-      'color': '#707070',
-      'fontSize': 12,
-      'fontWeight': '700',
-      'marginTop': 5,
-      'textAlign': 'center'
-
-    },
-    'costText': {
-      'fontFamily': "Apple SD Gothic Neo",
-      'color': '#707070',
-      'fontSize': 12,
-      'fontWeight': '700',
-      'marginTop': 5
-
-    },
-    'paymentText': {
-      'fontFamily': "Apple SD Gothic Neo",
-      'color': '#707070',
-      'fontSize': 12,
-      'fontWeight': '700',
-      'marginTop': 5
-    },
-    'qrscanText': {
-      'width': 50,
-      'fontFamily': "Apple SD Gothic Neo",
-      'color': '#707070',
-      'fontSize': 12,
-      'fontWeight': '700',
-      'marginTop': 5,
-      'textAlign': 'center'
-    },
   })
 }

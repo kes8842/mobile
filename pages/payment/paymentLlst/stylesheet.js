@@ -131,19 +131,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "alignItems": "center",
       "lineHeight": 40
     },
-    //   input[type="date"]::before {
 
-    //       content:attr(data-placeholder),
-    //       width:100%,
-    //       color:#ababab,
-    //   }
-
-
-    //   input[type="date"]:focus:before,
-    //   input[type="date"]:valid:before{
-    //       display: none,
-
-    //   }
 
     "cellWrap": {
       "width": "100%",
@@ -151,8 +139,8 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "position": "absolute",
       "top": 165,
       'zIndex': 3,
-      'marginTop': -20,
-      'paddingBottom': '10%',
+      'marginTop': -18,
+      'paddingBottom': '20%',
     },
     'divider': {
       'width': '100%',
@@ -161,6 +149,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       'marginLeft': 'auto',
       'marginRight': 'auto',
       'marginTop': 20,
+      'zIndex': 9,
     },
     'cellDivider': {
       'width': '85%',

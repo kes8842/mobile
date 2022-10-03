@@ -54,7 +54,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             "height": '100%',
             'marginLeft': 'auto',
             'marginRight': 'auto',
-            'paddingTop': 50,
+            'paddingTop': "15%",
             'position': 'relative',
         },
 
@@ -65,7 +65,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             "borderBottomWidth": 2,
             "borderBottomColor": "#707070",
             "fontFamily": "Apple SD Gothic Neo",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": '700',
             "color": "#383838",
             "paddingTop": 0,
@@ -78,7 +78,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             "borderBottomWidth": 2,
             "borderBottomColor": "#707070",
             "fontFamily": "Apple SD Gothic Neo",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": '700',
             "color": "#383838",
             "paddingTop": 0,
@@ -95,12 +95,11 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
         "phoneInput1": {
             'width': '23%',
-            'width': '23%',
             "overflow": "hidden",
             "borderBottomWidth": 2,
             "borderBottomColor": "#707070",
             "fontFamily": "Apple SD Gothic Neo",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": '700',
             "color": "#383838",
             "paddingTop": 0,
@@ -110,12 +109,11 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
         "phoneInput2": {
             'width': '23%',
-            'width': '23%',
             "overflow": "hidden",
             "borderBottomWidth": 2,
             "borderBottomColor": "#707070",
             "fontFamily": "Apple SD Gothic Neo",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": '700',
             "color": "#383838",
             "paddingTop": 0,
@@ -129,7 +127,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
             "borderBottomWidth": 2,
             "borderBottomColor": "#707070",
             "fontFamily": "Apple SD Gothic Neo",
-            "fontSize": 20,
+            "fontSize": 18,
             "fontWeight": '700',
             "color": "#383838",
             "paddingTop": 0,
@@ -185,9 +183,10 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
         "textBox": {
             'marginTop': 10,
             'width': '100%',
-            'height': 110,
+            'height': 120,
             'borderWidth': 2,
             'borderColor': '#707070',
+            'borderRadius': 10,
             'paddingVertical': 10,
             'paddingHorizontal': 10
         },
@@ -195,13 +194,20 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
         "textBoxTitle": {
             'fontFamily': 'Apple SD Gothic Neo',
             'fontWeight': '700',
+            'color': '#707070',
             'fontSize': 15,
+            'marginBottom': 5,
+        },
+        "text": {
+            'fontFamily': 'Apple SD Gothic Neo',
+            'color': '#707070',
             'marginBottom': 5,
         },
 
 
         "loginBtnWrap": {
             "width": '100%',
+            'height': 80,
             'marginLeft': 'auto',
             'marginRight': 'auto',
             'marginTop': '20%'
@@ -210,7 +216,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
 
         "loginBtn": {
             'backgroundColor': "#F15A24",
-            'height': 80,
+            'lineHeight': 80,
             'fontSize': 36,
             "fontFamily": "Apple SD Gothic Neo",
             "fontWeight": '700',

@@ -126,7 +126,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
       "top": 165,
       'zIndex': 3,
       'marginTop': -20,
-      'paddingBottom': '10%',
+      'paddingBottom': '20%',
     },
 
     'divider': {

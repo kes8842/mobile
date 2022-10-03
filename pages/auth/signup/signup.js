@@ -107,13 +107,13 @@ const Signup = (props) => {
         if (!loginData) {
           return
         }
-       
+
         await AsyncStorage.setItem('memberName', paramName || '')
         await AsyncStorage.setItem('hpNo', paramHpNo || '')
         await AsyncStorage.setItem('eventCode', paramEventCode || '')
 
         const userInfo = await setUserTp()
-        const { orgId, memberTp, orgEventName, mobileId, memberId,  } = userInfo
+        const { orgId, memberTp, orgEventName, mobileId, memberId, } = userInfo
 
         await AsyncStorage.setItem('orgEventName', orgEventName || '')
         await AsyncStorage.setItem('memberTp', memberTp || '')
@@ -138,6 +138,12 @@ const Signup = (props) => {
     } else {
       return 1
     }
+  }
+
+  const test = (e) => {
+    // console.log(e.nativeEvent.text)
+    // const a = e.nativeEvent.text.toUpperCase()
+    setEventCode(e.nativeEvent.text)
   }
 
   return (
@@ -236,7 +242,10 @@ const Signup = (props) => {
                 placeholder={'코드번호'}
                 ref={ref_input[4]}
                 onChange={(e) => setEventCode(e.nativeEvent.text)}
-              />
+                autoCapitalize={'characters'}
+              >
+                {eventCode}
+              </TextInput>
               <TouchableOpacity onPress={() => setPrivacyAgree(!privacyAgree)}>
                 <View style={styles.infoAggWrap}>
                   <View style={privacyAgree ? styles.checkBox : styles.unCheckBox}>

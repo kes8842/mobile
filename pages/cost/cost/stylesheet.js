@@ -15,7 +15,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
     },
     "inner": {
       "width": "85%",
-      'height': windowHeight,
+      'height': '100%',
       "marginLeft": 'auto',
       "marginRight": 'auto',
       'position': 'relative',
@@ -52,8 +52,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "fontWeight": '800',
       "fontSize": 22,
     },
-
-
     "won": {
       "position": "absolute",
       "right": 0,
@@ -63,7 +61,6 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "fontWeight": "700",
       "color": "#1d1d1d",
     },
-
 
     "contentsWrap": {
       "width": "100%",
@@ -94,8 +91,10 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "fontFamily": "Apple SD Gothic Neo",
       "color": "#f15a24",
       "fontWeight": '700',
-      "fontSize": 18,
+      "fontSize": 13,
       'marginTop': 10,
+      'marginBottom': 5,
+
       'marginBottom': 5,
 
     },
@@ -277,7 +276,7 @@ export const styleSheet = (windowHeight = Dimensions.get('window').height, windo
       "justifyContent": "center",
       "alignItems": "center",
     },
-    "btnWrap2": {
+    "modifyBtnWrap": {
       "width": "100%",
       "height": 50,
       'marginLeft': 'auto',

@@ -13,10 +13,10 @@ export const styleSheet = (windowHeight, windowWidth) => {
             "backgroundColor": "#f15a24",
             "width": 600,
             "height": 600,
-            'borderRadius' : 500,
-            'position' : 'absolute',
-            'left' : -180,
-            'top' : -350,
+            'borderRadius': 500,
+            'position': 'absolute',
+            'left': -180,
+            'top': -350,
         },
 
         'topMenu': {
@@ -27,7 +27,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'alignItems': 'center',
             'paddingVertical': 5,
             'paddingHorizontal': 10,
-            'marginTop' : 10,
+            'marginTop': 10,
 
         },
 
@@ -43,113 +43,113 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'backgroundColor': 'white',
             'width': '90%',
             'height': 240,
-            'borderRadius' : 20,
+            'borderRadius': 20,
             'marginLeft': 'auto',
             'marginRight': 'auto',
             'marginTop': '5%',
             'justifyContent': 'center',
             'position': 'relative',
-            'elevation' : 10,
+            'elevation': 10,
         },
 
-        'profileTextGroup' : {
-            'marginTop' : 'auto',
+        'profileTextGroup': {
+            'marginTop': 'auto',
         },
 
-        'processInfoWrap' : {
-            'width' :'100%',
-            'height' : 100,
-            'borderBottomRightRadius' :20,
-            'borderBottomLeftRadius' :20,
-            'backgroundColor' : '#f15a24',
-            'marginTop' : 'auto',
-            'flexDirection' : 'row',
-            'alignItems' : 'center',
-            'justifyContent' : 'space-between',
-            'paddingHorizontal' : 10,
-        
-        },
-        'leftProcessBox' : {
-
-            'width' : '77%',
-            'height' : 70,
-            'backgroundColor' : 'rgba(255,255,255,0.3)',
-            'borderRadius' : 10,
-            
+        'processInfoWrap': {
+            'width': '100%',
+            'height': 100,
+            'borderBottomRightRadius': 20,
+            'borderBottomLeftRadius': 20,
+            'backgroundColor': '#f15a24',
+            'marginTop': 'auto',
+            'flexDirection': 'row',
+            'alignItems': 'center',
+            'justifyContent': 'space-between',
+            'paddingHorizontal': 10,
 
         },
-        'rightProcessBox' : {
+        'leftProcessBox': {
 
-            'width' : '20%',
-            'height' : 70,
-            'backgroundColor' : 'rgba(255,255,255,0.3)',
-            'borderRadius' : 10,
+            'width': '77%',
+            'height': 70,
+            'backgroundColor': 'rgba(255,255,255,0.3)',
+            'borderRadius': 10,
 
-        },
-
-        'processTitle' : {
-            'color' : 'white',
-            'fontSize' : 8,
-            'lineHeight' : 18,
-            'fontWeight' : '700',
-            'textAlign' : 'center',
-            'marginLeft' : 'auto',
-            'marginRight' : 'auto',
-            'width' :'90%',
-            'borderBottomWidth' : 1,
-            'borderBottomColor' : 'white'
 
         },
-        'processInner' : {
-            'width' : '95%',
-            'marginLeft' : 'auto',
-            'marginRight' : 'auto',
-            'marginTop' : 5,
-            'flexDirection' : 'row',
-            'alignItems' : 'center',
-            'justifyContents' :'space-around',
+        'rightProcessBox': {
+
+            'width': '20%',
+            'height': 70,
+            'backgroundColor': 'rgba(255,255,255,0.3)',
+            'borderRadius': 10,
 
         },
 
-        'process':{
-            'width' :'25%',
-            'height' : 40,
-            'display' : 'flex',
-            'alignItems' :'center',
-            'justifyContents' :'space-around',
+        'processTitle': {
+            'color': 'white',
+            'fontSize': 8,
+            'lineHeight': 18,
+            'fontWeight': '700',
+            'textAlign': 'center',
+            'marginLeft': 'auto',
+            'marginRight': 'auto',
+            'width': '90%',
+            'borderBottomWidth': 1,
+            'borderBottomColor': 'white'
 
         },
-        'processRight':{
-            'width' :'100%',
-            'height' : 40,
-            'display' : 'flex',
-            'alignItems' :'center',
-            'justifyContents' :'space-around',
+        'processInner': {
+            'width': '95%',
+            'marginLeft': 'auto',
+            'marginRight': 'auto',
+            'marginTop': 5,
+            'flexDirection': 'row',
+            'alignItems': 'center',
+            'justifyContents': 'space-around',
 
         },
 
-        'processText' : {
-            'fontSize' : 10,
-            'color' : 'white',
-            'fontWeight' : '900',
-            'marginBottom' : -8,
+        'process': {
+            'width': '25%',
+            'height': 40,
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContents': 'space-around',
 
         },
-        'processNumber' : {
+        'processRight': {
+            'width': '100%',
+            'height': 40,
+            'display': 'flex',
+            'alignItems': 'center',
+            'justifyContents': 'space-around',
 
-            'color' : 'white',
-            'fontSize' : 26,
-            'fontWeight' : '700',
-            'marginTop' : 4,
-
-            
         },
 
-        'divider' : {
+        'processText': {
+            'fontSize': 10,
+            'color': 'white',
+            'fontWeight': '900',
+            'marginBottom': -8,
 
-            'height' : '80%',
-            'width' : 1,
-            'backgroundColor' : 'white'
+        },
+        'processNumber': {
+
+            'color': 'white',
+            'fontSize': 26,
+            'fontWeight': '700',
+            'marginTop': 4,
+
+
+        },
+
+        'divider': {
+
+            'height': '80%',
+            'width': 1,
+            'backgroundColor': 'white'
 
         },
 
@@ -158,7 +158,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'fontFamily': "Apple SD Gothic Neo",
             'color': '#383838',
             'fontSize': 40,
-            'textAlign' : 'center',
+            'textAlign': 'center',
             'fontWeight': '700',
             'marginBottom': 5
         },
@@ -169,7 +169,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'color': '#707070',
             'fontSize': 22,
             'fontWeight': '700',
-            'textAlign' : 'center',
+            'textAlign': 'center',
             'marginBottom': 5
         },
 
@@ -358,6 +358,7 @@ export const styleSheet = (windowHeight, windowWidth) => {
             'fontWeight': '700',
             'textAlign': 'center',
             'marginTop': 5,
+            'color': '#616161'
         },
 
         'adWrap': {
