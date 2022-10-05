@@ -51,7 +51,9 @@ const CostList = (props) => {
 
   const callModalData = async () => {
     const eventCode = await AsyncStorage.getItem('eventCode')
-    const res = await client.get(`/rest/v1/s0221a2000/event-list?&eventCode=${eventCode}&orgId=39`).catch(e => {
+    const uri = `/rest/v1/s0221a2000/event-list?&eventCode=${eventCode}&orgId=39`
+    console.log('uri---------------------', uri)
+    const res = await client.get(uri).catch(e => {
       console.log(JSON.stringify(e, null, 4))
     })
     console.log(JSON.stringify(res, null, 4))
@@ -61,6 +63,7 @@ const CostList = (props) => {
           text: i.eventNm, value: i.eventId
         }
       })
+      console.log(option)
       setEventOption(option)
     }
   }
@@ -85,6 +88,7 @@ const CostList = (props) => {
   const listItem = (item, index) => {
     try {
       const title = item?.useSubject
+      console.log(item)
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
       return (
         <>
@@ -93,7 +97,7 @@ const CostList = (props) => {
               <View style={styles.cellInner}>
                 <Text style={styles.cellTitle}>{cutTitle}</Text>
                 <Text style={styles.cellDate}>
-                  <Text style={styles.name}>{item?.memberName}</Text> {item?.useDate}
+                  <Text style={styles.name}>{item?.memberName}</Text> {item?.usedDate}/{item?.useProStatusNm}
                 </Text>
                 <Text style={styles.cellAmount}>{item?.useAmount && `${item?.useAmount} 원`}</Text>
               </View>

@@ -98,7 +98,6 @@ const Signup = (props) => {
       console.log(JSON.stringify(result, null, 4))
       if (result?.status === 200) {
         const { data } = result
-        console.log(data)
         if (data.status === 500) {
           alert(data.massage)
           return
@@ -110,16 +109,14 @@ const Signup = (props) => {
 
         await AsyncStorage.setItem('memberName', paramName || '')
         await AsyncStorage.setItem('hpNo', paramHpNo || '')
-        await AsyncStorage.setItem('eventCode', paramEventCode || '')
+        await setUserTp()
+        // const { orgId, memberTp, orgEventName, mobileId, memberId, } = userInfo
 
-        const userInfo = await setUserTp()
-        const { orgId, memberTp, orgEventName, mobileId, memberId, } = userInfo
-
-        await AsyncStorage.setItem('orgEventName', orgEventName || '')
-        await AsyncStorage.setItem('memberTp', memberTp || '')
-        await AsyncStorage.setItem('mobileId', mobileId || '')
-        await AsyncStorage.setItem('orgId', JSON.stringify(orgId) || '')
-        await AsyncStorage.setItem('memberId', JSON.stringify(memberId) || '')
+        // await AsyncStorage.setItem('orgEventName', orgEventName || '')
+        // await AsyncStorage.setItem('memberTp', memberTp || '')
+        // await AsyncStorage.setItem('mobileId', mobileId || '')
+        // await AsyncStorage.setItem('orgId', JSON.stringify(orgId) || '')
+        // await AsyncStorage.setItem('memberId', JSON.stringify(memberId) || '')
 
       } else {
         return

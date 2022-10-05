@@ -58,7 +58,6 @@ const PaymentList = (props) => {
       const eventUseId = item?.eventUseId
       const title = item?.useSubject
       const cutTitle = title ? `${title?.substring(0, 11)}...` : ""
-      console.log(item)
       return (
         <>
           <TouchableOpacity key={index} onPress={() => {

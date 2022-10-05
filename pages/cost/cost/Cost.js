@@ -105,7 +105,10 @@ const Cost = (props) => {
   }
 
   const callModalData = async () => {
-    const res = await client.get(`/rest/v1/s0221a2000/event-list?&orgId=39`).catch(e => {
+    const eventCode = await AsyncStorage.getItem('eventCode')
+    const orgId = await AsyncStorage.getItem('orgId') 
+    const uri = `/rest/v1/s0221a2000/event-list?&eventCode=${eventCode}&orgId=${orgId}`
+    const res = await client.get(uri).catch(e => {
       console.log(JSON.stringify(e, null, 4))
     })
     console.log(JSON.stringify(res, null, 4))

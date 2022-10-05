@@ -12,6 +12,7 @@ const TempoModal = (props) => {
 
     useEffect(() => {
         setDisplay(openModal)
+        console.log(option)
         BackHandler.addEventListener('hardwareBackPress', close)
         return () => {
             BackHandler.removeEventListener('hardwareBackPress', close)
