@@ -102,13 +102,15 @@ const Signup = (props) => {
           alert(data.massage)
           return
         }
-        const loginData = data?.data
-        if (!loginData) {
-          return
-        }
-
+        // const loginData = data?.data
+        // if (!loginData) {
+        //   return
+        // }
+        console.log('???')
         await AsyncStorage.setItem('memberName', paramName || '')
         await AsyncStorage.setItem('hpNo', paramHpNo || '')
+        await AsyncStorage.setItem('eventCode', paramEventCode || '')
+        console.log('1234')
         await setUserTp()
         // const { orgId, memberTp, orgEventName, mobileId, memberId, } = userInfo
 

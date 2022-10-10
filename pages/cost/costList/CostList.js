@@ -27,6 +27,7 @@ const CostList = (props) => {
 
   useEffect(() => {
     callModalData()
+    callList()
   }, [])
 
   const convertDateToVal = (val) => {

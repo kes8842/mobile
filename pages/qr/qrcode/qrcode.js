@@ -7,12 +7,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Footer from '../../share/footer/Footer';
 import client from '../../../api/client';
 import { setUserTp } from '../../share/lib/getuserinfo';
+import QrModal from '../../share/modal/QrModal';
 
 const QrCode = (props) => {
   const [memberName, setMemberName] = useState('')
   const [memberTp, setMemberTp] = useState('')
   const [statusCnt, setStatusCount] = useState({})
   const [payCnt, setPayCnt] = useState(0)
+  const [openModal, setOpenModal] = useState(false)
+  const [qrData, setQrData] = useState({})
   // const [hpNo, setHpNo] = useState('')
   // const [eventCode, setEventCode] = useState('')
   const { windowHeight, windowWidth } = props
@@ -28,6 +31,8 @@ const QrCode = (props) => {
       }
       await getUserInfo(localHpNo, localEventCode)
       await setUserTp()
+
+
     }
     getData()
   }, [])
@@ -52,6 +57,19 @@ const QrCode = (props) => {
     const payCountResult = await client.get(`/rest/v1/s0221a0010/pay-cnt?eventCode=${eventCode}&hpNo=${hpNo}`)
     const reducePayCnt = payCountResult?.data?.data[0]?.payCnt || 0
     setPayCnt(reducePayCnt)
+  }
+
+  const openQrModal = async () => {
+    const mobileId = await AsyncStorage.getItem('mobileId')
+    const orgId = await AsyncStorage.getItem('orgId')
+    const memberId = await AsyncStorage.getItem('memberId')
+
+    setQrData({
+      mobileId,
+      orgId,
+      memberId
+    })
+    setOpenModal(true)
   }
 
   return (
@@ -125,13 +143,10 @@ const QrCode = (props) => {
                     <Text style={styles.processNumber}>
                       {payCnt}
                     </Text>
-
                   </View>
                 </View>
               </View>
-
             </View>
-
           </View>
           <View style={styles.centerBtnWrap}>
             <View style={styles.layer1}>
@@ -149,10 +164,9 @@ const QrCode = (props) => {
                 </View>
                 <Text style={styles.centerText}>비용결제</Text>
               </TouchableOpacity>
-
             </View>
             <View style={styles.layer2}>
-              <TouchableOpacity style={styles.centerQrBtnWrap} onPress={() => props.navigation.navigate('')}>
+              <TouchableOpacity style={styles.centerQrBtnWrap} onPress={() => openQrModal()}>
                 <View style={styles.centerQrBtn}>
                   <ReactImage source={require('./assets/sampleQr-w.png')} style={styles.centerIcon} />
                 </View>
@@ -165,12 +179,16 @@ const QrCode = (props) => {
                 <Text style={styles.centerText}>가이드</Text>
               </TouchableOpacity>
             </View>
-
           </View>
         </ScrollView>
       </View>
       <Footer
         navigation={props.navigation}
+      />
+      <QrModal
+        openModal={openModal}
+        onClose={() => setOpenModal(false)}
+        qrData={qrData}
       />
     </View>
 

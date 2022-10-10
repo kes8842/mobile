@@ -1,14 +1,15 @@
 import React from "react";
 import { Text, View, BackHandler, } from 'react-native';
 import { Image as ReactImage } from 'react-native';
-import { QrModalStyleSheet } from './QrModalStylesheet';
+import { qrModalStyleSheet } from './QrModalStylesheet';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import { useState, useEffect } from "react";
+import QRCode from "react-native-qrcode-svg";
 
-const TempoModal = (props) => {
-    const { onClick, onClose, option, openModal } = props
+const QrModal = (props) => {
+    const { onClose, openModal, qrData } = props
     const [display, setDisplay] = useState(false)
-    const styles = modalStyleSheet()
+    const styles = qrModalStyleSheet()
 
     useEffect(() => {
         setDisplay(openModal)
@@ -40,7 +41,7 @@ const TempoModal = (props) => {
             <View style={styles.box}>
                 <View style={styles.titleSection}>
                     <Text style={styles.modalTitle}>QR코드</Text>
-                   <View style={styles.closeBtn}>
+                    <View style={styles.closeBtn}>
                         <TouchableOpacity onPress={() => closeModal()}>
                             <ReactImage source={require('./assets/backBtnIcon-w.png')} style={styles.backBtnIcon} />
                         </TouchableOpacity>
@@ -48,15 +49,12 @@ const TempoModal = (props) => {
                 </View>
 
                 <View style={styles.qrcodeWrap}>
-                    <View style={styles.qrcode}></View>
-                    <Text style={styles.memberName}>userName</Text>
-                    <Text style={styles.memberPosition}>소속부서 / 직책</Text>
+                    <QRCode size={240} value={JSON.stringify({ ...qrData })} />
                 </View>
-                
             </View>
         </View>
     );
 
 }
 
-export default TempoModal;
+export default QrModal;

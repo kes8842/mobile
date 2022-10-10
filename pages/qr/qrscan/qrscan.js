@@ -11,6 +11,7 @@ import client from '../../../api/client';
 const Qrscan = (props) => {
   const camera = useRef(null)
   const [controlCamera, setControlCamera] = useState(false)
+  const [cameraFront, setCameraFront] = useState(true)
   const CAM_VIEW_HEIGHT = Dimensions.get('screen').height;
   const CAM_VIEW_WIDTH = Dimensions.get('screen').width;
   const styles = useMemo(() => styleSheet(CAM_VIEW_HEIGHT, CAM_VIEW_WIDTH), [CAM_VIEW_HEIGHT, CAM_VIEW_WIDTH])
@@ -22,12 +23,15 @@ const Qrscan = (props) => {
     camera.current.pausePreview()
     setControlCamera(true)
 
-    const qrData = JSON.parse(e.data)
-    console.log(JSON.stringify(qrData, null, 4))
+    try {
+      const qrData = JSON.parse(e.data)
+      console.log(JSON.stringify(qrData, null, 4))
 
-    const response = await client.post('rest/v1/s0221a0020/qr-scan', { ...qrData, "orgId": "39", "eventId": "4" })
-    console.log(JSON.stringify(response, null, 4))
-
+      const response = await client.post('rest/v1/s0221a0020/qr-scan', { ...qrData, "orgId": "39", "eventId": "4" })
+      console.log(JSON.stringify(response, null, 4))
+    } catch (error) {
+      console.log(error)
+    }
     setTimeout(() => {
       setControlCamera(false)
       camera.current.resumePreview()
@@ -39,15 +43,15 @@ const Qrscan = (props) => {
     <RNCamera
       ref={camera}
       style={{ width: CAM_VIEW_WIDTH, height: CAM_VIEW_HEIGHT, }}
-      type={RNCamera.Constants.Type.front}
-      captureAudio={false}
+      type={cameraFront ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
+      captureAudio={true}
       barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
       cameraViewDimensions={{
         width: CAM_VIEW_WIDTH,
         height: CAM_VIEW_HEIGHT,
       }}
       rectOfInterest={{
-        x: 0.5,
+        x: cameraFront ? 0.5 : 0.1,
         y: 0,
         width: 0.35,
         height: 0.85,
@@ -61,6 +65,12 @@ const Qrscan = (props) => {
               props.navigation.goBack()
             }}>
               <ReactImage source={require('./assets/closeIcon.png')} style={styles.closeIcon} />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.closeBtn} onPress={() => {
+              setCameraFront(!cameraFront)
+            }}>
+              <ReactImage source={require('./assets/change.png')} style={styles.closeIcon} />
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.eventSelectBtn} onPress={() => {
